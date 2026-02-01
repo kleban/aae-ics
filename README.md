@@ -1,4 +1,4 @@
-# Ammunition and Equipment Management System
+# Automated Ammunition and Equipment Inventory and Control System (AAE-ICS)
 
 ---
 
