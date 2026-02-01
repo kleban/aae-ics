@@ -1,7 +1,7 @@
-﻿<Application x:Class="aae_ics.client.App"
+﻿<Application x:Class="AAEICS.Client.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:aae_ics.client"
+             xmlns:local="clr-namespace:AAEICS.Client"
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
              StartupUri="MainWindow.xaml">
     <Application.Resources>

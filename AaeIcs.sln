@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aae_ics.client", "aae_ics.client\aae_ics.client.csproj", "{2C86FE8C-C4E5-4E45-A638-BA8805F8081A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AaeIcs.Client", "AaeIcs.Client\AaeIcs.Client.csproj", "{2C86FE8C-C4E5-4E45-A638-BA8805F8081A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

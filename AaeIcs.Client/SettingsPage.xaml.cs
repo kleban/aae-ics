@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace aae_ics.client;
+namespace AAEICS.Client;
 
 public partial class SettingsPage : Page
 {

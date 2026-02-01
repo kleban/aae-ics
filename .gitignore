@@ -416,3 +416,9 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+#Intelljy IDEA files
+/.idea
+
+# Database ingeneerig files
+/DbIngeneering

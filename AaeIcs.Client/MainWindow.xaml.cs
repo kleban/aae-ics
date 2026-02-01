@@ -3,7 +3,7 @@ using System.Windows.Input;
 using Syncfusion.UI.Xaml.NavigationDrawer;
 using Syncfusion.Windows.Shared;
 
-namespace aae_ics.client;
+namespace AAEICS.Client;
 
 public partial class MainWindow: ChromelessWindow
 {
