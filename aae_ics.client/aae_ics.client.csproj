@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net10.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UseWPF>true</UseWPF>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Syncfusion.SfInput.WPF" Version="32.1.25" />
+      <PackageReference Include="Syncfusion.SfNavigationDrawer.WPF" Version="32.1.25" />
+      <PackageReference Include="Syncfusion.SfSkinManager.WPF" Version="32.1.25" />
+      <PackageReference Include="Syncfusion.Shared.WPF" Version="32.1.25" />
+      <PackageReference Include="Syncfusion.Themes.Material3Light.WPF" Version="32.1.25" />
+      <PackageReference Include="Syncfusion.Themes.Windows11Light.WPF" Version="32.1.25" />
+      <PackageReference Include="Syncfusion.Tools.WPF" Version="32.1.25" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="images\icon.png" />
+      <Resource Include="images\icon.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+    </ItemGroup>
+
+</Project>
