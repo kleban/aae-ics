@@ -422,3 +422,4 @@ FodyWeavers.xsd
 
 # Database ingeneerig files
 /DbIngeneering
+/AaeIcs.Client/appsettings.json

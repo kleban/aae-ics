@@ -9,6 +9,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.2" />
+      <PackageReference Include="Syncfusion.Licensing" Version="32.1.25" />
       <PackageReference Include="Syncfusion.SfInput.WPF" Version="32.1.25" />
       <PackageReference Include="Syncfusion.SfNavigationDrawer.WPF" Version="32.1.25" />
       <PackageReference Include="Syncfusion.SfSkinManager.WPF" Version="32.1.25" />
@@ -23,6 +25,12 @@
       <Resource Include="images\icon.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="appsettings.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>
