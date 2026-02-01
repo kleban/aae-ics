@@ -7,114 +7,54 @@
         xmlns:syncfusionskin="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
         syncfusionskin:SfSkinManager.Theme="{syncfusionskin:SkinManagerExtension ThemeName=Windows11Light}"
         mc:Ignorable="d"
-        Title="AEMS Client | Home"
-        Height="800" Width="1200"
-        WindowStartupLocation="CenterScreen"
+        Title="AAC-ICS Client | Home"
         
-        ResizeBorderThickness="5"
+        Height="800" Width="1200"
         CornerRadius="10"
+        ResizeBorderThickness="5"
+        BorderThickness="1"
+        BorderBrush="#E0E0E0"
+        Background="White"
+        
+        WindowStartupLocation="CenterScreen"
         AllowsTransparency="True"
         WindowStyle="None"
         
         TitleBarHeight="50"
-        ShowIcon="False"
-        
-        BorderThickness="1"
-        BorderBrush="#E0E0E0"
-        Background="White">
+        ShowIcon="False">
     
-    <syncfusion:ChromelessWindow.Resources>
-        <Geometry x:Key="HamburgerIcon">M3,6 H21 M3,12 H21 M3,18 H21</Geometry>
-        <Geometry x:Key="MinimizeIcon">M2,15 L18,15 L18,17 L2,17 Z</Geometry>
-        <Geometry x:Key="MaximizeIcon">M4,4 L16,4 L16,16 L4,16 Z M2,2 L18,2 L18,18 L2,18 Z</Geometry>
-        <Geometry x:Key="RestoreIcon">M4,8 L4,18 L14,18 L14,8 Z M8,8 L8,4 L18,4 L18,14 L14,14</Geometry>
-        <Geometry x:Key="CloseIcon">M4,4 L16,16 M4,16 L16,4</Geometry>
-
-        <Style TargetType="Button" x:Key="MenuButtonStyle">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Width" Value="40"/>
-            <Setter Property="Height" Value="35"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" CornerRadius="4">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#F0F0F0"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-        <Style TargetType="Button" x:Key="WindowControlButtonStyle">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Foreground" Value="#555555"/>
-            <Setter Property="Width" Value="50"/> 
-            <Setter Property="VerticalAlignment" Value="Stretch"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#E5E5E5"/>
-                    <Setter Property="Foreground" Value="Black"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-        <Style TargetType="Button" x:Key="WindowCloseButtonStyle" BasedOn="{StaticResource WindowControlButtonStyle}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border x:Name="ButtonBorder" Background="{TemplateBinding Background}" CornerRadius="0,10,0,0">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <DataTrigger Binding="{Binding WindowState, RelativeSource={RelativeSource AncestorType=Window}}" Value="Maximized">
-                                <Setter TargetName="ButtonBorder" Property="CornerRadius" Value="0"/>
-                            </DataTrigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#E81123"/>
-                    <Setter Property="Foreground" Value="White"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-    </syncfusion:ChromelessWindow.Resources>
-
     <syncfusion:ChromelessWindow.TitleBarTemplate>
         <ControlTemplate>
-            <Grid Background="Transparent" MouseLeftButtonDown="TitleBar_MouseDown" MouseMove="TitleBar_MouseMove">
+            <Grid Background="Transparent" 
+                  MouseLeftButtonDown="TitleBar_MouseDown" 
+                  MouseMove="TitleBar_MouseMove">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="0" Margin="10,0,5,0" Style="{StaticResource MenuButtonStyle}" Click="ToggleSidebar_Click">
-                    <Path Data="{StaticResource HamburgerIcon}" Stroke="#444444" StrokeThickness="2" Width="18" Height="18" Stretch="Uniform"/>
+                <Button Grid.Column="0" 
+                        Margin="10,0,5,0" 
+                        Style="{StaticResource MenuButtonStyle}" 
+                        Click="ToggleSidebar_Click">
+                    <Path Data="{StaticResource HamburgerIcon}" 
+                          Stroke="#444444" StrokeThickness="2" 
+                          Width="18" Height="18" Stretch="Uniform"/>
                 </Button>
 
-                <TextBlock Grid.Column="1" Text="{Binding Title, RelativeSource={RelativeSource AncestorType=syncfusion:ChromelessWindow}}" 
-                           VerticalAlignment="Center" Margin="5,0,20,0" FontSize="15" FontWeight="SemiBold" Foreground="#333333"/>
+                <TextBlock Grid.Column="1" 
+                           Text="{
+                               Binding Title, 
+                               RelativeSource={RelativeSource AncestorType=syncfusion:ChromelessWindow}
+                           }" 
+                           VerticalAlignment="Center" 
+                           Margin="5,0,20,0" 
+                           FontSize="15" FontWeight="SemiBold" Foreground="#333333"/>
                 
-                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Stretch">
+                <StackPanel Grid.Column="2" 
+                            Orientation="Horizontal" 
+                            VerticalAlignment="Stretch">
                     <Button Style="{StaticResource WindowControlButtonStyle}" Click="Minimize_Click">
                         <Path Data="{StaticResource MinimizeIcon}" Fill="#444444" Width="14" Height="14" Stretch="Uniform"/>
                     </Button>
@@ -145,7 +85,6 @@
     </syncfusion:ChromelessWindow.TitleBarTemplate>
 
     <syncfusion:SfNavigationDrawer x:Name="NavigationDrawer"
-                                   Grid.Row="1"
                                    DisplayMode="Expanded"
                                    IsOpen="True"
                                    IsToggleButtonVisible="False"
@@ -156,14 +95,18 @@
                                        Tag="home" 
                                        IsSelected="True">
                 <syncfusion:NavigationItem.Icon>
-                    <Path Data="{StaticResource Icon.Home}" Fill="#444444" Width="20" Height="20" Stretch="Uniform"/>
+                    <Path Data="{StaticResource Icon.Home}" 
+                          Fill="#444444" 
+                          Width="20" Height="20" Stretch="Uniform"/>
                 </syncfusion:NavigationItem.Icon>
             </syncfusion:NavigationItem>
                 
             <syncfusion:NavigationItem Header="Settings" 
                                        Tag="settings">
                 <syncfusion:NavigationItem.Icon>
-                    <Path Data="{StaticResource Icon.Settings}" Fill="#444444" Width="20" Height="20" Stretch="Uniform"/>
+                    <Path Data="{StaticResource Icon.Settings}" 
+                          Fill="#444444" 
+                          Width="20" Height="20" Stretch="Uniform"/>
                 </syncfusion:NavigationItem.Icon>
             </syncfusion:NavigationItem>
         </syncfusion:SfNavigationDrawer.Items>
@@ -175,13 +118,4 @@
         </syncfusion:SfNavigationDrawer.ContentView>
 
     </syncfusion:SfNavigationDrawer>
-    <!-- <Grid> -->
-    <!--     <Grid.RowDefinitions> -->
-    <!--         <RowDefinition Height="Auto"/> <RowDefinition Height="*"/> -->
-    <!--     </Grid.RowDefinitions> -->
-    <!-- -->
-    <!--     <Border Grid.Row="0" Background="#E0E0E0" /> -->
-    <!-- -->
-    <!--      -->
-    <!-- </Grid> -->
 </syncfusion:ChromelessWindow>
