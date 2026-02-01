@@ -1,8 +1,10 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using AaeIcs.Client.Services;
+using Microsoft.Extensions.Configuration;
 using Syncfusion.Licensing;
 using System.Configuration;
 using System.Data;
 using System.IO;
+using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 
 namespace AAEICS.Client;
@@ -12,17 +14,17 @@ namespace AAEICS.Client;
 /// </summary>
 public partial class App : Application
 {
+    public static IServiceProvider Services { get; private set; } = default!;
+
     public App()
     {
-        var config = new ConfigurationBuilder()
-        .SetBasePath(Directory.GetCurrentDirectory())
-        .AddJsonFile("appsettings.json", optional: true)
-        .Build();
+        var services = new ServiceCollection();
 
-        string? licenseKey = config["Syncfusion:LicenseKey"];
-        if (!string.IsNullOrEmpty(licenseKey))
-        {
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(licenseKey);
-        }
+        services.AddSingleton<IAppConfigService, AppConfigService>();
+        services.AddSingleton<ISyncfusionLicenseInitializer, SyncfusionLicenseInitializer>();
+
+        Services = services.BuildServiceProvider();
+
+        Services.GetRequiredService<ISyncfusionLicenseInitializer>().Register();
     }
 }
