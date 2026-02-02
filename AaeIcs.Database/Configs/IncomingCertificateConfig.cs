@@ -1,0 +1,60 @@
+﻿using AAEICS.Database.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace AAEICS.Database.Configs;
+
+public class AuthorConfiguration : IEntityTypeConfiguration<IncomingCertificate>
+{
+    public void Configure(EntityTypeBuilder<IncomingCertificate> entity)
+    {
+        entity.HasKey(e => e.IncCertificateId);
+
+        entity.HasIndex(e => e.IncCertificateId, "IX_IncomingCertificates_inc_certificate_id").IsUnique();
+
+        entity.Property(e => e.IncCertificateId)
+            .ValueGeneratedNever()
+            .HasColumnName("inc_certificate_id");
+        entity.Property(e => e.ApproveDate)
+            .HasColumnType("DATE")
+            .HasColumnName("approve_date");
+        entity.Property(e => e.ApprovePerson).HasColumnName("approve_person");
+        entity.Property(e => e.DeliveryCompany).HasColumnName("delivery_company");
+        entity.Property(e => e.DonorId).HasColumnName("donor_id");
+        entity.Property(e => e.Edrpou).HasColumnName("edrpou");
+        entity.Property(e => e.Reason).HasColumnName("reason");
+        entity.Property(e => e.RecipientId).HasColumnName("recipient_id");
+        entity.Property(e => e.RegistrationDate)
+            .HasColumnType("DATE")
+            .HasColumnName("registration_date");
+        entity.Property(e => e.RegistrationPlace)
+            .HasColumnType("VARCHAR")
+            .HasColumnName("registration_place");
+        entity.Property(e => e.TransferDateEnd)
+            .HasColumnType("DATE")
+            .HasColumnName("transfer_date_end");
+        entity.Property(e => e.TransferDateStart)
+            .HasColumnType("DATE")
+            .HasColumnName("transfer_date_start");
+
+        entity.HasOne(d => d.ApprovePersonNavigation).WithMany(p => p.IncomingCertificates)
+            .HasForeignKey(d => d.ApprovePerson)
+            .OnDelete(DeleteBehavior.ClientSetNull);
+
+        entity.HasOne(d => d.DeliveryCompanyNavigation).WithMany(p => p.IncomingCertificateDeliveryCompanyNavigations)
+            .HasForeignKey(d => d.DeliveryCompany)
+            .OnDelete(DeleteBehavior.ClientSetNull);
+
+        entity.HasOne(d => d.Donor).WithMany(p => p.IncomingCertificateDonors)
+            .HasForeignKey(d => d.DonorId)
+            .OnDelete(DeleteBehavior.ClientSetNull);
+
+        entity.HasOne(d => d.ReasonNavigation).WithMany(p => p.IncomingCertificates)
+            .HasForeignKey(d => d.Reason)
+            .OnDelete(DeleteBehavior.ClientSetNull);
+
+        entity.HasOne(d => d.Recipient).WithMany(p => p.IncomingCertificateRecipients)
+            .HasForeignKey(d => d.RecipientId)
+            .OnDelete(DeleteBehavior.ClientSetNull);
+    }
+}

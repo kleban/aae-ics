@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AaeIcs.Client.Services
+namespace AAEICS.Client.Services
 {
     public interface ISyncfusionLicenseInitializer
     {

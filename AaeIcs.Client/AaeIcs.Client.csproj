@@ -34,4 +34,9 @@
       </None>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\AAEICS.GuardFS\AAEICS.GuardFS.csproj" />
+      <ProjectReference Include="..\AaeIcs.Services\AaeIcs.Services.csproj" />
+    </ItemGroup>
+
 </Project>

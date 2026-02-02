@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Extensions.Configuration;
-using System.IO;
+﻿using Microsoft.Extensions.Configuration;
 
-namespace AaeIcs.Client.Services
+namespace AAEICS.Services.AppConfig
 {
     public class AppConfigService : IAppConfigService
     {
@@ -13,7 +9,9 @@ namespace AaeIcs.Client.Services
         public AppConfigService()
         {
             Configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
+                .SetBasePath(
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "AAEICS", "Config")
+                )
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .Build();
         }

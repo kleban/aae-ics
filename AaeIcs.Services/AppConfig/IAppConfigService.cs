@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AaeIcs.Client.Services
+namespace AAEICS.Services.AppConfig
 {
     public interface IAppConfigService
     {

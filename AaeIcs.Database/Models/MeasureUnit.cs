@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace AaeIcs.Database.Models;
+namespace AAEICS.Database.Models;
 
 public partial class MeasureUnit
 {
