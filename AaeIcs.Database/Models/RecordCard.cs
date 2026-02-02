@@ -35,13 +35,13 @@ public partial class RecordCard
 
     public int? Container { get; set; }
 
-    public virtual TransferInstance? DeliveryCentreNavigation { get; set; }
-
-    public virtual ICollection<IncomingCardLine> IncomingCardLines { get; set; } = new List<IncomingCardLine>();
-
-    public virtual ICollection<IssueCardLine> IssueCardLines { get; set; } = new List<IssueCardLine>();
-
-    public virtual TransferInstance? ManagementCompanyNavigation { get; set; }
+    // public virtual TransferInstance? DeliveryCentreNavigation { get; set; }
+    //
+    // public virtual ICollection<IncomingCardLine> IncomingCardLines { get; set; } = new List<IncomingCardLine>();
+    //
+    // public virtual ICollection<IssueCardLine> IssueCardLines { get; set; } = new List<IssueCardLine>();
+    //
+    // public virtual TransferInstance? ManagementCompanyNavigation { get; set; }
 
     public virtual Personnel ResponsiblePersonNavigation { get; set; } = null!;
 

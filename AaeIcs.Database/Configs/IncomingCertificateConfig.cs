@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AAEICS.Database.Configs;
 
-public class AuthorConfiguration : IEntityTypeConfiguration<IncomingCertificate>
+public class IncomingCertificateConfig : IEntityTypeConfiguration<IncomingCertificate>
 {
     public void Configure(EntityTypeBuilder<IncomingCertificate> entity)
     {
@@ -41,20 +41,20 @@ public class AuthorConfiguration : IEntityTypeConfiguration<IncomingCertificate>
             .HasForeignKey(d => d.ApprovePerson)
             .OnDelete(DeleteBehavior.ClientSetNull);
 
-        entity.HasOne(d => d.DeliveryCompanyNavigation).WithMany(p => p.IncomingCertificateDeliveryCompanyNavigations)
-            .HasForeignKey(d => d.DeliveryCompany)
-            .OnDelete(DeleteBehavior.ClientSetNull);
-
-        entity.HasOne(d => d.Donor).WithMany(p => p.IncomingCertificateDonors)
-            .HasForeignKey(d => d.DonorId)
-            .OnDelete(DeleteBehavior.ClientSetNull);
+        // entity.HasOne(d => d.DeliveryCompanyNavigation).WithMany(p => p.IncomingCertificateDeliveryCompanyNavigations)
+        //     .HasForeignKey(d => d.DeliveryCompany)
+        //     .OnDelete(DeleteBehavior.ClientSetNull);
+        //
+        // entity.HasOne(d => d.Donor).WithMany(p => p.IncomingCertificateDonors)
+        //     .HasForeignKey(d => d.DonorId)
+        //     .OnDelete(DeleteBehavior.ClientSetNull);
 
         entity.HasOne(d => d.ReasonNavigation).WithMany(p => p.IncomingCertificates)
             .HasForeignKey(d => d.Reason)
             .OnDelete(DeleteBehavior.ClientSetNull);
 
-        entity.HasOne(d => d.Recipient).WithMany(p => p.IncomingCertificateRecipients)
-            .HasForeignKey(d => d.RecipientId)
-            .OnDelete(DeleteBehavior.ClientSetNull);
+        // entity.HasOne(d => d.Recipient).WithMany(p => p.IncomingCertificateRecipients)
+        //     .HasForeignKey(d => d.RecipientId)
+        //     .OnDelete(DeleteBehavior.ClientSetNull);
     }
 }

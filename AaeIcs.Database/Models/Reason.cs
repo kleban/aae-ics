@@ -11,11 +11,11 @@ public partial class Reason
 
     public DateTime Date { get; set; }
 
-    public virtual ICollection<IncomingCardLine> IncomingCardLines { get; set; } = new List<IncomingCardLine>();
+    // public virtual ICollection<IncomingCardLine> IncomingCardLines { get; set; } = new List<IncomingCardLine>();
 
     public virtual ICollection<IncomingCertificate> IncomingCertificates { get; set; } = new List<IncomingCertificate>();
 
-    public virtual ICollection<IssuanceCertificate> IssuanceCertificates { get; set; } = new List<IssuanceCertificate>();
+    // public virtual ICollection<IssuanceCertificate> IssuanceCertificates { get; set; } = new List<IssuanceCertificate>();
 
-    public virtual ICollection<IssueCardLine> IssueCardLines { get; set; } = new List<IssueCardLine>();
+    // public virtual ICollection<IssueCardLine> IssueCardLines { get; set; } = new List<IssueCardLine>();
 }

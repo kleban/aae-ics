@@ -1,4 +1,6 @@
 ﻿using AAEICS.Client.Services;
+
+using AAEICS.Database.Context;
 using AAEICS.GuardFS.Core;
 using AAEICS.GuardFS.Checkups.AppConfigCheckup;
 using AAEICS.GuardFS.Contracts;
@@ -7,6 +9,7 @@ using AAEICS.Services.AppConfig;
 
 using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
+using Microsoft.EntityFrameworkCore;
 
 namespace AAEICS.Client;
 
@@ -20,6 +23,7 @@ public partial class App : Application
         var services = new ServiceCollection();
 
         ConfigureGuardFs(services);
+        // ConfigureDatabase(services);
         ConfigureLicense(services);
 
         Services = services.BuildServiceProvider();
@@ -47,24 +51,29 @@ public partial class App : Application
 
         services.AddSingleton<GuardEngine>();
         
-        services.AddSingleton<IEnumerable<ICheckup>>(sp =>
+        services.AddSingleton<IEnumerable<ICheckup>>(sp => new List<ICheckup>
         {
-            var configService = sp.GetRequiredService<IAppConfigService>();
-            
-            return new List<ICheckup>
-            {
-                new AppConfigCheckup(
-                    "App Settings Checkup", 
-                    "Checks if the appsettings.json file in AppData directory exists and is valid",
-                    configService)
-                
-            };
+            new AppConfigCheckup(
+                "App Settings Checkup", 
+                "Checks if the appsettings.json file in AppData directory exists and is valid"
+            )
         });
         services.AddSingleton<MainWindow>();
     }
 
+    // private void ConfigureDatabase(IServiceCollection services)
+    // {
+    //     services.Get;
+    //     services.AddDbContext<AAEICSDbContext>(sp =>
+    //     {
+    //         sp.GetRequiredService()
+    //     }
+    //     );
+    // }
+
     private void ConfigureLicense(IServiceCollection services)
     {
+        services.AddSingleton<IAppConfigService, AppConfigService>();
         services.AddSingleton<ISyncfusionLicenseInitializer, SyncfusionLicenseInitializer>();
     }
 }

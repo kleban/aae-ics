@@ -6,7 +6,7 @@ using AAEICS.Services.AppConfig;
 
 namespace AAEICS.GuardFS.Checkups.AppConfigCheckup;
 
-public class AppConfigCheckup(string name, string description, IAppConfigService appConfigService) : ICheckup
+public class AppConfigCheckup(string name, string description) : ICheckup
 {
     public string Name { get; set; } = name;
     public string Description { get; set; } = description;
@@ -15,9 +15,8 @@ public class AppConfigCheckup(string name, string description, IAppConfigService
     [
         new AppConfigFileExistence("App Settings Existence",
             "Checks if the appsettings.json file in AppData directory exists"),
-        new AppConfigNotEmptiness("App Settings Not Empty", 
-            "Checks if the appsettings.json file is not empty",
-            appConfigService
+        new AppConfigRawValidator("App Settings Not Empty", 
+            "Checks if the appsettings.json file is not empty"
             )
     ];
 
@@ -31,6 +30,23 @@ public class AppConfigCheckup(string name, string description, IAppConfigService
         foreach (var step in _steps)
         {
             var stepResultForm = step.Execute();
+            if (stepResultForm.Result is CheckupStepResults.Failed)
+            {
+                _failedSteps.Add(step);
+                if (!string.IsNullOrEmpty(stepResultForm.Message))
+                    _messages.Add(stepResultForm.Message);
+                
+                return new CheckupResultForm
+                {
+                    IsSuccessful = false,
+                    HasWarnings = _hasWarnings,
+                    SuccessfulSteps = _successfulSteps,
+                    FailedSteps = _failedSteps,
+                    Messages = _messages
+                };
+            }
+
+            
             if (!_hasWarnings && stepResultForm.Result is CheckupStepResults.Warning)
                 _hasWarnings = true;
             

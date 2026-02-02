@@ -31,13 +31,13 @@ public partial class IncomingCertificate
 
     public virtual Personnel ApprovePersonNavigation { get; set; } = null!;
 
-    public virtual TransferInstance DeliveryCompanyNavigation { get; set; } = null!;
-
-    public virtual TransferInstance Donor { get; set; } = null!;
+    // public virtual TransferInstance DeliveryCompanyNavigation { get; set; } = null!;
+    //
+    // public virtual TransferInstance Donor { get; set; } = null!;
 
     public virtual ICollection<IncomingCertificateLine> IncomingCertificateLines { get; set; } = new List<IncomingCertificateLine>();
 
     public virtual Reason ReasonNavigation { get; set; } = null!;
 
-    public virtual TransferInstance Recipient { get; set; } = null!;
+    // public virtual TransferInstance Recipient { get; set; } = null!;
 }

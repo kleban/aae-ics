@@ -19,7 +19,7 @@ public partial class Personnel
 
     public virtual ICollection<IncomingCertificate> IncomingCertificates { get; set; } = new List<IncomingCertificate>();
 
-    public virtual ICollection<IssuanceCertificate> IssuanceCertificates { get; set; } = new List<IssuanceCertificate>();
+    // public virtual ICollection<IssuanceCertificate> IssuanceCertificates { get; set; } = new List<IssuanceCertificate>();
 
     public virtual Position? PositionNavigation { get; set; }
 

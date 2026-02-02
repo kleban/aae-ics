@@ -1,12 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AaeIcs.Client", "AaeIcs.Client\AaeIcs.Client.csproj", "{2C86FE8C-C4E5-4E45-A638-BA8805F8081A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AAEICS.Client", "AAEICS.Client\AAEICS.Client.csproj", "{2C86FE8C-C4E5-4E45-A638-BA8805F8081A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AaeIcs.Database", "AaeIcs.Database\AaeIcs.Database.csproj", "{3B1ED0D4-FFD8-4747-B5FA-C7C21DFA8392}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AAEICS.Database", "AAEICS.Database\AAEICS.Database.csproj", "{3B1ED0D4-FFD8-4747-B5FA-C7C21DFA8392}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AaeIcs.FuzzyProcessor", "AaeIcs.FuzzyProcessor\AaeIcs.FuzzyProcessor.csproj", "{7EEAEE06-2E59-4C41-8FF5-0D1164EDC0C3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AAEICS.FuzzyProcessor", "AAEICS.FuzzyProcessor\AAEICS.FuzzyProcessor.csproj", "{7EEAEE06-2E59-4C41-8FF5-0D1164EDC0C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AaeIcs.Services", "AaeIcs.Services\AaeIcs.Services.csproj", "{6661A09A-6AC4-4034-B8FE-32449D532C0D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AAEICS.Services", "AAEICS.Services\AAEICS.Services.csproj", "{6661A09A-6AC4-4034-B8FE-32449D532C0D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AAEICS.GuardFS", "AAEICS.GuardFS\AAEICS.GuardFS.csproj", "{1CA9A8DC-2210-4FF5-821D-B140A07A3A7E}"
 EndProject
