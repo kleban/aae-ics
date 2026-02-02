@@ -23,7 +23,7 @@ public partial class App : Application
         var services = new ServiceCollection();
 
         ConfigureGuardFs(services);
-        // ConfigureDatabase(services);
+        ConfigureDatabase(services);
         ConfigureLicense(services);
 
         Services = services.BuildServiceProvider();
@@ -33,6 +33,12 @@ public partial class App : Application
         {
             await guard.ShieldUpAsync();
             Services.GetRequiredService<ISyncfusionLicenseInitializer>().Register();
+            
+            using (var scope = Services.CreateScope())
+            {
+                var dbContext = scope.ServiceProvider.GetRequiredService<AAEICSDbContext>();
+                await dbContext.Database.MigrateAsync();
+            }
 
             var mainWindow = Services.GetRequiredService<MainWindow>();
             mainWindow.Show();
@@ -51,25 +57,24 @@ public partial class App : Application
 
         services.AddSingleton<GuardEngine>();
         
-        services.AddSingleton<IEnumerable<ICheckup>>(sp => new List<ICheckup>
+        services.AddSingleton<IEnumerable<ICheckup>>(new List<ICheckup>
         {
             new AppConfigCheckup(
                 "App Settings Checkup", 
-                "Checks if the appsettings.json file in AppData directory exists and is valid"
+                "Checks if the appsettings.json file in AppData directory exists and is valid" // Передаємо налаштування напряму
             )
         });
         services.AddSingleton<MainWindow>();
     }
 
-    // private void ConfigureDatabase(IServiceCollection services)
-    // {
-    //     services.Get;
-    //     services.AddDbContext<AAEICSDbContext>(sp =>
-    //     {
-    //         sp.GetRequiredService()
-    //     }
-    //     );
-    // }
+    private void ConfigureDatabase(IServiceCollection services)
+    {
+        services.AddDbContext<AAEICSDbContext>((serviceProvider, options) =>
+        {
+            var configService = serviceProvider.GetRequiredService<IAppConfigService>();
+            options.UseSqlite(configService.Get("Database"));
+        });
+    }
 
     private void ConfigureLicense(IServiceCollection services)
     {
