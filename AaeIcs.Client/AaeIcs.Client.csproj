@@ -40,7 +40,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\AAEICS.Database\AAEICS.Database.csproj" />
-      <ProjectReference Include="..\AAEICS.GuardFS\AAEICS.GuardFS.csproj" />
       <ProjectReference Include="..\AaeIcs.Services\AaeIcs.Services.csproj" />
     </ItemGroup>
 

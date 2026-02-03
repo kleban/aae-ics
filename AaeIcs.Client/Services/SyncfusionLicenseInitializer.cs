@@ -1,6 +1,5 @@
 ﻿using Syncfusion.Licensing;
-
-using AAEICS.Services.AppConfig;
+using AAEICS.Services.AppConfiguration;
 
 namespace AAEICS.Client.Services
 {
@@ -8,11 +7,9 @@ namespace AAEICS.Client.Services
     {
         public void Register()
         {
-            var licenseKey = config.Get("Syncfusion:LicenseKey");
-            if (!string.IsNullOrWhiteSpace(licenseKey))
-            {
-                SyncfusionLicenseProvider.RegisterLicense(licenseKey);
-            }
+            var licenseKey = config.Get("Keys:Syncfusion");
+            if (!string.IsNullOrWhiteSpace(licenseKey))            
+                SyncfusionLicenseProvider.RegisterLicense(licenseKey);            
         }
     }
 }

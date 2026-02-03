@@ -7,12 +7,24 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Log\" />
+      <Compile Remove="InitialCheckupService\Checkups\AppFilesCheckup\**" />
+      <Compile Remove="InitialCheckupService\Checkups\Contracts\**" />
+      <Compile Remove="InitialCheckupService\Checkups\Services\**" />
+      <Compile Remove="InitialCheckupService\Checkups\StorageCheckup\**" />
+      <Compile Remove="Log\**" />
+      <EmbeddedResource Remove="InitialCheckupService\Checkups\AppFilesCheckup\**" />
+      <EmbeddedResource Remove="InitialCheckupService\Checkups\Contracts\**" />
+      <EmbeddedResource Remove="InitialCheckupService\Checkups\Services\**" />
+      <EmbeddedResource Remove="InitialCheckupService\Checkups\StorageCheckup\**" />
+      <EmbeddedResource Remove="Log\**" />
+      <None Remove="InitialCheckupService\Checkups\AppFilesCheckup\**" />
+      <None Remove="InitialCheckupService\Checkups\Contracts\**" />
+      <None Remove="InitialCheckupService\Checkups\Services\**" />
+      <None Remove="InitialCheckupService\Checkups\StorageCheckup\**" />
+      <None Remove="Log\**" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.2" />
-      <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="10.0.2" />
       <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="10.0.2" />
       <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.2" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.2" />

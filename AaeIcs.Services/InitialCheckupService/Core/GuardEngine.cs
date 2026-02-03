@@ -1,6 +1,6 @@
-﻿using AAEICS.GuardFS.Contracts;
+﻿using AAEICS.Services.InitialCheckupService.Contracts;
 
-namespace AAEICS.GuardFS.Core;
+namespace AAEICS.Services.InitialCheckupService.Core;
 
 public class GuardEngine(IEnumerable<ICheckup> checkups)
 {

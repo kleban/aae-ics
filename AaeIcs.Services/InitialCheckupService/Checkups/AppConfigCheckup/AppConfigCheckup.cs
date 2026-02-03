@@ -1,12 +1,11 @@
-﻿using AAEICS.GuardFS.Checkups.AppConfigCheckup.Steps;
+﻿using AAEICS.Services.AppConfiguration;
+using AAEICS.Services.InitialCheckupService.CheckupForm;
+using AAEICS.Services.InitialCheckupService.Checkups.AppConfigCheckup.Steps;
+using AAEICS.Services.InitialCheckupService.Contracts;
 
-using AAEICS.GuardFS.Contracts;
-using AAEICS.GuardFS.etc;
-using AAEICS.Services.AppConfig;
+namespace AAEICS.Services.InitialCheckupService.Checkups.AppConfigCheckup;
 
-namespace AAEICS.GuardFS.Checkups.AppConfigCheckup;
-
-public class AppConfigCheckup(string name, string description) : ICheckup
+public class AppConfigCheckup(string name, string description, string appsettings_path) : ICheckup
 {
     public string Name { get; set; } = name;
     public string Description { get; set; } = description;
@@ -14,9 +13,11 @@ public class AppConfigCheckup(string name, string description) : ICheckup
     private readonly List<ICheckupStep> _steps =
     [
         new AppConfigFileExistence("App Settings Existence",
-            "Checks if the appsettings.json file in AppData directory exists"),
+            "Checks if the appsettings.json file in AppData directory exists",
+            appsettings_path),
         new AppConfigRawValidator("App Settings Not Empty", 
-            "Checks if the appsettings.json file is not empty"
+            "Checks if the appsettings.json file is not empty",
+            appsettings_path
             )
     ];
 

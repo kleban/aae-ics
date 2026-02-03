@@ -1,11 +1,11 @@
-﻿using AAEICS.GuardFS.BaseSettings;
-using AAEICS.GuardFS.Contracts;
-using AAEICS.GuardFS.etc;
+﻿
+using AAEICS.Services.InitialCheckupService.CheckupForm;
+using AAEICS.Services.InitialCheckupService.Contracts;
 using System.Text.Json;
 
-namespace AAEICS.GuardFS.Checkups.AppConfigCheckup.Steps;
+namespace AAEICS.Services.InitialCheckupService.Checkups.AppConfigCheckup.Steps;
 
-public class AppConfigRawValidator(string name, string description) : ICheckupStep
+public class AppConfigRawValidator(string name, string description, string appsettings_path) : ICheckupStep
 {
     public string Name { get; set; } = name;
     public string Description { get; set; } = description;
@@ -14,7 +14,7 @@ public class AppConfigRawValidator(string name, string description) : ICheckupSt
     {
         try
         {
-            if (!File.Exists(AppBaseSettings.AppConfigFilePath))
+            if (!File.Exists(appsettings_path))
             {
                 return new CheckupStepResultForm
                 {
@@ -23,7 +23,7 @@ public class AppConfigRawValidator(string name, string description) : ICheckupSt
                 };
             }
 
-            string content = File.ReadAllText(AppBaseSettings.AppConfigFilePath);
+            string content = File.ReadAllText(appsettings_path);
 
             if (string.IsNullOrWhiteSpace(content))
             {
@@ -38,14 +38,14 @@ public class AppConfigRawValidator(string name, string description) : ICheckupSt
             using var jsonDoc = JsonDocument.Parse(content);
             
             // Перевіряємо наявність секції Database, яку ви згадували
-            if (!jsonDoc.RootElement.TryGetProperty("Database", out _))
+            /*if (!jsonDoc.RootElement.TryGetProperty("Database", out _))
             {
                 return new CheckupStepResultForm
                 {
                     Result = CheckupStepResults.Warning,
                     Message = "JSON is valid, but 'Database' section is missing. Will use defaults."
                 };
-            }
+            }*/
 
             return new CheckupStepResultForm
             {

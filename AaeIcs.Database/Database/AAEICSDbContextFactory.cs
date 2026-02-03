@@ -15,7 +15,7 @@ public class AAEICSDbContextFactory : IDesignTimeDbContextFactory<AAEICSDbContex
         // 2. Вказуємо рядок підключення ТІЛЬКИ для створення міграцій.
         // Це не вплине на реальну програму. Реальна програма візьме шлях з AppConfigService.
         // Можна вказати будь-який шлях, головне щоб синтаксис був правильний.
-        optionsBuilder.UseSqlite("Data Source=designTime.db");
+        optionsBuilder.UseSqlite($"Data Source=designTime.db");
 
         // 3. Повертаємо готовий контекст
         return new AAEICSDbContext(optionsBuilder.Options);
