@@ -1,42 +1,30 @@
 ﻿using AAEICS.Services.AppConfiguration;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace AAEICS.Services.InitialFolders
+namespace AAEICS.Services.InitialFolders;
+
+public class InitialFoldersService(IAppConfigService configService) : IInitialFoldersService
 {
-    public class InitialFoldersService : IInitialFoldersService
+    public void CreateInitialFolders()
     {
-        private readonly IAppConfigService configService;
-        public InitialFoldersService(IAppConfigService configService)
+        var folders = configService.GetAppConfig().Path;
+
+        if (!System.IO.Directory.Exists(folders.AssetsPath))
         {
-            this.configService = configService;
+            var dir = Directory.CreateDirectory(folders.AssetsPath);
+            configService.UpdatePath("AssetsPath", dir.FullName);
+            configService.UpdatePath("DbPath", Path.Combine(dir.FullName, "aaeics.db"));
         }
 
-        public void CreateInitialFolders()
+        if (!System.IO.Directory.Exists(folders.LogsPath))
         {
-            var folders = configService.GetAppConfig().Path;
+            var logs = System.IO.Directory.CreateDirectory(folders.LogsPath);
+            configService.UpdatePath("LogsPath", logs.FullName);
+        }
 
-            if (!System.IO.Directory.Exists(folders.AssetsPath))
-            {
-                var dir = Directory.CreateDirectory(folders.AssetsPath);
-                configService.UpdatePath("AssetsPath", dir.FullName);
-                configService.UpdatePath("DbPath", Path.Combine(dir.FullName, "aaeics.db"));
-            }
-            else
-                return;
-
-            if (!System.IO.Directory.Exists(folders.LogsPath))
-            {
-                var logs = System.IO.Directory.CreateDirectory(folders.LogsPath);
-                configService.UpdatePath("LogsPath", logs.FullName);
-            }
-
-            if (!System.IO.Directory.Exists(folders.DbBackupPath))
-            {
-                var backup = System.IO.Directory.CreateDirectory(folders.DbBackupPath);
-                configService.UpdatePath("DbBackupPath", backup.FullName);
-            }
+        if (!System.IO.Directory.Exists(folders.DbBackupPath))
+        {
+            var backup = System.IO.Directory.CreateDirectory(folders.DbBackupPath);
+            configService.UpdatePath("DbBackupPath", backup.FullName);
         }
     }
 }

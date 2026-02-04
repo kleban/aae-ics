@@ -1,15 +1,14 @@
 ﻿using Syncfusion.Licensing;
 using AAEICS.Services.AppConfiguration;
 
-namespace AAEICS.Client.Services
+namespace AAEICS.Client.Services;
+
+public sealed class SyncfusionLicenseInitializer(IAppConfigService config) : ISyncfusionLicenseInitializer
 {
-    public sealed class SyncfusionLicenseInitializer(IAppConfigService config) : ISyncfusionLicenseInitializer
+    public void Register()
     {
-        public void Register()
-        {
-            var licenseKey = config.Get("Keys:Syncfusion");
-            if (!string.IsNullOrWhiteSpace(licenseKey))            
-                SyncfusionLicenseProvider.RegisterLicense(licenseKey);            
-        }
+        var licenseKey = config.Get("Keys:Syncfusion");
+        if (!string.IsNullOrWhiteSpace(licenseKey))            
+            SyncfusionLicenseProvider.RegisterLicense(licenseKey);            
     }
 }

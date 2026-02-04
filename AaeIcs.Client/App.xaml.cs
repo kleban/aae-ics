@@ -4,10 +4,9 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 using Microsoft.EntityFrameworkCore;
 using AAEICS.Services.AppConfiguration;
-using AAEICS.Services.InitialCheckupService.Contracts;
-using AAEICS.Services.InitialCheckupService.Core;
-using AAEICS.Services.InitialCheckupService.Checkups.AppConfigCheckup;
-using System.IO;
+// using AAEICS.Services.InitialCheckupService.Contracts;
+// using AAEICS.Services.InitialCheckupService.Core;
+// using AAEICS.Services.InitialCheckupService.Checkups.AppConfigCheckup;
 using AAEICS.Services.InitialFolders;
 
 namespace AAEICS.Client;
@@ -23,7 +22,7 @@ public partial class App : Application
         services.AddSingleton<IAppConfigService, AppConfigService>();
         services.AddSingleton<IInitialFoldersService, InitialFoldersService>();
 
-        ConfigureGuardFs(services, AppConfigService.ConfigFileName);
+        // ConfigureGuardFs(services, AppConfigService.ConfigFileName);
         ConfigureDatabase(services);
         ConfigureLicense(services);
 
@@ -31,19 +30,17 @@ public partial class App : Application
 
         Services = services.BuildServiceProvider();
         
-        var initFolders = Services.GetRequiredService<IInitialFoldersService>();
-        initFolders.CreateInitialFolders();
-
-       var guard = Services.GetRequiredService<GuardEngine>();
+        // var guard = Services.GetRequiredService<GuardEngine>();
         try
         {
-             await guard.ShieldUpAsync();
+            // await guard.ShieldUpAsync();
 
-            using (var scope = Services.CreateScope())
-            {
-                var dbContext = scope.ServiceProvider.GetRequiredService<AAEICSDbContext>();
-                await dbContext.Database.MigrateAsync();
-            }            
+            var initFolders = Services.GetRequiredService<IInitialFoldersService>();
+            initFolders.CreateInitialFolders();
+
+            using var scope = Services.CreateScope();
+            var dbContext = scope.ServiceProvider.GetRequiredService<AAEICSDbContext>();
+            await dbContext.Database.MigrateAsync();
         }
         catch (Exception ex)
         {
@@ -58,20 +55,20 @@ public partial class App : Application
         mainWindow.Show();
     }
 
-    private void ConfigureGuardFs(IServiceCollection services, string appsettings_path)
-    {        
-
-        services.AddSingleton<GuardEngine>();        
-        services.AddSingleton<IEnumerable<ICheckup>>(new List<ICheckup>
-        {
-            new AppConfigCheckup(
-                "App Settings Checkup", 
-                "Checks if the appsettings.json file in AppData directory exists and is valid", // Передаємо налаштування напряму
-                appsettings_path
-            )
-        });
-        
-    }
+    // private void ConfigureGuardFs(IServiceCollection services, string appsettings_path)
+    // {        
+    //
+    //     services.AddSingleton<GuardEngine>();        
+    //     services.AddSingleton<IEnumerable<ICheckup>>(new List<ICheckup>
+    //     {
+    //         new AppConfigCheckup(
+    //             "App Settings Checkup", 
+    //             "Checks if the appsettings.json file in AppData directory exists and is valid", // Передаємо налаштування напряму
+    //             appsettings_path
+    //         )
+    //     });
+    //     
+    // }
 
     private void ConfigureDatabase(IServiceCollection services)
     {     

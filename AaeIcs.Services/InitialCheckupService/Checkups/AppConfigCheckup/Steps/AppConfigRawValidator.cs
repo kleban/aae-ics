@@ -38,14 +38,14 @@ public class AppConfigRawValidator(string name, string description, string appse
             using var jsonDoc = JsonDocument.Parse(content);
             
             // Перевіряємо наявність секції Database, яку ви згадували
-            /*if (!jsonDoc.RootElement.TryGetProperty("Database", out _))
+            if (!jsonDoc.RootElement.TryGetProperty("Database", out _))
             {
                 return new CheckupStepResultForm
                 {
                     Result = CheckupStepResults.Warning,
                     Message = "JSON is valid, but 'Database' section is missing. Will use defaults."
                 };
-            }*/
+            }
 
             return new CheckupStepResultForm
             {
