@@ -1,9 +1,9 @@
-﻿<Page x:Class="AAEICS.Client.HomePage"
+﻿<Page x:Class="AAEICS.Client.Views.HomePage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:local="clr-namespace:AAEICS.Client"
+      xmlns:local="clr-namespace:AAEICS.Client.Views"
       mc:Ignorable="d"
       Title="HomePage" Height="auto" Width="auto">
     <Grid>

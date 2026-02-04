@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using AAEICS.Client.Views;
+
+using System.Windows;
 using System.Windows.Input;
 using Syncfusion.UI.Xaml.NavigationDrawer;
 using Syncfusion.Windows.Shared;
