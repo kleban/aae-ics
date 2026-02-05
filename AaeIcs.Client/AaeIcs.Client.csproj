@@ -17,7 +17,6 @@
       <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.2" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.2" />
       <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
-      <PackageReference Include="Syncfusion.Licensing" Version="32.1.25" />
       <PackageReference Include="Syncfusion.SfGrid.WPF" Version="32.1.25" />
       <PackageReference Include="Syncfusion.SfInput.WPF" Version="32.1.25" />
       <PackageReference Include="Syncfusion.SfNavigationDrawer.WPF" Version="32.1.25" />
@@ -55,6 +54,11 @@
         <SubType>Designer</SubType>
       </Page>
       <Page Update="Views\SettingsPage.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="Views\MainWindow.xaml">
         <Generator>MSBuild:Compile</Generator>
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>

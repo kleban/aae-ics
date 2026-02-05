@@ -1,7 +1,6 @@
 ﻿using AAEICS.Shared.DTOs;
-using AAEICS.Services.IncomingCertificates.Contracts;
 
-namespace AAEICS.Services.IncomingCertificates.Implementations;
+namespace AAEICS.Services.IncomingCertificates;
 
 public class IncomingCertificateService: IIncomingCertificateService
 {

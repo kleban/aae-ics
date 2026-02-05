@@ -1,12 +1,11 @@
-﻿using AAEICS.Client.Views;
-
-using System.Windows;
-using System.Windows.Input;
-using Microsoft.Extensions.DependencyInjection;
-using Syncfusion.UI.Xaml.NavigationDrawer;
+﻿using Syncfusion.UI.Xaml.NavigationDrawer;
 using Syncfusion.Windows.Shared;
 
-namespace AAEICS.Client;
+using Microsoft.Extensions.DependencyInjection;
+using System.Windows;
+using System.Windows.Input;
+
+namespace AAEICS.Client.Views;
 
 public partial class MainWindow: ChromelessWindow
 {

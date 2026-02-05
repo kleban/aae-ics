@@ -3,7 +3,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
-using AAEICS.Services.IncomingCertificates.Contracts;
+using AAEICS.Services.IncomingCertificates;
 
 namespace AAEICS.Client.ViewModels;
 
