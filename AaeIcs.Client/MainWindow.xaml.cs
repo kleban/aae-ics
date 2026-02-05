@@ -2,6 +2,7 @@
 
 using System.Windows;
 using System.Windows.Input;
+using Microsoft.Extensions.DependencyInjection;
 using Syncfusion.UI.Xaml.NavigationDrawer;
 using Syncfusion.Windows.Shared;
 
@@ -17,7 +18,7 @@ public partial class MainWindow: ChromelessWindow
         InitializeComponent();
         
         StateChanged += MainWindow_StateChanged;
-        MainContentFrame.Navigate(new HomePage());
+        MainContentFrame.Navigate(new NewIncomingCertificatePage());
     }
     
     private void MainWindow_StateChanged(object? sender, EventArgs e)
@@ -45,7 +46,7 @@ public partial class MainWindow: ChromelessWindow
         switch (clickedItem.Tag.ToString())
         {
             case "home":
-                MainContentFrame.Navigate(new HomePage());
+                MainContentFrame.Navigate(App.Services.GetRequiredService<HomePage>());
                 Title = "AAC-ICS Client | Home";
                 break;
             case "settings":

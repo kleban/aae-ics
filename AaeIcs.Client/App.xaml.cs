@@ -1,7 +1,10 @@
 ﻿using AAEICS.Client.Services;
+using AAEICS.Client.Views;
 using AAEICS.Database.Context;
 using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
+using AAEICS.Client.ViewModels;
+using AAEICS.Services;
 using Microsoft.EntityFrameworkCore;
 using AAEICS.Services.AppConfiguration;
 // using AAEICS.Services.InitialCheckupService.Contracts;
@@ -19,14 +22,16 @@ public partial class App : Application
     {
         base.OnStartup(e);
         var services = new ServiceCollection();
-        services.AddSingleton<IAppConfigService, AppConfigService>();
-        services.AddSingleton<IInitialFoldersService, InitialFoldersService>();
+        services.AddServices();
 
         // ConfigureGuardFs(services, AppConfigService.ConfigFileName);
         ConfigureDatabase(services);
         ConfigureLicense(services);
+        
+        services.AddViewModels();
 
         services.AddSingleton<MainWindow>();
+        services.AddTransient<HomePage>();
 
         Services = services.BuildServiceProvider();
         
@@ -52,6 +57,9 @@ public partial class App : Application
         Services.GetRequiredService<ISyncfusionLicenseInitializer>().Register();
 
         var mainWindow = Services.GetRequiredService<MainWindow>();
+        var homePage = Services.GetRequiredService<HomePage>();
+        
+        mainWindow.MainContentFrame.Navigate(homePage);
         mainWindow.Show();
     }
 

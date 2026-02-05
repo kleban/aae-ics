@@ -24,4 +24,42 @@
         <!--     </syncfusion:SfNavigationDrawer.ContentView> -->
         <!-- </syncfusion:SfNavigationDrawer> -->
     </Grid>
+    <!--         <syncfusion:MenuAdv Grid.Row="0" Height="25" VerticalAlignment="Top" Background="Aqua"> -->
+    <!--         <syncfusion:MenuItemAdv Header="File"> -->
+    <!--             <syncfusion:MenuItemAdv Header="New"> -->
+    <!--                 <syncfusion:MenuItemAdv.Icon> -->
+    <!--                     <Viewbox Width="15" Height="15"> -->
+    <!--                         <Path Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"  -->
+    <!--                               Fill="Black"  -->
+    <!--                               Stretch="Uniform" /> -->
+    <!--                     </Viewbox> -->
+    <!--                 </syncfusion:MenuItemAdv.Icon> -->
+    <!--             </syncfusion:MenuItemAdv> -->
+    <!--             <syncfusion:MenuItemAdv Header="Open"> -->
+    <!--                 <syncfusion:MenuItemAdv.Icon> -->
+    <!--                     <Viewbox Width="15" Height="15"> -->
+    <!--                         <Path Data="M20,18H4V8H20M20,6H12L10,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V8C22,6.89 21.1,6 20,6Z"  -->
+    <!--                               Fill="#FF4500"  -->
+    <!--                               Stretch="Uniform" /> -->
+    <!--                     </Viewbox> -->
+    <!--                 </syncfusion:MenuItemAdv.Icon> -->
+    <!--             </syncfusion:MenuItemAdv> -->
+    <!--         </syncfusion:MenuItemAdv> -->
+    <!--         <syncfusion:MenuItemAdv Header="Edit"> -->
+    <!--             <syncfusion:MenuItemAdv Header="Undo"/> -->
+    <!--             <syncfusion:MenuItemAdv Header="Redo"/> -->
+    <!--         </syncfusion:MenuItemAdv> -->
+    <!--         <syncfusion:MenuItemAdv Header="View"> -->
+    <!--             <syncfusion:MenuItemAdv Header="Zoom In"/> -->
+    <!--             <syncfusion:MenuItemAdv Header="Zoom Out"/> -->
+    <!--         </syncfusion:MenuItemAdv> -->
+    <!--         <syncfusion:MenuItemAdv Header="Help"> -->
+    <!--             <syncfusion:MenuItemAdv Header="Documentation"/> -->
+    <!--             <syncfusion:MenuItemAdv Header="About"/> -->
+    <!--         </syncfusion:MenuItemAdv> -->
+    <!--     </syncfusion:MenuAdv> -->
+    <!--     <StackPanel Grid.Row="1" Background="Bisque"> -->
+    <!--         <syncfusion:ButtonAdv SmallIcon="../images/icon.png" Label="hjgkjghj"/> -->
+    <!--     </StackPanel> -->
+    <!-- </Grid> -->
 </Page>

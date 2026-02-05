@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AAEICS.Database", "AAEICS.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AAEICS.Services", "AAEICS.Services\AAEICS.Services.csproj", "{6661A09A-6AC4-4034-B8FE-32449D532C0D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AAEICS.Repositories", "AAEICS.Repositories\AAEICS.Repositories.csproj", "{42354883-6054-4DF2-8FCB-5A7F0851BCAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AAEICS.Shared", "AAEICS.Shared\AAEICS.Shared.csproj", "{508D69B3-037C-49A6-BDD8-D38726C367A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{6661A09A-6AC4-4034-B8FE-32449D532C0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6661A09A-6AC4-4034-B8FE-32449D532C0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6661A09A-6AC4-4034-B8FE-32449D532C0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42354883-6054-4DF2-8FCB-5A7F0851BCAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42354883-6054-4DF2-8FCB-5A7F0851BCAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42354883-6054-4DF2-8FCB-5A7F0851BCAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42354883-6054-4DF2-8FCB-5A7F0851BCAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{508D69B3-037C-49A6-BDD8-D38726C367A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{508D69B3-037C-49A6-BDD8-D38726C367A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{508D69B3-037C-49A6-BDD8-D38726C367A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{508D69B3-037C-49A6-BDD8-D38726C367A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -25,6 +25,18 @@
         <Geometry x:Key="CloseIcon">
             M4,4 L16,16 M4,16 L16,4
         </Geometry>
+        <Geometry x:Key="NewFile">
+            M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z
+        </Geometry>
+        <Geometry x:Key="OpenFile">
+            M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z
+        </Geometry>
+        <Geometry x:Key="SaveFile">
+            M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z
+        </Geometry>
+        <Geometry x:Key="CloseFile">
+            M18 6L6 18M6 6l12 12
+        </Geometry>
 
         <Style TargetType="Button" x:Key="MenuButtonStyle">
             <Setter Property="Background" Value="Transparent"/>

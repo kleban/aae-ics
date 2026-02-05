@@ -9,16 +9,20 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.2">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
       <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.2" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.2" />
+      <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
       <PackageReference Include="Syncfusion.Licensing" Version="32.1.25" />
+      <PackageReference Include="Syncfusion.SfGrid.WPF" Version="32.1.25" />
       <PackageReference Include="Syncfusion.SfInput.WPF" Version="32.1.25" />
       <PackageReference Include="Syncfusion.SfNavigationDrawer.WPF" Version="32.1.25" />
       <PackageReference Include="Syncfusion.SfSkinManager.WPF" Version="32.1.25" />
+      <PackageReference Include="Syncfusion.SfTextInputLayout.WPF" Version="32.1.25" />
       <PackageReference Include="Syncfusion.Shared.WPF" Version="32.1.25" />
       <PackageReference Include="Syncfusion.Themes.Material3Light.WPF" Version="32.1.25" />
       <PackageReference Include="Syncfusion.Themes.Windows11Light.WPF" Version="32.1.25" />
@@ -41,14 +45,11 @@
     <ItemGroup>
       <ProjectReference Include="..\AAEICS.Database\AAEICS.Database.csproj" />
       <ProjectReference Include="..\AaeIcs.Services\AaeIcs.Services.csproj" />
+      <ProjectReference Include="..\AAEICS.Shared\AAEICS.Shared.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="ViewModels\" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Page Update="Views\HomePage.xaml">
+      <Page Update="Views\NewIncomingCertificatePage.xaml">
         <Generator>MSBuild:Compile</Generator>
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>

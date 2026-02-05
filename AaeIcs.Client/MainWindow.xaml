@@ -114,7 +114,11 @@
 
         <syncfusion:SfNavigationDrawer.ContentView>
             <Grid Background="White">
-                <Frame x:Name="MainContentFrame" NavigationUIVisibility="Hidden"/>
+                <Frame x:Name="MainContentFrame" 
+                       NavigationUIVisibility="Hidden"
+                       HorizontalContentAlignment="Stretch"
+                       VerticalContentAlignment="Stretch"
+                       Margin="5,0,0,0"/>
             </Grid>
         </syncfusion:SfNavigationDrawer.ContentView>
 

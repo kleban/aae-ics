@@ -30,4 +30,8 @@
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.2" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\AAEICS.Shared\AAEICS.Shared.csproj" />
+    </ItemGroup>
+
 </Project>
