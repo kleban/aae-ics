@@ -28,7 +28,6 @@
       <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="10.0.2" />
       <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.2" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.2" />
-      <PackageReference Include="Syncfusion.Licensing" Version="32.1.25" />
     </ItemGroup>
 
     <ItemGroup>

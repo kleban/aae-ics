@@ -1,15 +1,16 @@
-﻿using AAEICS.Client.Views;
+﻿using AAEICS.Client.Services.SyncfusionLicenseInitializerService;
+using AAEICS.Client.Views;
 using AAEICS.Client.ViewModels;
 
 using AAEICS.Database;
 using AAEICS.Database.Context;
 using AAEICS.Services;
 using AAEICS.Services.InitialFolders;
-using AAEICS.Services.SyncfusionLicenseInitializerService;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
+using AAEICS.Client.Services;
 
 namespace AAEICS.Client;
 
@@ -22,6 +23,7 @@ public partial class App : Application
         base.OnStartup(e);
         var services = new ServiceCollection();
         services.AddServices();
+        services.AddClientServices();
         services.AddDatabase();
         services.AddViewModels();
         services.AddViews();
@@ -49,7 +51,7 @@ public partial class App : Application
         var mainWindow = Services.GetRequiredService<MainWindow>();
         var homePage = Services.GetRequiredService<HomePage>();
         
-        mainWindow.MainContentFrame.Navigate(homePage);
+        // mainWindow.MainContentFrame.Navigate(homePage);
         mainWindow.Show();
     }
 }

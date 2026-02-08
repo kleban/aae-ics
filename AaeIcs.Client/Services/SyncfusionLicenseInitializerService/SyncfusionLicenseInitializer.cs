@@ -1,7 +1,7 @@
 ﻿using Syncfusion.Licensing;
 using AAEICS.Services.AppConfiguration;
 
-namespace AAEICS.Services.SyncfusionLicenseInitializerService;
+namespace AAEICS.Client.Services.SyncfusionLicenseInitializerService;
 
 public sealed class SyncfusionLicenseInitializer(IAppConfigService config) : ISyncfusionLicenseInitializer
 {

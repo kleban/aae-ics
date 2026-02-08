@@ -1,4 +1,4 @@
-﻿namespace AAEICS.Services.SyncfusionLicenseInitializerService;
+﻿namespace AAEICS.Client.Services.SyncfusionLicenseInitializerService;
 
 public interface ISyncfusionLicenseInitializer
 {

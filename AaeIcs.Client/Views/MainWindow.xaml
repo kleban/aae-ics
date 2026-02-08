@@ -3,19 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:AAEICS.Client.Views"
+        xmlns:local="clr-namespace:AAEICS.Client"
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
-        xmlns:syncfusionskin="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
-        syncfusionskin:SfSkinManager.Theme="{syncfusionskin:SkinManagerExtension ThemeName=Windows11Light}"
         mc:Ignorable="d"
         Title="AAC-ICS Client | Home"
         
         Height="800" Width="1200"
-        CornerRadius="10"
-        ResizeBorderThickness="5"
-        BorderThickness="1"
-        BorderBrush="#E0E0E0"
-        Background="White"
+        MinHeight="576" MinWidth="1024"
+        Style="{DynamicResource CustomChromelessWindowStyle}"
         
         WindowStartupLocation="CenterScreen"
         AllowsTransparency="True"
@@ -23,7 +18,6 @@
         
         TitleBarHeight="50"
         ShowIcon="False">
-    
     <syncfusion:ChromelessWindow.TitleBarTemplate>
         <ControlTemplate>
             <Grid Background="Transparent" 
@@ -34,42 +28,72 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-
-                <Button Grid.Column="0" 
-                        Margin="10,0,5,0" 
-                        Style="{StaticResource MenuButtonStyle}" 
-                        Click="ToggleSidebar_Click">
-                    <Path Data="{StaticResource HamburgerIcon}" 
-                          Stroke="#444444" StrokeThickness="2" 
-                          Width="18" Height="18" Stretch="Uniform"/>
-                </Button>
-
+                <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,10,0">
+                    <Grid HorizontalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Light" Style="{DynamicResource TitleBarHeader}"/>
+                        <ToggleButton Grid.Column="1" Width="60" Height="30" Margin="5,0,5,0"
+                                      IsChecked="{Binding IsDarkTheme, Mode=TwoWay}" 
+                                      HorizontalAlignment="Left">
+                            <ToggleButton.Template>
+                                <ControlTemplate>
+                                    <Border x:Name="SwitchBorder" Width="58" Height="30" CornerRadius="15" Background="#CCC">
+                                        <Border x:Name="SwitchShape" Width="22" Height="22" CornerRadius="15" Background="#ed8f0c" 
+                                                HorizontalAlignment="Left" Margin="4,0,4,0">
+                                            <Border.Effect>
+                                                <DropShadowEffect Opacity=".2"/>
+                                            </Border.Effect>
+                                        </Border>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="ToggleButton.IsChecked" Value="True">
+                                            <Setter TargetName="SwitchShape" Property="HorizontalAlignment" Value="Right"/>
+                                            <Setter TargetName="SwitchShape" Property="Background" Value="#FFDD00"/>
+                                        </Trigger>
+                                        
+                                        <Trigger Property="ToggleButton.IsChecked" Value="False">
+                                            <Setter TargetName="SwitchBorder" Property="Background" Value="LightGray"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                    
+                                </ControlTemplate>
+                            </ToggleButton.Template>
+                        </ToggleButton>
+                        <TextBlock Grid.Column="2" Text="Dark" Style="{DynamicResource TitleBarHeader}"/>
+                    </Grid>
+                </StackPanel>
                 <TextBlock Grid.Column="1" 
-                           Text="{
-                               Binding Title, 
-                               RelativeSource={RelativeSource AncestorType=syncfusion:ChromelessWindow}
-                           }" 
-                           VerticalAlignment="Center" 
-                           Margin="5,0,20,0" 
-                           FontSize="15" FontWeight="SemiBold" Foreground="#333333"/>
+                           Text="{Binding Title, RelativeSource={RelativeSource AncestorType=syncfusion:ChromelessWindow}}" 
+                           Style="{DynamicResource TitleBarHeader}" 
+                           Margin="10,0,10,0"/>
                 
                 <StackPanel Grid.Column="2" 
                             Orientation="Horizontal" 
                             VerticalAlignment="Stretch">
-                    <Button Style="{StaticResource WindowControlButtonStyle}" Click="Minimize_Click">
-                        <Path Data="{StaticResource MinimizeIcon}" Fill="#444444" Width="14" Height="14" Stretch="Uniform"/>
+                    <Button Style="{DynamicResource WindowControlButtonStyle}" 
+                            Command="{Binding MinimizeAppCommand}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=syncfusion:ChromelessWindow}}">
+                        <Path Data="{DynamicResource MinimizeIcon}"
+                              Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}" 
+                              Width="14" Height="14" Stretch="Uniform"/>
                     </Button>
                     
-                    <Button Style="{StaticResource WindowControlButtonStyle}" Click="Maximize_Click">
+                    <Button Style="{DynamicResource WindowControlButtonStyle}" 
+                            Command="{Binding MaximizeAppCommand}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=syncfusion:ChromelessWindow}}">
                         <Path Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}" 
                               Width="14" Height="14" Stretch="Uniform">
                             <Path.Style>
                                 <Style TargetType="Path">
-                                    <Setter Property="Data" Value="{StaticResource MaximizeIcon}"/>
+                                    <Setter Property="Data" Value="{DynamicResource MaximizeIcon}"/>
                 
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding WindowState, RelativeSource={RelativeSource AncestorType=Window}}" Value="Maximized">
-                                            <Setter Property="Data" Value="{StaticResource RestoreIcon}"/>
+                                            <Setter Property="Data" Value="{DynamicResource RestoreIcon}"/>
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
@@ -77,50 +101,79 @@
                         </Path>
                     </Button>
                     
-                    <Button Style="{StaticResource WindowCloseButtonStyle}" Click="Close_Click">
-                        <Path Data="{StaticResource CloseIcon}" Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}" StrokeThickness="1.5" Width="14" Height="14" Stretch="Uniform"/>
+                    <Button Style="{DynamicResource WindowCloseButtonStyle}"
+                            Command="{Binding CloseAppCommand}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=syncfusion:ChromelessWindow}}">
+                        <Path Data="{DynamicResource CloseIcon}" Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}" StrokeThickness="1.5" Width="14" Height="14" Stretch="Uniform"/>
                     </Button>
                 </StackPanel>
             </Grid>
         </ControlTemplate>
     </syncfusion:ChromelessWindow.TitleBarTemplate>
+    <syncfusion:ChromelessWindow.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
+    </syncfusion:ChromelessWindow.Resources>
+    
+    <Grid>
+        <!--// Responsive Layouts //-->
 
-    <syncfusion:SfNavigationDrawer x:Name="NavigationDrawer"
-                                   DisplayMode="Expanded"
-                                   IsOpen="True"
-                                   IsToggleButtonVisible="False"
-                                   ItemClicked="NavigationDrawer_ItemClicked">
-            
-        <syncfusion:SfNavigationDrawer.Items>
-            <syncfusion:NavigationItem Header="Home" 
-                                       Tag="home" 
-                                       IsSelected="True">
-                <syncfusion:NavigationItem.Icon>
-                    <Path Data="{StaticResource Icon.Home}" 
-                          Fill="#444444" 
-                          Width="20" Height="20" Stretch="Uniform"/>
-                </syncfusion:NavigationItem.Icon>
-            </syncfusion:NavigationItem>
+        <ContentControl Content="{Binding}">
+
+            <ContentControl.Style>
+
+                <Style TargetType="ContentControl">
+                    
+                    <!--// Default Layout //-->
+
+                    <Setter Property="ContentTemplate"
+                            Value="{DynamicResource LaptopLayout}" />
+
+                    <Style.Triggers>
+                        
+                        <!--// Desktop Layout // {width > 1400px}-->
+
+                        <DataTrigger Binding="{Binding Path=ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={x:Static local:Helper.IsGreaterThanConverter.Instance}, ConverterParameter=1400}"
+                                     Value="True">
+
+                            <Setter Property="ContentTemplate"
+                                    Value="{DynamicResource DesktopLayout}" />
+
+                        </DataTrigger>      
+                        
+                        <!--// Tablet Landscape Layout // {width < 1200px}-->
+
+                        <DataTrigger Binding="{Binding Path=ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={x:Static local:Helper.IsLessThanConverter.Instance}, ConverterParameter=1200}"
+                                     Value="True">
+
+                            <Setter Property="ContentTemplate"
+                                    Value="{DynamicResource TabletLayout}" />
+
+                        </DataTrigger>
+
+                    </Style.Triggers>                    
+
+                </Style>
                 
-            <syncfusion:NavigationItem Header="Settings" 
-                                       Tag="settings">
-                <syncfusion:NavigationItem.Icon>
-                    <Path Data="{StaticResource Icon.Settings}" 
-                          Fill="#444444" 
-                          Width="20" Height="20" Stretch="Uniform"/>
-                </syncfusion:NavigationItem.Icon>
-            </syncfusion:NavigationItem>
-        </syncfusion:SfNavigationDrawer.Items>
+            </ContentControl.Style>
+            
+        </ContentControl>
+        
+        <!--// Side Menu // [ For Tablet, Mobile Layouts ]-->
 
-        <syncfusion:SfNavigationDrawer.ContentView>
-            <Grid Background="White">
-                <Frame x:Name="MainContentFrame" 
-                       NavigationUIVisibility="Hidden"
-                       HorizontalContentAlignment="Stretch"
-                       VerticalContentAlignment="Stretch"
-                       Margin="5,0,0,0"/>
-            </Grid>
-        </syncfusion:SfNavigationDrawer.ContentView>
+        <ContentControl Content="{Binding}"
+                        Visibility="{Binding IsPanelVisible, Converter={StaticResource BooleanToVisibility}}">
 
-    </syncfusion:SfNavigationDrawer>
+            <ContentControl.Style>
+
+                <Style TargetType="ContentControl">
+
+                    <Setter Property="ContentTemplate"
+                            Value="{DynamicResource MenuTemplate}" />
+
+                </Style>
+
+            </ContentControl.Style>
+
+        </ContentControl>
+    </Grid>
 </syncfusion:ChromelessWindow>

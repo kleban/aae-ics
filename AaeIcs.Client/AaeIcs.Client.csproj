@@ -17,6 +17,7 @@
       <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.2" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.2" />
       <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
+      <PackageReference Include="Syncfusion.Licensing" Version="32.2.3" />
       <PackageReference Include="Syncfusion.SfGrid.WPF" Version="32.1.25" />
       <PackageReference Include="Syncfusion.SfInput.WPF" Version="32.1.25" />
       <PackageReference Include="Syncfusion.SfNavigationDrawer.WPF" Version="32.1.25" />
@@ -30,9 +31,55 @@
 
     <ItemGroup>
       <None Remove="images\icon.png" />
-      <Resource Include="images\icon.png">
+      <Resource Include="Images\icon.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
+      <None Remove="assets\analytics_icon.png" />
+      <Resource Include="Assets\analytics_icon.png" />
+      <None Remove="assets\calendar_icon.png" />
+      <Resource Include="Assets\calendar_icon.png" />
+      <None Remove="assets\categories_icon.png" />
+      <Resource Include="Assets\categories_icon.png" />
+      <None Remove="assets\close_menu_def.png" />
+      <Resource Include="Assets\close_menu_def.png" />
+      <None Remove="assets\close_menu_mo.png" />
+      <Resource Include="Assets\close_menu_mo.png" />
+      <None Remove="assets\dashboard_icon.png" />
+      <Resource Include="Assets\dashboard_icon.png" />
+      <None Remove="assets\delivery_icon.png" />
+      <Resource Include="Assets\delivery_icon.png" />
+      <None Remove="assets\Devices_Image.png" />
+      <Resource Include="Assets\Devices_Image.png" />
+      <None Remove="assets\discount_icon.png" />
+      <Resource Include="Assets\discount_icon.png" />
+      <None Remove="assets\hamburger_icon.png" />
+      <Resource Include="Assets\hamburger_icon.png" />
+      <None Remove="assets\hamburger_mo.png" />
+      <Resource Include="Assets\hamburger_mo.png" />
+      <None Remove="assets\line_chart.png" />
+      <Resource Include="Assets\line_chart.png" />
+      <None Remove="assets\max_def.png" />
+      <Resource Include="Assets\max_def.png" />
+      <None Remove="assets\max_mo.png" />
+      <Resource Include="Assets\max_mo.png" />
+      <None Remove="assets\order32.png" />
+      <Resource Include="Assets\order32.png" />
+      <None Remove="assets\product_icon.png" />
+      <Resource Include="Assets\product_icon.png" />
+      <None Remove="assets\reports_icon.png" />
+      <Resource Include="Assets\reports_icon.png" />
+      <None Remove="assets\sales_icon.png" />
+      <Resource Include="Assets\sales_icon.png" />
+      <None Remove="assets\shutdown_def.png" />
+      <Resource Include="Assets\shutdown_def.png" />
+      <None Remove="assets\shutdown_mo.png" />
+      <Resource Include="Assets\shutdown_mo.png" />
+      <None Remove="assets\stats_icon.png" />
+      <Resource Include="Assets\stats_icon.png" />
+      <None Remove="assets\stocks_icon.png" />
+      <Resource Include="Assets\stocks_icon.png" />
+      <None Remove="assets\user_icon.png" />
+      <Resource Include="Assets\user_icon.png" />
     </ItemGroup>
 
     <ItemGroup>
