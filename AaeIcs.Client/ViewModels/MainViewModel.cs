@@ -1,4 +1,5 @@
-﻿using AAEICS.Client.Services.ThemeService;
+﻿using System.Collections.ObjectModel;
+using AAEICS.Client.Services.ThemeService;
 
 using AAEICS.Shared.Models;
 
@@ -8,6 +9,22 @@ using Syncfusion.Windows.Shared;
 using System.Windows;
 
 namespace AAEICS.Client.ViewModels;
+
+
+public partial class TableRowItem : ObservableObject
+{
+    [ObservableProperty]
+    private bool _isConfirmed;
+    
+    [ObservableProperty]
+    private string _description;
+    
+    [ObservableProperty]
+    private string _value;
+    
+}
+
+
 
 public partial class MainViewModel : ObservableObject
 {
@@ -23,11 +40,19 @@ public partial class MainViewModel : ObservableObject
     [NotifyPropertyChangedFor(nameof(IsDarkTheme))]
     private Theme _currentTheme;
 
+    [ObservableProperty] 
+    private ObservableCollection<TableRowItem> _tableItems;
+
     public MainViewModel(IThemesService themesDataService)
     {
         _themesService = themesDataService;
         AvailableThemes = _themesService.GetAllThemes();
         CurrentTheme = AvailableThemes.FirstOrDefault(t => t.Name == "Light");
+        TableItems =
+        [
+            new TableRowItem { Description = "Приклад запису 1", Value = "100", IsConfirmed = true },
+            new TableRowItem { Description = "Приклад запису 2", Value = "250", IsConfirmed = false }
+        ];
     }
     
 
@@ -67,6 +92,12 @@ public partial class MainViewModel : ObservableObject
         var newTheme = _themesService.GetThemeByName(theme);
         _themesService.SetTheme(newTheme);
         CurrentTheme = newTheme;
+    }
+    
+    [RelayCommand]
+    private void AddRow(object obj)
+    {
+        TableItems.Add(new TableRowItem { Description = "Новий запис", Value = "0", IsConfirmed = false });
     }
 
 

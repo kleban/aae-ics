@@ -1,14 +1,14 @@
-﻿using AAEICS.Shared.DTOs;
+﻿using AAEICS.Shared.Dto;
 
 namespace AAEICS.Services.IncomingCertificates;
 
 public class IncomingCertificateService: IIncomingCertificateService
 {
-    public async Task<List<IncomingCertificateDTO>> GetIncomingCertificates()
+    public async Task<List<IncomingCertificateDto>> GetIncomingCertificates()
     {
-        List<IncomingCertificateDTO> incomingCertificates =
+        List<IncomingCertificateDto> incomingCertificates =
         [
-            new IncomingCertificateDTO
+            new IncomingCertificateDto
             {
                 IncCertificateId = 1,
                 Edrpou = 12345678,
@@ -27,12 +27,12 @@ public class IncomingCertificateService: IIncomingCertificateService
         return await Task.FromResult(incomingCertificates);
     }
     
-    public IncomingCertificateDTO GetIncomingCertificate(int id)
+    public IncomingCertificateDto GetIncomingCertificate(int id)
     {
         throw new NotImplementedException();
     }
     
-    public IncomingCertificateDTO AddIncomingCertificate(IncomingCertificateDTO incomingCertificate)
+    public IncomingCertificateDto AddIncomingCertificate(IncomingCertificateDto incomingCertificate)
     {
         throw new NotImplementedException();
     }

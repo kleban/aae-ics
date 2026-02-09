@@ -60,7 +60,7 @@
                     <!--// Card - 5 //-->
 
                     <ContentControl Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4"
-                                    Template="{DynamicResource Card5Desktop}" />
+                                    Template="{DynamicResource CardTable}" />
 
                     <!--// Card - 6 //-->
 

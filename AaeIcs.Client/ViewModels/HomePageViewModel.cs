@@ -1,4 +1,4 @@
-﻿using AAEICS.Shared.DTOs;
+﻿using AAEICS.Shared.Dto;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -9,7 +9,7 @@ namespace AAEICS.Client.ViewModels;
 
 public partial class HomePageViewModel(IIncomingCertificateService incomingCertificateService) : ObservableObject
 {
-    [ObservableProperty] private ObservableCollection<IncomingCertificateDTO> _incomingCertificates = new();
+    [ObservableProperty] private ObservableCollection<IncomingCertificateDto> _incomingCertificates = new();
 
     [RelayCommand]
     private async Task LoadData()

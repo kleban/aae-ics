@@ -1,6 +1,6 @@
-﻿namespace AAEICS.Shared.DTOs;
+﻿namespace AAEICS.Shared.Dto;
 
-public class IncomingCertificateDTO
+public class IncomingCertificateDto
 {
     public int IncCertificateId { get; set; }
 

@@ -1,12 +1,12 @@
-﻿using AAEICS.Shared.DTOs;
+﻿using AAEICS.Shared.Dto;
 
 namespace AAEICS.Services.IncomingCertificates;
 
 public interface IIncomingCertificateService
 {
-    public Task<List<IncomingCertificateDTO>> GetIncomingCertificates();
+    public Task<List<IncomingCertificateDto>> GetIncomingCertificates();
     
-    public IncomingCertificateDTO GetIncomingCertificate(int id);
+    public IncomingCertificateDto GetIncomingCertificate(int id);
     
-    public IncomingCertificateDTO AddIncomingCertificate(IncomingCertificateDTO incomingCertificate);
+    public IncomingCertificateDto AddIncomingCertificate(IncomingCertificateDto incomingCertificate);
 }

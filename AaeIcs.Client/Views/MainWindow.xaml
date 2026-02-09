@@ -59,7 +59,6 @@
                                             <Setter TargetName="SwitchBorder" Property="Background" Value="LightGray"/>
                                         </Trigger>
                                     </ControlTemplate.Triggers>
-                                    
                                 </ControlTemplate>
                             </ToggleButton.Template>
                         </ToggleButton>
@@ -113,67 +112,38 @@
     <syncfusion:ChromelessWindow.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
     </syncfusion:ChromelessWindow.Resources>
-    
     <Grid>
-        <!--// Responsive Layouts //-->
-
         <ContentControl Content="{Binding}">
-
             <ContentControl.Style>
-
                 <Style TargetType="ContentControl">
-                    
-                    <!--// Default Layout //-->
-
-                    <Setter Property="ContentTemplate"
-                            Value="{DynamicResource LaptopLayout}" />
-
+                    <Setter Property="ContentTemplate" Value="{DynamicResource LaptopLayout}" />
                     <Style.Triggers>
-                        
-                        <!--// Desktop Layout // {width > 1400px}-->
-
-                        <DataTrigger Binding="{Binding Path=ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={x:Static local:Helper.IsGreaterThanConverter.Instance}, ConverterParameter=1400}"
-                                     Value="True">
-
-                            <Setter Property="ContentTemplate"
-                                    Value="{DynamicResource DesktopLayout}" />
-
+                        <!--// Desktop Layout // {width >= 1400px}-->
+                        <DataTrigger Binding="{Binding Path=ActualWidth, 
+                                     RelativeSource={RelativeSource AncestorType=Window}, 
+                                     Converter={x:Static local:Helper.IsGreaterThanConverter.Instance}, 
+                                     ConverterParameter=1400}" Value="True">
+                            <Setter Property="ContentTemplate" Value="{DynamicResource DesktopLayout}" />
                         </DataTrigger>      
-                        
                         <!--// Tablet Landscape Layout // {width < 1200px}-->
-
-                        <DataTrigger Binding="{Binding Path=ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={x:Static local:Helper.IsLessThanConverter.Instance}, ConverterParameter=1200}"
-                                     Value="True">
-
-                            <Setter Property="ContentTemplate"
-                                    Value="{DynamicResource TabletLayout}" />
-
+                        <DataTrigger Binding="{Binding Path=ActualWidth,
+                                     RelativeSource={RelativeSource AncestorType=Window},
+                                     Converter={x:Static local:Helper.IsLessThanConverter.Instance},
+                                     ConverterParameter=1200}" Value="True">
+                            <Setter Property="ContentTemplate" Value="{DynamicResource TabletLayout}" />
                         </DataTrigger>
-
                     </Style.Triggers>                    
-
                 </Style>
-                
             </ContentControl.Style>
-            
         </ContentControl>
-        
         <!--// Side Menu // [ For Tablet, Mobile Layouts ]-->
-
         <ContentControl Content="{Binding}"
                         Visibility="{Binding IsPanelVisible, Converter={StaticResource BooleanToVisibility}}">
-
             <ContentControl.Style>
-
                 <Style TargetType="ContentControl">
-
-                    <Setter Property="ContentTemplate"
-                            Value="{DynamicResource MenuTemplate}" />
-
+                    <Setter Property="ContentTemplate" Value="{DynamicResource MenuTemplate}" />
                 </Style>
-
             </ContentControl.Style>
-
         </ContentControl>
     </Grid>
 </syncfusion:ChromelessWindow>

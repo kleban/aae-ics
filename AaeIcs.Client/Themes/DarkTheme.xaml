@@ -2,6 +2,32 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:AAEICS.Client"
                     xmlns:syncfusion="http://schemas.syncfusion.com/wpf">
+    
+    <BitmapImage x:Key="Icon.Hamburger" UriSource="pack://application:,,,/Assets/DarkTheme/hamburger_icon.png" />
+    <BitmapImage x:Key="Icon.Hamburger.Pressed" UriSource="pack://application:,,,/Assets/DarkTheme/hamburger_mo.png" />
+    <BitmapImage x:Key="Icon.CloseMenu" UriSource="pack://application:,,,/Assets/DarkTheme/close_menu_def.png" />
+    <BitmapImage x:Key="Icon.CloseMenu.Pressed" UriSource="pack://application:,,,/Assets/DarkTheme/close_menu_mo.png" />
+
+    <BitmapImage x:Key="Icon.Max" UriSource="pack://application:,,,/Assets/DarkTheme/max_def.png" />
+    <BitmapImage x:Key="Icon.Max.Pressed" UriSource="pack://application:,,,/Assets/DarkTheme/max_mo.png" />
+    <BitmapImage x:Key="Icon.Shutdown" UriSource="pack://application:,,,/Assets/DarkTheme/shutdown_def.png" />
+    <BitmapImage x:Key="Icon.Shutdown.Pressed" UriSource="pack://application:,,,/Assets/DarkTheme/shutdown_mo.png" />
+
+    <BitmapImage x:Key="Icon.Analytics" UriSource="pack://application:,,,/Assets/DarkTheme/analytics_icon.png" />
+    <BitmapImage x:Key="Icon.Calendar" UriSource="pack://application:,,,/Assets/DarkTheme/calendar_icon.png" />
+    <BitmapImage x:Key="Icon.Categories" UriSource="pack://application:,,,/Assets/DarkTheme/categories_icon.png" />
+    <BitmapImage x:Key="Icon.Dashboard" UriSource="pack://application:,,,/Assets/DarkTheme/dashboard_icon.png" />
+    <BitmapImage x:Key="Icon.Delivery" UriSource="pack://application:,,,/Assets/DarkTheme/delivery_icon.png" />
+    <BitmapImage x:Key="Icon.Devices" UriSource="pack://application:,,,/Assets/DarkTheme/Devices_Image.png" />
+    <BitmapImage x:Key="Icon.Discount" UriSource="pack://application:,,,/Assets/DarkTheme/discount_icon.png" />
+    <BitmapImage x:Key="Icon.LineChart" UriSource="pack://application:,,,/Assets/DarkTheme/line_chart.png" />
+    <BitmapImage x:Key="Icon.Order" UriSource="pack://application:,,,/Assets/DarkTheme/order32.png" />
+    <BitmapImage x:Key="Icon.Product" UriSource="pack://application:,,,/Assets/DarkTheme/product_icon.png" />
+    <BitmapImage x:Key="Icon.Reports" UriSource="pack://application:,,,/Assets/DarkTheme/reports_icon.png" />
+    <BitmapImage x:Key="Icon.Sales" UriSource="pack://application:,,,/Assets/DarkTheme/sales_icon.png" />
+    <BitmapImage x:Key="Icon.Stats" UriSource="pack://application:,,,/Assets/DarkTheme/stats_icon.png" />
+    <BitmapImage x:Key="Icon.Stocks" UriSource="pack://application:,,,/Assets/DarkTheme/stocks_icon.png" />
+    <BitmapImage x:Key="Icon.User" UriSource="pack://application:,,,/Assets/DarkTheme/user_icon.png" />
 
     <Style x:Key="C101Style" TargetType="Border">
         <Setter Property="Background" Value="#373E46" />
@@ -68,7 +94,7 @@
     </Style>
 
     <Style x:Key="C105Style" TargetType="Image">
-        <Setter Property="Source" Value="../Assets/order32.png" />
+        <Setter Property="Source" Value="{DynamicResource Icon.Order}" />
         <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="HorizontalAlignment" Value="Right" />
         <Setter Property="Stretch" Value="None" />
@@ -116,7 +142,7 @@
     </Style>
 
     <Style x:Key="C205Style" TargetType="Image" BasedOn="{StaticResource C105Style}">
-        <Setter Property="Source" Value="../Assets/sales_icon.png" />
+        <Setter Property="Source" Value="{DynamicResource Icon.Sales}" />
     </Style>
 
     <!--#endregion-->
@@ -150,11 +176,11 @@
     </Style>
 
     <Style x:Key="Card304Style" TargetType="Image" BasedOn="{StaticResource C105Style}">
-        <Setter Property="Source" Value="../Assets/product_icon.png" />
+        <Setter Property="Source" Value="{DynamicResource Icon.Product}" />
     </Style>
 
     <Style x:Key="C305Style" TargetType="Image" BasedOn="{StaticResource C105Style}">
-        <Setter Property="Source" Value="../Assets/product_icon.png" />
+        <Setter Property="Source" Value="{DynamicResource Icon.Product}" />
     </Style>
 
     <Style x:Key="C304StyleDesktop" TargetType="TextBlock">
@@ -199,11 +225,11 @@
     </Style>
 
     <Style x:Key="Card404Style" TargetType="Image" BasedOn="{StaticResource C105Style}">
-        <Setter Property="Source" Value="../Assets/user_icon.png" />
+        <Setter Property="Source" Value="{DynamicResource Icon.User}" />
     </Style>
 
     <Style x:Key="C405Style" TargetType="Image" BasedOn="{StaticResource C105Style}">
-        <Setter Property="Source" Value="../Assets/user_icon.png" />
+        <Setter Property="Source" Value="{DynamicResource Icon.User}" />
     </Style>
 
     <Style x:Key="C404StyleDesktop" TargetType="TextBlock">
@@ -374,7 +400,7 @@
     <Style x:Key="Cal01Style" TargetType="Image">
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Source" Value="../Assets/calendar_icon.png" />
+        <Setter Property="Source" Value="{DynamicResource Icon.Calendar}" />
         <Setter Property="Stretch" Value="None" />
         <Setter Property="Margin" Value="20,0,0,0" />
     </Style>
@@ -404,7 +430,7 @@
     <Style x:Key="Rep01Style" TargetType="Image">
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" /> 
-        <Setter Property="Source" Value="../Assets/reports_icon.png" />
+        <Setter Property="Source" Value="{DynamicResource Icon.Reports}" />
         <Setter Property="Stretch" Value="None" />
         <Setter Property="Margin" Value="20,0,0,0" />
     </Style>
@@ -434,7 +460,7 @@
     <Style x:Key="Stat01Style" TargetType="Image">
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Source" Value="../Assets/stats_icon.png" />
+        <Setter Property="Source" Value="{DynamicResource Icon.Stats}" />
         <Setter Property="Stretch" Value="None" />
         <Setter Property="Margin" Value="20,0,0,0" />
     </Style>
@@ -521,7 +547,7 @@
     <Style x:Key="C706Style" TargetType="Image">
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Source" Value="../Assets/line_chart.png" />
+        <Setter Property="Source" Value="{DynamicResource Icon.LineChart}" />
         <Setter Property="Stretch" Value="None" />
     </Style>
 
@@ -583,7 +609,7 @@
     <Style x:Key="C712Style" TargetType="Image">
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Source" Value="../Assets/delivery_icon.png" />
+        <Setter Property="Source" Value="{DynamicResource Icon.Delivery}" />
         <Setter Property="Stretch" Value="None" />
     </Style>
 
@@ -723,7 +749,7 @@
     
     <Style x:Key="SideMenuStyle" TargetType="Border">
         <Setter Property="Background" Value="#373E46" />
-        <Setter Property="CornerRadius" Value="4,4,4,4" />
+        <Setter Property="CornerRadius" Value="8,8,8,8" />
         <Setter Property="MinWidth" Value="200" />
         <Setter Property="Margin" Value="2,2,0,2" />
     </Style>
@@ -736,7 +762,7 @@
                         <Border x:Name="border" Background="#373E46" Height="50" VerticalAlignment="Top">
                             <ContentPresenter />
                         </Border>
-                        <Image Source="../Assets/dashboard_icon.png"
+                        <Image Source="{DynamicResource Icon.Dashboard}"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Center"
                                Margin="20,0,0,0"
@@ -749,10 +775,13 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" TargetName="border" Value="#292F34" />
+                            <Setter Property="Background" TargetName="border" Value="#282D33" />
+                            <Setter Property="BorderBrush" TargetName="border" Value="#FFDD00"/>
+                            <Setter Property="BorderThickness" TargetName="border" Value="4,0,0,0"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Background" TargetName="border" Value="#292F34" />
+                            <Setter Property="TextElement.Foreground" Value="White"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -768,7 +797,7 @@
                         <Border x:Name="border" Background="#373E46" Height="50" VerticalAlignment="Top">
                             <ContentPresenter />
                         </Border>
-                        <Image Source="../Assets/stocks_icon.png"
+                        <Image Source="{DynamicResource Icon.Stocks}"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Center"
                                Margin="20,0,0,0"
@@ -781,10 +810,13 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" TargetName="border" Value="#292F34" />
+                            <Setter Property="Background" TargetName="border" Value="#282D33" />
+                            <Setter Property="BorderBrush" TargetName="border" Value="#FFDD00"/>
+                            <Setter Property="BorderThickness" TargetName="border" Value="4,0,0,0"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Background" TargetName="border" Value="#292F34" />
+                            <Setter Property="TextElement.Foreground" Value="White"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -800,7 +832,7 @@
                         <Border x:Name="border" Background="#373E46" Height="50" VerticalAlignment="Top">
                             <ContentPresenter />
                         </Border>
-                        <Image Source="../Assets/analytics_icon.png"
+                        <Image Source="{DynamicResource Icon.Analytics}"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Center"
                                Margin="20,0,0,0"
@@ -813,10 +845,13 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" TargetName="border" Value="#292F34" />
+                            <Setter Property="Background" TargetName="border" Value="#282D33" />
+                            <Setter Property="BorderBrush" TargetName="border" Value="#FFDD00"/>
+                            <Setter Property="BorderThickness" TargetName="border" Value="4,0,0,0"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Background" TargetName="border" Value="#292F34" />
+                            <Setter Property="TextElement.Foreground" Value="White"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -832,7 +867,7 @@
                         <Border x:Name="border" Background="#373E46" Height="50" VerticalAlignment="Top">
                             <ContentPresenter />
                         </Border>
-                        <Image Source="../Assets/discount_icon.png"
+                        <Image Source="{DynamicResource Icon.Discount}"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Center"
                                Margin="20,0,0,0"
@@ -845,10 +880,13 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" TargetName="border" Value="#292F34" />
+                            <Setter Property="Background" TargetName="border" Value="#282D33" />
+                            <Setter Property="BorderBrush" TargetName="border" Value="#FFDD00"/>
+                            <Setter Property="BorderThickness" TargetName="border" Value="4,0,0,0"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Background" TargetName="border" Value="#292F34" />
+                            <Setter Property="TextElement.Foreground" Value="White"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -865,7 +903,7 @@
                         <Border x:Name="border" Background="#373E46" Height="50" VerticalAlignment="Top">
                             <ContentPresenter />
                         </Border>
-                        <Image Source="../Assets/categories_icon.png"
+                        <Image Source="{DynamicResource Icon.Categories}"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Center"
                                Margin="20,0,0,0"
@@ -878,10 +916,13 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" TargetName="border" Value="#292F34" />
+                            <Setter Property="Background" TargetName="border" Value="#282D33" />
+                            <Setter Property="BorderBrush" TargetName="border" Value="#FFDD00"/>
+                            <Setter Property="BorderThickness" TargetName="border" Value="4,0,0,0"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Background" TargetName="border" Value="#292F34" />
+                            <Setter Property="TextElement.Foreground" Value="White"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -907,13 +948,17 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border x:Name="border" BorderThickness="0" Background="{StaticResource hamburger_def}"/>
+                    <Grid Background="Transparent">
+                        <Image x:Name="Img" 
+                               Source="{DynamicResource Icon.CloseMenu}" 
+                               Stretch="None" />
+                    </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True"> 
-                            <Setter Property="Background" TargetName="border" Value="{StaticResource hamburger_mo}" />
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Source" TargetName="Img" Value="{DynamicResource Icon.CloseMenu.Pressed}" />
                         </Trigger>
-                        <Trigger Property="IsPressed" Value="True"> 
-                            <Setter Property="Background" TargetName="border" Value="{StaticResource hamburger_mo}" />
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Source" TargetName="Img" Value="{DynamicResource Icon.CloseMenu.Pressed}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -930,20 +975,135 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border x:Name="border" BorderThickness="0" Background="{StaticResource close_def}"/>
-                    <ControlTemplate.Triggers> 
-                        <Trigger Property="IsMouseOver" Value="True"> 
-                            <Setter Property="Background" TargetName="border" Value="{StaticResource close_mo}" />
-                        </Trigger> 
-                        <Trigger Property="IsPressed" Value="True"> 
-                            <Setter Property="Background" TargetName="border" Value="{StaticResource close_mo}" />
+                    <Grid Background="Transparent">
+                        <Image x:Name="Img" 
+                               Source="{DynamicResource Icon.Shutdown}" 
+                               Stretch="None" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Source" TargetName="Img" Value="{DynamicResource Icon.Shutdown.Pressed}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Source" TargetName="Img" Value="{DynamicResource Icon.Shutdown.Pressed}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-    
+
+    <Style x:Key="ButtonMobile" TargetType="{x:Type Button}">
+        <Setter Property="Height" Value="40" />
+        <Setter Property="Background" Value="#FFDD00" />
+        <Setter Property="Width" Value="120" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="Margin" Value="0,0,0,10" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border"
+                                                BorderThickness="0"
+                                                Background="#FFDD00"
+                                                CornerRadius="20">
+                        <TextBlock x:Name="BtnText"
+                                                       Text="GET STARTED"
+                                                       Foreground="#292F34"
+                                                       FontSize="12"
+                                                       VerticalAlignment="Center"
+                                                       HorizontalAlignment="Center"
+                                                       FontFamily="Fonts/#Open Sans SemiBold" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="#E6C702" />
+                            <Setter Property="Foreground" TargetName="BtnText" Value="#FFFFFF" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="#FFDD00" />
+                            <Setter Property="Foreground" TargetName="BtnText" Value="#292F34" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="Button" TargetType="{x:Type Button}">
+        <Setter Property="Height" Value="40" />
+        <Setter Property="Background" Value="#FFDD00" />
+        <Setter Property="Width" Value="120" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="Margin" Value="40,10,0,0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border"
+                            BorderThickness="0"
+                            Background="#FFDD00"
+                            CornerRadius="20">
+                        <TextBlock x:Name="BtnText"
+                                   Text="GET STARTED"
+                                   Foreground="#292F34"
+                                   FontSize="12"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   FontFamily="Fonts/#Open Sans SemiBold" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="#E6C702" />
+                            <Setter Property="Foreground" TargetName="BtnText" Value="#FFFFFF" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="#FFDD00" />
+                            <Setter Property="Foreground" TargetName="BtnText" Value="#292F34" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ButtonDesktop"  TargetType="{x:Type Button}">
+        <Setter Property="Height" Value="50" />
+        <Setter Property="Background" Value="#FFDD00" />
+        <Setter Property="Width" Value="150" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="Margin" Value="60,10,0,0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border"
+                                                BorderThickness="0"
+                                                Background="#FFDD00"
+                                                CornerRadius="25">
+                        <TextBlock x:Name="BtnText"
+                                                       Text="GET STARTED"
+                                                       Foreground="#292F34"
+                                                       FontSize="14"
+                                                       VerticalAlignment="Center"
+                                                       HorizontalAlignment="Center"
+                                                       FontFamily="Fonts/#Open Sans SemiBold" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="#E6C702" />
+                            <Setter Property="Foreground" TargetName="BtnText" Value="#FFFFFF" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="#FFDD00" />
+                            <Setter Property="Foreground" TargetName="BtnText" Value="#292F34" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="CloseAppStyle" TargetType="{x:Type Button}"> 
         <Setter Property="Height" Value="40" />
         <Setter Property="Width" Value="40" />
@@ -953,16 +1113,19 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border x:Name="border" BorderThickness="0" Background="{StaticResource close_app_def}"> 
-                    </Border>
-                    <ControlTemplate.Triggers> 
+                    <Grid Background="Transparent">
+                        <Image x:Name="Img" 
+                               Source="{DynamicResource Icon.Max}" 
+                               Stretch="None" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" TargetName="border" Value="{StaticResource close_app_mo}" /> 
-                        </Trigger> 
+                            <Setter Property="Source" TargetName="Img" Value="{DynamicResource Icon.Max.Pressed}" />
+                        </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" TargetName="border" Value="{StaticResource close_app_mo}" />
-                        </Trigger> 
-                    </ControlTemplate.Triggers> 
+                            <Setter Property="Source" TargetName="Img" Value="{DynamicResource Icon.Max.Pressed}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate> 
             </Setter.Value> 
         </Setter> 

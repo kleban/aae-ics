@@ -34,37 +34,4 @@
     <Geometry x:Key="CloseFile">
         M18 6L6 18M6 6l12 12
     </Geometry>
-    
-    
-    <ImageBrush x:Key="hamburger_def"
-                ImageSource="../Assets/hamburger_icon.png"
-                Stretch="None" />
-
-    <ImageBrush x:Key="hamburger_mo"
-                ImageSource="../Assets/hamburger_mo.png"
-                Stretch="None" />
-    
-    <ImageBrush x:Key="close_def"
-                ImageSource="../Assets/close_menu_def.png"
-                Stretch="None" />
-
-    <ImageBrush x:Key="close_mo"
-                ImageSource="../Assets/close_menu_mo.png"
-                Stretch="None" />
-    
-    <ImageBrush x:Key="close_app_def"
-                ImageSource="../Assets/shutdown_def.png"
-                Stretch="None" />
-
-    <ImageBrush x:Key="close_app_mo"
-                ImageSource="../Assets/shutdown_mo.png"
-                Stretch="None" />
-    
-    <ImageBrush x:Key="max_app_def"
-                ImageSource="../Assets/max_def.png"
-                Stretch="None" />
-
-    <ImageBrush x:Key="max_app_mo"
-                ImageSource="../Assets/max_mo.png"
-                Stretch="None" />
 </ResourceDictionary>
