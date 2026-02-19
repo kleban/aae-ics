@@ -6,12 +6,12 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Syncfusion.Themes.Windows11Light.WPF;component/chromelesswindow/chromelesswindow.xaml " />
-                <ResourceDictionary Source="Themes/CoreStyles.xaml"/>
-                <ResourceDictionary Source="Themes/LightTheme.xaml" />
-                <ResourceDictionary Source="Themes/AppTemplates.xaml"/>
-                <ResourceDictionary Source="Themes/DesktopLayout.xaml"/>
-                <ResourceDictionary Source="Themes/LaptopLayout.xaml"/>
-                <ResourceDictionary Source="Themes/TabletLayout.xaml"/>
+                <ResourceDictionary Source="Resources/Palettes/LightColors.xaml" />
+                <ResourceDictionary Source="Resources/Languages/Lang.en-US.xaml"/>
+                <ResourceDictionary Source="Resources/Effects.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/ActLinesDataGrid.xaml"/>
+                <ResourceDictionary Source="Resources/Theme.xaml"/>
+                <ResourceDictionary Source="Views/Views.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

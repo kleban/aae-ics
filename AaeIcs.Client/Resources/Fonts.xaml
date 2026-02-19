@@ -1,0 +1,29 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <FontFamily x:Key="MainFontRegular">/MyProject;component/Assets/Fonts/#OpenSansRegular</FontFamily>
+    <FontFamily x:Key="MainFontSemiBold">/MyProject;component/Assets/Fonts/#OpenSansSemiBold</FontFamily>
+    <FontFamily x:Key="Raleway">/MyProject;component/Assets/Fonts/#Raleway</FontFamily>
+    <FontFamily x:Key="Roboto">/MyProject;component/Assets/Fonts/#Roboto</FontFamily>
+    <FontFamily x:Key="Saira">/MyProject;component/Assets/Fonts/#Saira</FontFamily>
+    
+    <Style x:Key="DashboardTitleStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource DashboardTextForegroundBrush}" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontFamily" Value="{DynamicResource MainFontRegular}" />
+    </Style>
+
+    <Style x:Key="DashboardTitleStyleDesktop" TargetType="TextBlock" BasedOn="{StaticResource DashboardTitleStyle}">
+        <Setter Property="FontSize" Value="14" />
+    </Style>
+    
+    <Style x:Key="DashboardDescriptionStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource DashboardTextForegroundBrush}" /> 
+        <Setter Property="FontSize" Value="22" />
+        <Setter Property="FontFamily" Value="{DynamicResource MainFontRegular}" />
+    </Style>
+    
+    <Style x:Key="DashboardDescriptionStyleDesktop" TargetType="TextBlock" BasedOn="{StaticResource DashboardDescriptionStyle}">
+        <Setter Property="FontSize" Value="28" />
+    </Style>
+</ResourceDictionary>

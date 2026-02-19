@@ -1,0 +1,21 @@
+﻿<Window x:Class="AAEICS.Client.Views.SplashScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:AAEICS.Client.Views"
+        WindowStyle="None" WindowStartupLocation="CenterScreen"
+        Width="600" Height="350" Background="White" Topmost="True">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.8*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="30">
+            <TextBlock Text="AAE-ICS" FontSize="24" FontWeight="Bold"/>
+            <TextBlock x:Name="LabelStatus" Text="Завантаження модулів..." Margin="0,10,0,5"/>
+            <ProgressBar x:Name="ProgressBarStatus" Height="10" Minimum="0" Maximum="100" />
+        </StackPanel>
+
+        <Image Grid.Column="1" Source="{DynamicResource Icon.Devices}" Stretch="Fill" />
+    </Grid>
+</Window>

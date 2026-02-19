@@ -1,0 +1,17 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Fonts.xaml"/>
+        <ResourceDictionary Source="Icons.xaml"/>
+        <ResourceDictionary Source="Images.xaml"/>
+        <!-- <ResourceDictionary Source="Controls/ActLinesDataGrid.xaml"/> -->
+        <ResourceDictionary Source="Styles/Buttons.xaml"/>
+        <ResourceDictionary Source="Styles/CheckBox.xaml"/>
+        <ResourceDictionary Source="Styles/DashBoard.xaml"/>
+        <ResourceDictionary Source="Styles/MainWindow.xaml"/>
+        <ResourceDictionary Source="Styles/NavBar.xaml"/>
+        <ResourceDictionary Source="Styles/SideMenu.xaml"/>
+        <ResourceDictionary Source="Styles/UniFillIcon.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

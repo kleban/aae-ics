@@ -10,6 +10,7 @@
 
     <ItemGroup>
       <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+      <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="6.2.1" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.2">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -24,16 +25,12 @@
       <PackageReference Include="Syncfusion.SfSkinManager.WPF" Version="32.1.25" />
       <PackageReference Include="Syncfusion.SfTextInputLayout.WPF" Version="32.1.25" />
       <PackageReference Include="Syncfusion.Shared.WPF" Version="32.1.25" />
-      <PackageReference Include="Syncfusion.Themes.Material3Light.WPF" Version="32.1.25" />
       <PackageReference Include="Syncfusion.Themes.Windows11Light.WPF" Version="32.1.25" />
       <PackageReference Include="Syncfusion.Tools.WPF" Version="32.1.25" />
     </ItemGroup>
 
     <ItemGroup>
       <None Remove="images\icon.png" />
-      <Resource Include="Images\icon.png">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Resource>
       <None Remove="assets\analytics_icon.png" />
       <None Remove="assets\calendar_icon.png" />
       <None Remove="assets\categories_icon.png" />
@@ -58,97 +55,144 @@
       <None Remove="assets\stocks_icon.png" />
       <None Remove="assets\user_icon.png" />
       <None Remove="Assets\LightTheme\analytics_icon.png" />
-      <Resource Include="Assets\LightTheme\analytics_icon.png" />
       <None Remove="Assets\LightTheme\calendar_icon.png" />
-      <Resource Include="Assets\LightTheme\calendar_icon.png" />
       <None Remove="Assets\LightTheme\categories_icon.png" />
-      <Resource Include="Assets\LightTheme\categories_icon.png" />
       <None Remove="Assets\LightTheme\close_menu_def.png" />
-      <Resource Include="Assets\LightTheme\close_menu_def.png" />
       <None Remove="Assets\LightTheme\close_menu_mo.png" />
-      <Resource Include="Assets\LightTheme\close_menu_mo.png" />
       <None Remove="Assets\LightTheme\dashboard_icon.png" />
-      <Resource Include="Assets\LightTheme\dashboard_icon.png" />
       <None Remove="Assets\LightTheme\delivery_icon.png" />
-      <Resource Include="Assets\LightTheme\delivery_icon.png" />
       <None Remove="Assets\LightTheme\Devices_Image.png" />
-      <Resource Include="Assets\LightTheme\Devices_Image.png" />
       <None Remove="Assets\LightTheme\discount_icon.png" />
-      <Resource Include="Assets\LightTheme\discount_icon.png" />
       <None Remove="Assets\LightTheme\hamburger_icon.png" />
-      <Resource Include="Assets\LightTheme\hamburger_icon.png" />
       <None Remove="Assets\LightTheme\hamburger_mo.png" />
-      <Resource Include="Assets\LightTheme\hamburger_mo.png" />
       <None Remove="Assets\LightTheme\line_chart.png" />
-      <Resource Include="Assets\LightTheme\line_chart.png" />
       <None Remove="Assets\LightTheme\max_def.png" />
-      <Resource Include="Assets\LightTheme\max_def.png" />
       <None Remove="Assets\LightTheme\max_mo.png" />
-      <Resource Include="Assets\LightTheme\max_mo.png" />
       <None Remove="Assets\LightTheme\order32.png" />
-      <Resource Include="Assets\LightTheme\order32.png" />
       <None Remove="Assets\LightTheme\product_icon.png" />
-      <Resource Include="Assets\LightTheme\product_icon.png" />
       <None Remove="Assets\LightTheme\reports_icon.png" />
-      <Resource Include="Assets\LightTheme\reports_icon.png" />
       <None Remove="Assets\LightTheme\sales_icon.png" />
-      <Resource Include="Assets\LightTheme\sales_icon.png" />
       <None Remove="Assets\LightTheme\shutdown_def.png" />
-      <Resource Include="Assets\LightTheme\shutdown_def.png" />
       <None Remove="Assets\LightTheme\shutdown_mo.png" />
-      <Resource Include="Assets\LightTheme\shutdown_mo.png" />
       <None Remove="Assets\LightTheme\stats_icon.png" />
-      <Resource Include="Assets\LightTheme\stats_icon.png" />
       <None Remove="Assets\LightTheme\stocks_icon.png" />
-      <Resource Include="Assets\LightTheme\stocks_icon.png" />
       <None Remove="Assets\LightTheme\user_icon.png" />
-      <Resource Include="Assets\LightTheme\user_icon.png" />
       <None Remove="Assets\DarkTheme\analytics_icon.png" />
-      <Resource Include="Assets\DarkTheme\analytics_icon.png" />
       <None Remove="Assets\DarkTheme\calendar_icon.png" />
-      <Resource Include="Assets\DarkTheme\calendar_icon.png" />
       <None Remove="Assets\DarkTheme\categories_icon.png" />
-      <Resource Include="Assets\DarkTheme\categories_icon.png" />
       <None Remove="Assets\DarkTheme\close_menu_def.png" />
-      <Resource Include="Assets\DarkTheme\close_menu_def.png" />
       <None Remove="Assets\DarkTheme\close_menu_mo.png" />
-      <Resource Include="Assets\DarkTheme\close_menu_mo.png" />
       <None Remove="Assets\DarkTheme\dashboard_icon.png" />
-      <Resource Include="Assets\DarkTheme\dashboard_icon.png" />
       <None Remove="Assets\DarkTheme\delivery_icon.png" />
-      <Resource Include="Assets\DarkTheme\delivery_icon.png" />
       <None Remove="Assets\DarkTheme\Devices_Image.png" />
-      <Resource Include="Assets\DarkTheme\Devices_Image.png" />
       <None Remove="Assets\DarkTheme\discount_icon.png" />
-      <Resource Include="Assets\DarkTheme\discount_icon.png" />
       <None Remove="Assets\DarkTheme\hamburger_icon.png" />
-      <Resource Include="Assets\DarkTheme\hamburger_icon.png" />
       <None Remove="Assets\DarkTheme\hamburger_mo.png" />
-      <Resource Include="Assets\DarkTheme\hamburger_mo.png" />
       <None Remove="Assets\DarkTheme\line_chart.png" />
-      <Resource Include="Assets\DarkTheme\line_chart.png" />
       <None Remove="Assets\DarkTheme\max_def.png" />
-      <Resource Include="Assets\DarkTheme\max_def.png" />
       <None Remove="Assets\DarkTheme\max_mo.png" />
-      <Resource Include="Assets\DarkTheme\max_mo.png" />
       <None Remove="Assets\DarkTheme\order32.png" />
-      <Resource Include="Assets\DarkTheme\order32.png" />
       <None Remove="Assets\DarkTheme\product_icon.png" />
-      <Resource Include="Assets\DarkTheme\product_icon.png" />
       <None Remove="Assets\DarkTheme\reports_icon.png" />
-      <Resource Include="Assets\DarkTheme\reports_icon.png" />
       <None Remove="Assets\DarkTheme\sales_icon.png" />
-      <Resource Include="Assets\DarkTheme\sales_icon.png" />
       <None Remove="Assets\DarkTheme\shutdown_def.png" />
-      <Resource Include="Assets\DarkTheme\shutdown_def.png" />
       <None Remove="Assets\DarkTheme\shutdown_mo.png" />
-      <Resource Include="Assets\DarkTheme\shutdown_mo.png" />
       <None Remove="Assets\DarkTheme\stats_icon.png" />
-      <Resource Include="Assets\DarkTheme\stats_icon.png" />
       <None Remove="Assets\DarkTheme\stocks_icon.png" />
-      <Resource Include="Assets\DarkTheme\stocks_icon.png" />
       <None Remove="Assets\DarkTheme\user_icon.png" />
-      <Resource Include="Assets\DarkTheme\user_icon.png" />
+      <None Remove="Assets\LightTheme\setting.png" />
+      <None Remove="Assets\LightTheme\settings.png" />
+      <Resource Include="Resources\Assets\Images\analytics_icon.png">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\Assets\Images\calendar_icon.png">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\Assets\Images\categories_icon.png">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\Assets\Images\close_menu_def.png">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\Assets\Images\close_menu_mo.png">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\Assets\Images\dashboard_icon.png">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\Assets\Images\delivery_icon.png">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\Assets\Images\Devices_Image.png">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\Assets\Images\discount_icon.png">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\Assets\Images\hamburger_icon.png">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\Assets\Images\hamburger_mo.png">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\Assets\Images\icon.png">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\Assets\Images\line_chart.png">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\Assets\Images\max_def.png">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\Assets\Images\max_mo.png">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\Assets\Images\order32.png">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\Assets\Images\product_icon.png">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\Assets\Images\reports_icon.png">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\Assets\Images\sales_icon.png">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\Assets\Images\settings.png">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\Assets\Images\shutdown_def.png">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\Assets\Images\shutdown_mo.png">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\Assets\Images\stats_icon.png">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\Assets\Images\stocks_icon.png">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Resources\Assets\Fonts\OpenSans-Regular.ttf" />
+      <Resource Include="Resources\Assets\Fonts\OpenSans-Regular.ttf" />
+      <None Remove="Resources\Assets\Fonts\OpenSans-SemiBold.ttf" />
+      <Resource Include="Resources\Assets\Fonts\OpenSans-SemiBold.ttf" />
+      <None Remove="Resources\Assets\Fonts\Raleway-Medium.ttf" />
+      <Resource Include="Resources\Assets\Fonts\Raleway-Medium.ttf" />
+      <None Remove="Resources\Assets\Fonts\Raleway-SemiBold.ttf" />
+      <Resource Include="Resources\Assets\Fonts\Raleway-SemiBold.ttf" />
+      <None Remove="Resources\Assets\Fonts\Roboto-Medium.ttf" />
+      <Resource Include="Resources\Assets\Fonts\Roboto-Medium.ttf" />
+      <None Remove="Resources\Assets\Fonts\Roboto-Regular.ttf" />
+      <Resource Include="Resources\Assets\Fonts\Roboto-Regular.ttf" />
+      <None Remove="Resources\Assets\Fonts\Saira-Regular.ttf" />
+      <Resource Include="Resources\Assets\Fonts\Saira-Regular.ttf" />
+      <None Remove="Resources\Assets\Fonts\Saira-SemiBold.ttf" />
+      <Resource Include="Resources\Assets\Fonts\Saira-SemiBold.ttf" />
+      <Resource Include="Resources\Assets\Images\user_icon.png">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </Resource>
     </ItemGroup>
 
     <ItemGroup>
@@ -164,12 +208,62 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Page Update="Views\NewIncomingCertificatePage.xaml">
+      <Page Update="Resources\Languages\Lang.en-US.xaml">
         <Generator>MSBuild:Compile</Generator>
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
       </Page>
-      <Page Update="Views\SettingsPage.xaml">
+      <Page Update="Resources\Languages\Lang.uk-UA.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="Resources\Controls\UniFillIcon.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="Resources\Controls\LightTheme.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="Resources\Controls\DarkTheme.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="Resources\Palettes\LightColors.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="Views\HomePage\Layouts\DesktopLayout.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="Views\HomePage\Layouts\LaptopLayout.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="Views\HomePage\Layouts\TabletLayout.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="Views\Windows\MainWindow\Controls\SideMenu.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="Views\Windows\MainWindow\Controls\SideMenuBody.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="Views\SettingsPage\Controls\TogleButton.xaml">
         <Generator>MSBuild:Compile</Generator>
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
@@ -179,6 +273,40 @@
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
       </Page>
+      <Page Update="Views\SplashScreen.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="Views\MainWindowComponents\Controls\TitleBar.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </Page>
+      <Page Update="Views\MainWindowComponents\Controls\SideMenu.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </Page>
+      <Page Update="Views\MainWindowComponents\Controls\SideMenuBody.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </Page>
+      <Page Update="Views\SettingsPage.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="Views\IncomingCertificatePage.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="Views\HomePage.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Views\IncomingCertificatePage\" />
+      <Folder Include="Views\SplashScreenComponents\" />
     </ItemGroup>
 
 </Project>

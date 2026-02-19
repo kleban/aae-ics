@@ -1,0 +1,93 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                    xmlns:helpers="clr-namespace:AAEICS.Client.Helpers">
+    
+    <ControlTemplate x:Key="CardTableDesktop">
+        <Border Style="{DynamicResource DashboardStyle}">
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <DockPanel Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <TextBlock DockPanel.Dock="Left"
+                               Text="DATA TABLE" 
+                               Style="{DynamicResource DashboardTitleStyle}" 
+                               HorizontalAlignment="Left" VerticalAlignment="Center"
+                               Margin="10,0,10,0"/>
+                    <Button DockPanel.Dock="Right"
+                            Style="{DynamicResource PrimaryButton}"
+                            Content="ADD ROW"
+                            FontSize="14"
+                            helpers:ButtonHelper.CornerRadius="6"
+                            Command="{Binding AddRowCommand}"
+                            VerticalAlignment="Center" HorizontalAlignment="Right"
+                            Margin="10,0,10,0"
+                            Width="100" Height="30"/>
+                </DockPanel>
+                
+                
+                <DataGrid Grid.Row="1" x:Name="membersDataGrid"
+                          ItemsSource="{Binding TableItems}"
+                          Style="{DynamicResource EditableDataGridStyle}"
+                          RowStyle="{DynamicResource DataGridRowStyle}"
+                          CellStyle="{DynamicResource DataGridCellStyle}"
+                          ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}"
+
+
+                
+                          HorizontalScrollBarVisibility="Hidden">
+                    <DataGrid.Columns>
+                        <DataGridCheckBoxColumn Header="C" CanUserResize="False" Width="auto" 
+                                                ElementStyle="{DynamicResource CheckBoxStyle}" 
+                                                Binding="{Binding IsConfirmed, UpdateSourceTrigger=PropertyChanged}">
+                            <DataGridCheckBoxColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <CheckBox Style="{DynamicResource CheckBoxStyle}" 
+                                              IsChecked="{Binding DataContext.IsAllConfirmed, RelativeSource={RelativeSource AncestorType=DataGrid}, Mode=TwoWay}"/>
+                                </DataTemplate>
+                            </DataGridCheckBoxColumn.HeaderTemplate>
+                        </DataGridCheckBoxColumn>
+
+                        <DataGridTextColumn Header="Description" 
+                                            IsReadOnly="False" 
+                                            CanUserResize="False" 
+                                            Width="2*" 
+                                            Binding="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                            ElementStyle="{StaticResource WrapTextElementStyle}"
+                                            EditingElementStyle="{StaticResource WrapTextEditingStyle}"
+                                            CellStyle="{StaticResource LockableCellStyle}"/>
+
+                        <DataGridTextColumn Header="Value" 
+                                            Binding="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                            IsReadOnly="False" 
+                                            Width="*" 
+                                            ElementStyle="{StaticResource WrapTextElementStyle}"
+                                            EditingElementStyle="{StaticResource WrapTextEditingStyle}"
+                                            CellStyle="{StaticResource LockableCellStyle}"/>
+
+                        <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto" CellStyle="{DynamicResource LockableCellStyle}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <Button Style="{DynamicResource GridEditButton}">
+                                            <icon:PackIconMaterial Kind="PencilOutline" Style="{DynamicResource GridButtonIcon}"/>
+                                        </Button>
+                                        <Button Margin="5 0 0 0"
+                                                Style="{DynamicResource GridRemoveButton}"
+                                                Command="{Binding DataContext.DeleteRowCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                CommandParameter="{Binding .}">
+                                            <icon:PackIconMaterial Kind="DeleteOutline" Style="{DynamicResource GridButtonIcon}"/>
+                                        </Button>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Border>
+    </ControlTemplate>
+</ResourceDictionary>

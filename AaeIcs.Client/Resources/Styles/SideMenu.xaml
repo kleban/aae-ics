@@ -1,0 +1,116 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        
+    <Style x:Key="SideMenuStyle" TargetType="Border">
+        <Setter Property="Background" Value="{DynamicResource SideMenuBackgroundBrush}" />
+        <Setter Property="CornerRadius" Value="0,0,8,8" />
+    </Style>
+    
+    <Style x:Key="SideMenuStackPanelStyle" TargetType="StackPanel">
+        <Setter Property="Orientation" Value="Vertical" />
+        <Setter Property="Height" Value="Auto" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="Margin" Value="0,180,0,0" />
+    </Style>
+    
+    <Style x:Key="SideMenuOptionStyle" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Border x:Name="border" 
+                                VerticalAlignment="Top"
+                                Background="{DynamicResource SurfaceBrush}" 
+                                MinHeight="50" 
+                                Padding="0,5">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>    
+                                </Grid.ColumnDefinitions>
+
+                                <ContentControl Grid.Column="0"
+                                                Style="{DynamicResource UniFillIcon}"
+                                                Content="{TemplateBinding Tag}"
+                                                VerticalAlignment="Center"
+                                                Margin="10,0,15,0" 
+                                                Width="32" Height="32"
+                                                Foreground="{DynamicResource PrimaryBrandBrush}"/>
+        
+                                <TextBlock Grid.Column="1"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Left"
+                                           Margin="0,0,10,0"
+                                           FontSize="18" FontFamily="{DynamicResource MainFontRegular}"
+                                           Text="{TemplateBinding Content}" TextWrapping="Wrap"
+                                           Foreground="{DynamicResource SideMenuOptionTextBrush}"/> 
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{DynamicResource SideMenuOptionHoverBrush}" />
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource PrimaryBrandBrush}"/>
+                            <Setter Property="BorderThickness" TargetName="border" Value="4,0,0,0"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{DynamicResource PrimaryBrandBrush}" />
+                            <Setter Property="TextElement.Foreground" Value="White"/> 
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="HamburgerMenuButtonStyle" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid Background="Transparent">
+                        <ContentControl x:Name="Img"
+                                        Style="{DynamicResource UniFillIcon}"
+                                        Content="{TemplateBinding Tag}"
+                                        Width="40" Height="40"
+                                        Foreground="{DynamicResource PrimaryBrandBrush}"
+                                        Effect="{DynamicResource SideMenuButtonShadow}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" TargetName="Img" Value="{DynamicResource PrimaryBrandActiveBrush}" />
+                            
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Foreground" TargetName="Img" Value="{DynamicResource PrimaryBrandBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="CloseMenuButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid Background="Transparent">
+                        <ContentControl x:Name="Img"
+                                        Style="{DynamicResource UniFillIcon}"
+                                        Content="{TemplateBinding Tag}"
+                                        Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"
+                                        Foreground="{DynamicResource PrimaryBrandBrush}"
+                                        Effect="{DynamicResource SideMenuButtonShadow}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" TargetName="Img" Value="{DynamicResource PrimaryBrandActiveBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Foreground" TargetName="Img" Value="{DynamicResource PrimaryBrandBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

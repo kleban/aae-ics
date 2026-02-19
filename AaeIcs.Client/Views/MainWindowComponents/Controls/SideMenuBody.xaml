@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="AAEICS.Client.Views.MainWindowComponents.Controls.SideMenuBody"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:AAEICS.Client.Views.MainWindowComponents.Controls"
+             mc:Ignorable="d">
+    <Grid>
+        <StackPanel Style="{DynamicResource SideMenuStackPanelStyle}">
+            <Button Style="{DynamicResource SideMenuOptionStyle}" 
+                    Tag="{DynamicResource Icon.Dashboard}"
+                    Content="{DynamicResource HomeMenuOption}"
+                    Command="{Binding NavigateToCommand}" CommandParameter="home"/>
+            <Button Style="{DynamicResource SideMenuOptionStyle}" 
+                    Tag="{DynamicResource Icon.Settings}"
+                    Content="{DynamicResource SettingsMenuOption}"
+                    Command="{Binding NavigateToCommand}" CommandParameter="settings"/>
+            <Button Style="{DynamicResource SideMenuOptionStyle}" 
+                    Tag="{DynamicResource Icon.Categories}"
+                    Content="{DynamicResource NewCertificateMenuOption}"
+                    Command="{Binding NavigateToCommand}" CommandParameter="newIncomingCertificate"/>
+        </StackPanel>
+        <TextBlock Text="{DynamicResource MenuCopyright}"
+                   FontFamily="Fonts/#Saira SemiBold" FontSize="10"
+                   VerticalAlignment="Bottom"
+                   HorizontalAlignment="Center"
+                   Foreground="#959FAC"
+                   Margin="0,0,10,10" FontStretch="UltraExpanded" />
+    </Grid>
+</UserControl>

@@ -1,132 +1,52 @@
 ﻿using AAEICS.Client.ViewModels;
 
-using Syncfusion.UI.Xaml.NavigationDrawer;
 using Syncfusion.Windows.Shared;
 
 using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Navigation;
+using AAEICS.Client.Services;
+using AAEICS.Client.Services.NavigationManager;
 
 namespace AAEICS.Client.Views;
 
-public partial class MainWindow: ChromelessWindow
+public partial class MainWindow: ChromelessWindow, IWindowController
 {
     private Point _startPoint;
     private bool _isDoubleClick;
+    private MainViewModel ViewModel => DataContext as MainViewModel;
     
     public MainWindow(MainViewModel viewModel)
     {
         InitializeComponent();
         DataContext = viewModel;
+        App.Services.GetRequiredService<INavigationService>().MainFrame = MainFrame;
+
+        MainFrame.Navigated += MainFrame_Navigated;
     }
     
-    // private void NavigationDrawer_ItemClicked(object sender, NavigationItemClickedEventArgs e)
-    // {
-    //     var clickedItem = e.Item;
-    //
-    //     if (clickedItem == null) return;
-    //     
-    //     switch (clickedItem.Tag.ToString())
-    //     {
-    //         case "home":
-    //             MainContentFrame.Navigate(App.Services.GetRequiredService<HomePage>());
-    //             Title = "AAC-ICS Client | Home";
-    //             break;
-    //         case "settings":
-    //             MainContentFrame.Navigate(new SettingsPage());
-    //             Title = "AAC-ICS Client | Settings";
-    //             break;
-    //     }
-    // }
+    public void ShowMenu() => ViewModel.IsSideMenuVisible = true;
+    public void HideMenu() => ViewModel.IsSideMenuVisible = false;
     
-    private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
-    {
-        if (e.ChangedButton == MouseButton.Left)
-        {
-            if (e.ClickCount == 2)
-            {
-                _isDoubleClick = true;
-                WindowState = WindowState == WindowState.Normal ? WindowState.Maximized : WindowState.Normal;
-                e.Handled = true;
-            }
-            else
-            {
-                _isDoubleClick = false;
-                _startPoint = e.GetPosition(this);
-            }
-        }
-    }
+    public void RegisterPageMinWidth(double minWidth) => ViewModel.RegisterPageConstraints(minWidth);
     
-    private void TitleBar_MouseMove(object sender, MouseEventArgs e)
+    public void CheckLayoutRules(double currentWindowWidth) => ViewModel.CheckLayoutRules(currentWindowWidth);
+    
+    public bool IsMenuVisible => ViewModel.IsSideMenuVisible;
+    
+    private void MainFrame_Navigated(object sender, NavigationEventArgs e)
     {
-        if (_isDoubleClick) return;
-
-        if (e.LeftButton == MouseButtonState.Pressed)
-        {
-            if (WindowState == WindowState.Maximized)
-                WindowState = WindowState.Normal;
-
-            var currentPoint = e.GetPosition(this);
+        if (e.Content is not FrameworkElement page) return;
+        
+        var pageMinWidth = page.MinWidth; 
             
-            if (Math.Abs(currentPoint.X - _startPoint.X) > SystemParameters.MinimumHorizontalDragDistance ||
-                Math.Abs(currentPoint.Y - _startPoint.Y) > SystemParameters.MinimumVerticalDragDistance)
-            {
-                try
-                {
-                    DragMove();
-                }
-                catch { }
-            }
-        }
+        var menuWidth = IsMenuVisible ? UIConfig.SideMenuWidth : 0; 
+        var totalRequiredWidth = pageMinWidth + menuWidth;
+            
+        MinWidth = totalRequiredWidth;
+
+        if (ActualWidth < totalRequiredWidth)
+            Width = totalRequiredWidth;
     }
-    // private void ChromelessWindow_SizeChanged(object sender, SizeChangedEventArgs e)
-    // {
-    //     double windowWidth = e.NewSize.Width;
-    //         
-    //     // Захист від мінімальних значень при старті
-    //     if (windowWidth < 100) return;
-    //
-    //     if (windowWidth <= 1001)
-    //     {
-    //         // === РЕЖИМ: МАЛЕНЬКЕ ВІКНО ===
-    //             
-    //         // 1. Встановлюємо фіксовану ширину колонки Grid
-    //         SidebarColumn.Width = new GridLength(60);
-    //             
-    //         // 2. Налаштовуємо Drawer
-    //         if (NavigationDrawer.DisplayMode != DisplayMode.Compact)
-    //         {
-    //             NavigationDrawer.DisplayMode = DisplayMode.Compact;
-    //             NavigationDrawer.CompactModeWidth = 60;
-    //             NavigationDrawer.IsToggleButtonVisible = true;
-    //         }
-    //     }
-    //     else
-    //     {
-    //         // // === РЕЖИМ: ВЕЛИКЕ ВІКНО ===
-    //         //     
-    //         // // 1. Рахуємо 25% від ширини вікна
-    //         double targetWidth = windowWidth * 0.25;
-    //         //
-    //         // // 2. Встановлюємо ширину колонки Grid в ПІКСЕЛЯХ
-    //         // // Це виправляє баг "зникання", бо ми не використовуємо Star (пропорції), 
-    //         // // які можуть ламатися при перерахунках.
-    //         SidebarColumn.Width = new GridLength(targetWidth);
-    //         //
-    //         // 3. Змушуємо Drawer прийняти цю ширину
-    //         // Це виправляє баг "не хоче розтягуватись"
-    //         if (NavigationDrawer.DrawerWidth != targetWidth)
-    //         {
-    //             NavigationDrawer.ExpandedModeWidth = targetWidth;
-    //         }
-    //
-    //         // 4. Вмикаємо Expanded
-    //         if (NavigationDrawer.DisplayMode != DisplayMode.Expanded)
-    //         {
-    //             NavigationDrawer.DisplayMode = DisplayMode.Expanded;
-    //             NavigationDrawer.IsOpen = true;
-    //             NavigationDrawer.IsToggleButtonVisible = false;
-    //         }
-    //     }
-    // }
 }

@@ -8,7 +8,7 @@ public static class ViewExtensions
     {
         services.AddSingleton<MainWindow>();
         services.AddTransient<HomePage>();
-        services.AddTransient<NewIncomingCertificatePage>();
+        services.AddTransient<IncomingCertificatePage>();
         services.AddTransient<SettingsPage>();
         
         return services;

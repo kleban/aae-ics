@@ -1,4 +1,5 @@
-﻿using AAEICS.Client.Services.SyncfusionLicenseInitializerService;
+﻿using AAEICS.Client.Services;
+using AAEICS.Client.Services.SyncfusionLicenseInitializer;
 using AAEICS.Client.Views;
 using AAEICS.Client.ViewModels;
 
@@ -10,7 +11,7 @@ using AAEICS.Services.InitialFolders;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
-using AAEICS.Client.Services;
+using SplashScreen = AAEICS.Client.Views.SplashScreen;
 
 namespace AAEICS.Client;
 
@@ -21,12 +22,19 @@ public partial class App : Application
     protected override async void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
+        var splashScreen = new SplashScreen();
+        splashScreen.Show();
         var services = new ServiceCollection();
         services.AddServices();
+        splashScreen.ProgressBarStatus.Value += 10;
         services.AddClientServices();
+        splashScreen.ProgressBarStatus.Value += 10;
         services.AddDatabase();
+        splashScreen.ProgressBarStatus.Value += 10;
         services.AddViewModels();
+        splashScreen.ProgressBarStatus.Value += 10;
         services.AddViews();
+        splashScreen.ProgressBarStatus.Value += 10;
         
         Services = services.BuildServiceProvider();
         
@@ -45,13 +53,16 @@ public partial class App : Application
                 MessageBoxImage.Error);
             Shutdown();
         } 
+        splashScreen.ProgressBarStatus.Value += 20;
 
-        Services.GetRequiredService<ISyncfusionLicenseInitializer>().Register();
+        Services.GetRequiredService<ISyncfusionLicenseInitializerService>().Register();
 
         var mainWindow = Services.GetRequiredService<MainWindow>();
         var homePage = Services.GetRequiredService<HomePage>();
-        
-        // mainWindow.MainContentFrame.Navigate(homePage);
+        splashScreen.ProgressBarStatus.Value += 20;
+        mainWindow.MainFrame.Navigate(homePage);
         mainWindow.Show();
+        splashScreen.ProgressBarStatus.Value += 10;
+        splashScreen.Close();
     }
 }

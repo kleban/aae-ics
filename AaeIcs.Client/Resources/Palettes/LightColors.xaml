@@ -1,0 +1,80 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <!-- Shadow Effects Colors -->
+    
+    <Color x:Key="DropShadowEffectColor" >#D0D0D0</Color>
+    <Color x:Key="SideMenuButtonEffectColor" >#ED8F0C</Color>
+    
+    <!-- MainWindow Brushes -->
+    
+    <SolidColorBrush x:Key="SurfaceBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="WindowBackgroundBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="WindowTitleBarHeaderBrush" Color="#555555"/>
+    <SolidColorBrush x:Key="WindowControlButtonForegroundBrush" Color="#555555"/>
+    <SolidColorBrush x:Key="WindowControlButtonBackgroundHoverBrush" Color="#D0D0D0"/>
+    <SolidColorBrush x:Key="WindowControlButtonForegroundHoverBrush" Color="#000000"/>
+    <SolidColorBrush x:Key="WindowCloseButtonBackgroundHoverBrush" Color="#E81123"/>
+    <SolidColorBrush x:Key="WindowCLoseButtonForegroundHoverBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="WindowMainFrameBackgroundBrush" Color="#F3F3F3"/>
+    
+    <!-- Primary Brand Brushes -->
+    
+    <SolidColorBrush x:Key="PrimaryBrandBrush" Color="#ED8F0C"/>
+    <SolidColorBrush x:Key="PrimaryBrandActiveBrush" Color="#C7760A"/>
+    <SolidColorBrush x:Key="PrimaryTextBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="PrimaryTextHoverBrush" Color="#292F34"/>
+    <!-- <SolidColorBrush x:Key="PrimaryBrandActiveBrush" Color="#CF7D0A"/> -->
+    
+    <!-- Secondary Brand Brushes-->
+    
+    <SolidColorBrush x:Key="SecondaryBrandBrush" Color="#FFBCBCBC"/>
+    <SolidColorBrush x:Key="SecondaryBrandActiveBrush" Color="#FF707070"/>
+    <SolidColorBrush x:Key="SecondaryTextBrush" Color="#555555"/>
+    <SolidColorBrush x:Key="SecondaryTextHoverBrush" Color="#292F34"/>
+    
+    <!-- Dashboard Brushes -->
+    
+    <SolidColorBrush x:Key="DashboardTitleBorderBrush" Color="#F4F6F8"/>
+    <SolidColorBrush x:Key="DashboardTextForegroundBrush" Color="#333333"/>
+    
+    <!-- Side Menu Brushes -->
+    <SolidColorBrush x:Key="SideMenuBackgroundBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="SideMenuStackPanelBrush" Color="#F0F0F0"/>
+    <SolidColorBrush x:Key="SideMenuOptionTextBrush" Color="#333333"/>
+    <SolidColorBrush x:Key="SideMenuOptionHoverBrush" Color="#F0F0F0"/>
+    
+    <!-- ActLinesDataGrid Brushes-->
+    
+    <SolidColorBrush x:Key="DataGridTextForeground" Color="#555555"/>
+    <SolidColorBrush x:Key="DataGridColumnHeaderBackgroundBrush" Color="#69717D"/>
+    <SolidColorBrush x:Key="DataGridRowBackgroundBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="DataGridRowSelectedInactiveBackgroundBrush" Color="#DFDFDF"/>
+    <SolidColorBrush x:Key="DataGridTextActiveForeground" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="DataGridButtonForeground" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="DataGridEditButtonBackgroundBrush" Color="#512DA8"/>
+    <SolidColorBrush x:Key="DataGridEditButtonBorderBrush" Color="#4A148C"/>
+    <SolidColorBrush x:Key="DataGridEditButtonHoveredBrush" Color="#673AB7"/>
+    <SolidColorBrush x:Key="DataGridDeleteButtonBackgroundBrush" Color="#D32F2F"/>
+    <SolidColorBrush x:Key="DataGridDeleteButtonBorderBrush" Color="#B71C1C"/>
+    <SolidColorBrush x:Key="DataGridDeleteButtonHoveredBrush" Color="#F44336"/>
+    
+    <!--#region Check Box Style-->
+    
+    <SolidColorBrush x:Key="CheckBoxBackgroundBrush" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="CheckBoxBackgroundHoveredBrush" Color="#FFF3F9FF"/>
+    <SolidColorBrush x:Key="CheckBoxBorderBrush" Color="#DAE2EA"/>
+    <SolidColorBrush x:Key="CheckBoxGlyphForegroundBrush" Color="#FF212121"/>
+    <SolidColorBrush x:Key="CheckBoxBackgroundDisabledBrush" Color="#FFE6E6E6"/>
+    <SolidColorBrush x:Key="CheckBoxBorderDisabledBrush" Color="#FFBCBCBC"/>
+    <SolidColorBrush x:Key="CheckBoxGlyphForegroundDisabledBrush" Color="#FF707070"/>
+    <SolidColorBrush x:Key="CheckBoxBackgroundPressedBrush" Color="#FFD9ECFF"/>
+    <SolidColorBrush x:Key="CheckBoxGlyphForegroundPressedBrush" Color="#FF212121"/>
+    
+    <!-- ToggleButton Brushes -->
+    
+    <SolidColorBrush x:Key="ToggleButtonBackground" Color="#CCC"/>
+    <SolidColorBrush x:Key="ToggleButtonBackgroundHover" Color="#707070"/>
+    <SolidColorBrush x:Key="ToggleButtonSwitchDisabledBackground" Color="#808080"/>
+    <SolidColorBrush x:Key="ToggleButtonSwitchEnabledBackground" Color="#ed8f0c"/>
+</ResourceDictionary>
