@@ -3,24 +3,27 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:AAEICS.Client.Views.MainWindowComponents.Controls"
+             xmlns:local="clr-namespace:AAEICS.Client"
              mc:Ignorable="d">
     <Grid>
         <StackPanel Style="{DynamicResource SideMenuStackPanelStyle}">
             <Button Style="{DynamicResource SideMenuOptionStyle}" 
                     Tag="{DynamicResource Icon.Dashboard}"
-                    Content="{DynamicResource HomeMenuOption}"
-                    Command="{Binding NavigateToCommand}" CommandParameter="home"/>
+                    Content="{Binding [HomeMenuOption], Source={x:Static local:App.LanguageService}}"
+                    Command="{Binding NavigateToCommand}"
+                    CommandParameter="home"/>
             <Button Style="{DynamicResource SideMenuOptionStyle}" 
                     Tag="{DynamicResource Icon.Settings}"
-                    Content="{DynamicResource SettingsMenuOption}"
-                    Command="{Binding NavigateToCommand}" CommandParameter="settings"/>
+                    Content="{Binding [SettingsMenuOption], Source={x:Static local:App.LanguageService}}"
+                    Command="{Binding NavigateToCommand}"
+                    CommandParameter="settings"/>
             <Button Style="{DynamicResource SideMenuOptionStyle}" 
                     Tag="{DynamicResource Icon.Categories}"
-                    Content="{DynamicResource NewCertificateMenuOption}"
-                    Command="{Binding NavigateToCommand}" CommandParameter="newIncomingCertificate"/>
+                    Content="{Binding [NewCertificateMenuOption], Source={x:Static local:App.LanguageService}}"
+                    Command="{Binding NavigateToCommand}"
+                    CommandParameter="newIncomingCertificate"/>
         </StackPanel>
-        <TextBlock Text="{DynamicResource MenuCopyright}"
+        <TextBlock Text="{Binding [MenuCopyright], Source={x:Static local:App.LanguageService}}"
                    FontFamily="Fonts/#Saira SemiBold" FontSize="10"
                    VerticalAlignment="Bottom"
                    HorizontalAlignment="Center"

@@ -11,7 +11,7 @@ public class RankConfig : IEntityTypeConfiguration<Rank>
         entity.HasIndex(e => e.RankId, "IX_Ranks_rank_id").IsUnique();
 
         entity.Property(e => e.RankId)
-            .ValueGeneratedNever()
+            .ValueGeneratedOnAdd()
             .HasColumnName("rank_id");
         entity.Property(e => e.Name)
             .HasColumnType("VARCHAR")

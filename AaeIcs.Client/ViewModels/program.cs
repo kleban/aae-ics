@@ -8,7 +8,8 @@ public static class ViewModelExtensions
     {
         services.AddSingleton<MainViewModel>();
         services.AddSingleton<SettingsViewModel>();
-        services.AddTransient<HomePageViewModel>();
+        services.AddSingleton<HomePageViewModel>();
+        services.AddTransient<IncomingCertificateViewModel>();
         
         return services;
     }

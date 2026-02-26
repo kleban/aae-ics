@@ -1,39 +1,26 @@
-﻿using AAEICS.Shared.Dto;
+﻿using AAEICS.Core.DTO.Certificates;
+using AAEICS.Core.Contracts;
+using AAEICS.Core.Contracts.Repositories;
+using AAEICS.Core.Contracts.Services;
 
 namespace AAEICS.Services.IncomingCertificates;
 
-public class IncomingCertificateService: IIncomingCertificateService
+public class IncomingCertificateService(IUnitOfWork unitOfWork) : IIncomingCertificateService
 {
-    public async Task<List<IncomingCertificateDto>> GetIncomingCertificates()
+    public async Task<IEnumerable<IncomingCertificateDTO>> GetIncomingCertificates()
     {
-        List<IncomingCertificateDto> incomingCertificates =
-        [
-            new IncomingCertificateDto
-            {
-                IncCertificateId = 1,
-                Edrpou = 12345678,
-                ApprovePerson = "John Smith",
-                ApproveDate = DateTime.Now.AddDays(-5),
-                RegistrationDate = DateTime.Now.AddDays(-10),
-                RegistrationPlace = "Kyiv, Ukraine",
-                TransferDateStart = DateTime.Now.AddDays(-3),
-                TransferDateEnd = DateTime.Now.AddDays(7),
-                Donor = "Acme Corporation",
-                Recipient = "Tech Solutions Ltd",
-                Deliver = "Express Delivery Service",
-                Reason = "Equipment transfer for project implementation"
-            }
-        ];
-        return await Task.FromResult(incomingCertificates);
+        return await unitOfWork.IncomingCertificatesRepository.GetAllAsync();
     }
     
-    public IncomingCertificateDto GetIncomingCertificate(int id)
+    public IncomingCertificateDTO GetIncomingCertificate(int id)
     {
         throw new NotImplementedException();
     }
     
-    public IncomingCertificateDto AddIncomingCertificate(IncomingCertificateDto incomingCertificate)
+    public async Task<bool> AddIncomingCertificateAsync(IncomingCertificateDTO incomingCertificate, IEnumerable<IncomingCertificateLineDTO> incomingCertificateLines)
     {
-        throw new NotImplementedException();
+        await unitOfWork.IncomingCertificatesRepository.AddAsync(incomingCertificate, incomingCertificateLines);
+        await unitOfWork.CompleteAsync();
+        return true;
     }
 }

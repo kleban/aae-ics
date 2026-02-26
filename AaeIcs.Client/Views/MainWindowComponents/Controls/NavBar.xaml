@@ -1,0 +1,27 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:AAEICS.Client">
+    
+    <ControlTemplate x:Key="NavBar">
+        <Border Style="{DynamicResource NavBarStyle}"> 
+            <UniformGrid Rows="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Button Style="{DynamicResource NavBarButtonStyle}" 
+                        Content="{Binding [HomeNavBarOption], Source={x:Static local:App.LanguageService}}"
+                        Command="{Binding NavigateToCommand}"
+                        CommandParameter="home"/>
+                <Button Style="{DynamicResource NavBarButtonStyle}" 
+                        Content="{Binding [NewIncomingCertificateNavBarOption], Source={x:Static local:App.LanguageService}}"
+                        Command="{Binding NavigateToCommand}"
+                        CommandParameter="newIncomingCertificate"/>
+                <Button Style="{DynamicResource NavBarButtonStyle}" 
+                        Content="{Binding [NewIssuanceCertificateNavBarOption], Source={x:Static local:App.LanguageService}}"
+                        Command="{Binding NavigateToCommand}"
+                        CommandParameter="newIssuanceCertificate"/>
+                <Button Style="{DynamicResource NavBarButtonStyle}" 
+                        Content="{Binding [NewWriteOffCertificateNavBarOption], Source={x:Static local:App.LanguageService}}"
+                        Command="{Binding NavigateToCommand}"
+                        CommandParameter="newWriteOffCertificate"/>
+            </UniformGrid>
+        </Border>
+    </ControlTemplate>
+</ResourceDictionary>

@@ -1,0 +1,171 @@
+﻿<UserControl x:Class="AAEICS.Client.Views.IncomingCertificatePageComponents.Controls.ActLinesDataGrid"
+             x:Name="Root"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:AAEICS.Client.Views.IncomingCertificatePageComponents.Controls"
+             xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:helpers="clr-namespace:AAEICS.Client.Helpers"
+             mc:Ignorable="d">
+    <Border CornerRadius="10"
+            BorderThickness="0"
+            Background="White"
+            Padding="10">
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <DockPanel Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <TextBlock DockPanel.Dock="Left"
+                           Text="DATA TABLE" 
+                           Style="{DynamicResource DashboardTitleFont}" 
+                           HorizontalAlignment="Left" VerticalAlignment="Center"
+                           Margin="10,0,10,0"/>
+                <Button DockPanel.Dock="Right"
+                        Style="{DynamicResource PrimaryButton}"
+                        Content="ADD ROW"
+                        FontSize="14"
+                        helpers:ButtonHelper.CornerRadius="6"
+                        Command="{Binding AddRowCommand}"
+                        VerticalAlignment="Center" HorizontalAlignment="Right"
+                        Margin="10,0,10,0"
+                        Width="100" Height="30"/>
+            </DockPanel>
+            <DataGrid Grid.Row="1"
+                      ItemsSource="{Binding SourceItems, ElementName=Root}"
+                      Style="{DynamicResource EditableDataGridStyle}"
+                      RowStyle="{DynamicResource DataGridRowStyle}"
+                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}"
+                      HorizontalScrollBarVisibility="Hidden">
+                <DataGrid.Columns>
+                    <DataGridCheckBoxColumn Header="C" Width="auto"
+                                            ElementStyle="{DynamicResource CheckBoxStyle}"
+                                            Binding="{Binding IsConfirmed, UpdateSourceTrigger=PropertyChanged}"
+                                            CellStyle="{StaticResource BaseDataGridCellStyle}">
+                        <DataGridCheckBoxColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <CheckBox Style="{DynamicResource CheckBoxStyle}"
+                                          IsChecked="{Binding DataContext.IsAllConfirmed, 
+                                          RelativeSource={RelativeSource AncestorType=DataGrid}, Mode=TwoWay}"/>
+                            </DataTemplate>
+                        </DataGridCheckBoxColumn.HeaderTemplate>
+                    </DataGridCheckBoxColumn>
+                    
+                    <DataGridTemplateColumn Header="Одиниця виміру" Width="66" CellStyle="{StaticResource LockableCellStyle}">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ComboBox 
+                                    ItemsSource="{Binding DataContext.MeasureUnitsList, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                    DisplayMemberPath="Name" 
+                                    SelectedValuePath="UnitId" 
+                                    SelectedValue="{Binding MeasureUnit, UpdateSourceTrigger=PropertyChanged}" 
+                
+                                    BorderThickness="0" 
+                                    Background="Transparent"
+                                    Padding="5,2"
+                                    VerticalAlignment="Center"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    
+                    <DataGridTemplateColumn Width="160" CellStyle="{StaticResource LockableCellStyle}">
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                            <Grid Width="auto">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Text="Sent" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,0,0,5"/>
+                                <Rectangle Grid.Row="1" Height="1" Fill="{DynamicResource DataGridColumnHeaderBackgroundBrush}" Margin="0,2,0,5"/>
+                                <Grid Grid.Row="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="1"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="Quantity Sent" HorizontalAlignment="Center" Margin="10,0,10,0" TextWrapping="Wrap"/>
+                                    <Rectangle Grid.Column="1" Fill="{DynamicResource DataGridColumnHeaderBackgroundBrush}"/>
+                                    <TextBlock Grid.Column="2" Text="Category Sent" HorizontalAlignment="Center" Margin="10,0,10,0" TextWrapping="Wrap"/>
+                                </Grid>
+                            </Grid>
+                                </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="1"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Grid.Column="0" Text="{Binding QuantitySent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource WrapTextEditingStyle}" Background="Transparent"/>
+                                    <Rectangle Grid.Column="1" Fill="#E0E0E0" />
+                                    <TextBox Grid.Column="2" Text="{Binding CategorySent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource WrapTextEditingStyle}" Background="Transparent"/>
+                                </Grid>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Width="160" CellStyle="{StaticResource LockableCellStyle}">
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                            <Grid Width="auto">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Text="Received" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,0,0,5"/>
+                                <Rectangle Grid.Row="1" Width="auto" Height="1" Fill="{DynamicResource DataGridColumnHeaderBackgroundBrush}" Margin="0,2,0,5"/>
+                                <Grid Grid.Row="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="1"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="Quantity Received" HorizontalAlignment="Center" Margin="10,0,10,0" TextWrapping="Wrap"/>
+                                    <Rectangle Grid.Column="1" Fill="{DynamicResource DataGridColumnHeaderBackgroundBrush}"/>
+                                    <TextBlock Grid.Column="2" Text="Category Received" HorizontalAlignment="Center" Margin="10,0,10,0" TextWrapping="Wrap"/>
+                                </Grid>
+                            </Grid>
+                                </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="1"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Grid.Column="0" Text="{Binding QuantityReceived, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource WrapTextEditingStyle}" Background="Transparent"/>
+                                    <Rectangle Grid.Column="1" Fill="#E0E0E0" />
+                                    <TextBox Grid.Column="2" Text="{Binding CategoryReceived, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource WrapTextEditingStyle}" Background="Transparent"/>
+                                </Grid>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="Operations" Width="auto" CellStyle="{StaticResource LockableCellStyle}">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Style="{DynamicResource GridRemoveButton}"
+                                        Command="{Binding DataContext.DeleteRowCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                        CommandParameter="{Binding .}">
+                                    <icon:PackIconMaterial Kind="DeleteOutline" Style="{DynamicResource GridButtonIcon}"/>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Border>
+</UserControl>

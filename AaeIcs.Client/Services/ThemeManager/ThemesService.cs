@@ -1,4 +1,4 @@
-﻿using AAEICS.Shared.Models;
+﻿using AAEICS.Client.Models;
 
 using System.Collections.ObjectModel;
 using System.Diagnostics;

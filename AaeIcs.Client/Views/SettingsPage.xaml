@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:local="clr-namespace:AAEICS.Client.Views"
+      xmlns:local="clr-namespace:AAEICS.Client"
       mc:Ignorable="d"
       Height="450" Width="800">
     <Grid>
@@ -12,21 +12,27 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         
-        <StackPanel Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,10,10,0">
+        <StackPanel Grid.Row="0" 
+                    HorizontalAlignment="Left" VerticalAlignment="Center" 
+                    Margin="10,10,10,0">
             <Grid HorizontalAlignment="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="{DynamicResource LightThemeSettingsOption}" Style="{DynamicResource TitleBarHeader}"/>
+                <TextBlock Grid.Column="0" 
+                           Text="{Binding [LightThemeSettingsOption], Source={x:Static local:App.LanguageService}}"
+                           Style="{DynamicResource TitleBarHeader}"/>
                 <ToggleButton Grid.Column="1" 
                               Template="{DynamicResource ToggleButtonTemplate}"
                               HorizontalAlignment="Left"
                               Width="60" Height="30" 
                               Margin="5,0,5,0"
                               IsChecked="{Binding IsDarkTheme, Mode=TwoWay}" />
-                <TextBlock Grid.Column="2" Text="{DynamicResource DarkThemeSettingsOption}" Style="{DynamicResource TitleBarHeader}"/>
+                <TextBlock Grid.Column="2" 
+                           Text="{Binding [DarkThemeSettingsOption], Source={x:Static local:App.LanguageService}}" 
+                           Style="{DynamicResource TitleBarHeader}"/>
             </Grid>
         </StackPanel>
         <StackPanel Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,10,10,0">
@@ -36,14 +42,18 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="{DynamicResource UkLanguageSettingsOption}" Style="{DynamicResource TitleBarHeader}"/>
+                <TextBlock Grid.Column="0" 
+                           Text="{Binding [UkLanguageSettingsOption], Source={x:Static local:App.LanguageService}}"
+                           Style="{DynamicResource TitleBarHeader}"/>
                 <ToggleButton Grid.Column="1" 
                               Template="{DynamicResource ToggleButtonTemplate}"
                               HorizontalAlignment="Left"
                               Margin="5,0,5,0"
                               Width="60" Height="30" 
                               IsChecked="{Binding IsEnglishLanguage, Mode=TwoWay}"/>
-                <TextBlock Grid.Column="2" Text="{DynamicResource EnLanguageSettingsOption}" Style="{DynamicResource TitleBarHeader}"/>
+                <TextBlock Grid.Column="2" 
+                           Text="{Binding [EnLanguageSettingsOption], Source={x:Static local:App.LanguageService}}"
+                           Style="{DynamicResource TitleBarHeader}"/>
             </Grid>
         </StackPanel>
     </Grid>

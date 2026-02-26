@@ -22,7 +22,7 @@
     
     <SolidColorBrush x:Key="PrimaryBrandBrush" Color="#ED8F0C"/>
     <SolidColorBrush x:Key="PrimaryBrandActiveBrush" Color="#C7760A"/>
-    <SolidColorBrush x:Key="PrimaryTextBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="PrimaryTextBrush" Color="#555555"/>
     <SolidColorBrush x:Key="PrimaryTextHoverBrush" Color="#292F34"/>
     <!-- <SolidColorBrush x:Key="PrimaryBrandActiveBrush" Color="#CF7D0A"/> -->
     
@@ -35,14 +35,36 @@
     
     <!-- Dashboard Brushes -->
     
-    <SolidColorBrush x:Key="DashboardTitleBorderBrush" Color="#F4F6F8"/>
+    <SolidColorBrush x:Key="DashboardCardBackgroundBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="DashboardCardBorderHoverBrush" Color="#ED8F0C"/>
+    <SolidColorBrush x:Key="DashboardCardTitleBackgroundBrush" Color="#F4F6F8"/>
     <SolidColorBrush x:Key="DashboardTextForegroundBrush" Color="#333333"/>
     
-    <!-- Side Menu Brushes -->
+    <!-- NavBar Brushes -->
+    
+    <SolidColorBrush x:Key="NavBarBackgroundBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="NavBarButtonBackgroundBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="NavBarButtonBackgroundHoverBrush" Color="#ED8F0C"/>
+    <SolidColorBrush x:Key="NavBarButtonBackgroundActiveBrush" Color="#C7760A"/>
+    <SolidColorBrush x:Key="NavBarButtonTextBrush" Color="#555555"/>
+    <SolidColorBrush x:Key="NavBarButtonTextHoveredBrush" Color="#F4F6F8"/>
+    <SolidColorBrush x:Key="NavBarButtonTextActiveBrush" Color="#292F34"/>
+    
+    <!-- SideMenu Brushes -->
+    
     <SolidColorBrush x:Key="SideMenuBackgroundBrush" Color="#FFFFFF"/>
     <SolidColorBrush x:Key="SideMenuStackPanelBrush" Color="#F0F0F0"/>
     <SolidColorBrush x:Key="SideMenuOptionTextBrush" Color="#333333"/>
     <SolidColorBrush x:Key="SideMenuOptionHoverBrush" Color="#F0F0F0"/>
+    
+    <!-- TabControl Brushes -->
+    <SolidColorBrush x:Key="TabControlBackgroundBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="TabItemBackgroundBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="TabItemBackgroundHoverBrush" Color="#F0F0F0"/>
+    <SolidColorBrush x:Key="TabItemBackgroundSelectedBrush" Color="#ED8F0C"/>
+    <SolidColorBrush x:Key="TabItemTextBrush" Color="#555555"/>
+    <SolidColorBrush x:Key="TabItemTextHoverBrush" Color="#333333"/>
+    <SolidColorBrush x:Key="TabItemTextSelectedBrush" Color="#FFFFFF"/>
     
     <!-- ActLinesDataGrid Brushes-->
     
@@ -59,7 +81,7 @@
     <SolidColorBrush x:Key="DataGridDeleteButtonBorderBrush" Color="#B71C1C"/>
     <SolidColorBrush x:Key="DataGridDeleteButtonHoveredBrush" Color="#F44336"/>
     
-    <!--#region Check Box Style-->
+    <!-- Check Box Style-->
     
     <SolidColorBrush x:Key="CheckBoxBackgroundBrush" Color="#FFFFFFFF"/>
     <SolidColorBrush x:Key="CheckBoxBackgroundHoveredBrush" Color="#FFF3F9FF"/>

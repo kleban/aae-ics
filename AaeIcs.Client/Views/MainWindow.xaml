@@ -5,13 +5,13 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:services="clr-namespace:AAEICS.Client.Services"
-        xmlns:helper="clr-namespace:AAEICS.Client.Converters"
+        xmlns:local="clr-namespace:AAEICS.Client"
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
         mc:Ignorable="d"
         Title="{Binding AppTitle}"
         
         Height="800" Width="1200"
-        MinHeight="619" MinWidth="1100"
+        MinHeight="619" MinWidth="{Binding WindowMinWidth}"
         Style="{DynamicResource CustomChromelessWindowStyle}"
         
         WindowStartupLocation="CenterScreen"
@@ -19,7 +19,8 @@
         WindowStyle="None"
         
         TitleBarHeight="50"
-        ShowIcon="False">
+        ShowIcon="False"
+        SizeChanged="MainWindow_SizeChanged">
     <syncfusion:ChromelessWindow.TitleBarTemplate>
         <StaticResource ResourceKey="TitleBarTemplate"/>
     </syncfusion:ChromelessWindow.TitleBarTemplate>
@@ -91,11 +92,21 @@
             </ContentControl>
         </Grid>
         
-        <Border Grid.Column="1" 
+        <Border Grid.Column="1"
                 Background="{DynamicResource WindowMainFrameBackgroundBrush}"
-                Margin="0"
                 CornerRadius="8,8,10,8">
-            <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" />
+            <Grid Margin="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                
+                <ContentControl Grid.Row="0"
+                                Template="{DynamicResource NavBar}"
+                                Margin="10"/>
+            
+                <Frame Grid.Row="1" x:Name="MainFrame" NavigationUIVisibility="Hidden" Margin="0" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            </Grid>
         </Border>
     </Grid>
 </syncfusion:ChromelessWindow>

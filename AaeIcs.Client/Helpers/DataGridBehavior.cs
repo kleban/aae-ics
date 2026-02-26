@@ -1,53 +1,188 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace AAEICS.Client.Helpers;
 
 public static class DataGridBehavior
 {
-    // Створюємо властивість, яку можна вмикати в XAML
     public static readonly DependencyProperty KeepEditingTextProperty =
         DependencyProperty.RegisterAttached(
             "KeepEditingText",
             typeof(bool),
             typeof(DataGridBehavior),
             new PropertyMetadata(false, OnKeepEditingTextChanged));
+    
+    public static readonly DependencyProperty AutoFormatGeneratedColumnsProperty =
+        DependencyProperty.RegisterAttached(
+            "AutoFormatGeneratedColumns",
+            typeof(bool),
+            typeof(DataGridBehavior),
+            new PropertyMetadata(false, OnAutoFormatGeneratedColumnsChanged));
+    
+    private static readonly DependencyProperty SavedOriginalTextProperty =
+        DependencyProperty.RegisterAttached(
+            "SavedOriginalText", 
+            typeof(string), 
+            typeof(DataGridBehavior));
 
-    public static bool GetKeepEditingText(DependencyObject obj)
-    {
-        return (bool)obj.GetValue(KeepEditingTextProperty);
-    }
-
-    public static void SetKeepEditingText(DependencyObject obj, bool value)
-    {
+    public static bool GetKeepEditingText(DependencyObject obj) => 
+        (bool)obj.GetValue(KeepEditingTextProperty);
+    public static void SetKeepEditingText(DependencyObject obj, bool value) => 
         obj.SetValue(KeepEditingTextProperty, value);
-    }
 
+    public static bool GetAutoFormatGeneratedColumns(DependencyObject obj) => 
+        (bool)obj.GetValue(AutoFormatGeneratedColumnsProperty);
+    public static void SetAutoFormatGeneratedColumns(DependencyObject obj, bool value) => 
+        obj.SetValue(AutoFormatGeneratedColumnsProperty, value);
+    
     private static void OnKeepEditingTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        if (d is DataGrid dataGrid)
+        if (d is not DataGrid dataGrid) return;
+        
+        if ((bool)e.NewValue)
         {
-            if ((bool)e.NewValue)
+            dataGrid.BeginningEdit += DataGrid_BeginningEdit;
+            dataGrid.PreparingCellForEdit += DataGrid_PreparingCellForEdit;
+        }
+        else
+        {
+            dataGrid.BeginningEdit -= DataGrid_BeginningEdit;
+            dataGrid.PreparingCellForEdit -= DataGrid_PreparingCellForEdit;
+        }
+    }
+    
+    private static void DataGrid_BeginningEdit(object? sender, DataGridBeginningEditEventArgs e)
+    {
+        if (sender is not DataGrid dataGrid) return;
+        
+        if (e.Column is DataGridTextColumn)
+        {
+            var cellContent = e.Column.GetCellContent(e.Row);
+            if (cellContent is TextBlock textBlock)
+                dataGrid.SetValue(SavedOriginalTextProperty, textBlock.Text);
+        }
+    }
+    
+    private static void DataGrid_PreparingCellForEdit(object? sender, DataGridPreparingCellForEditEventArgs e)
+    {
+        if (e.EditingElement is not TextBox textBox || sender is not DataGrid dataGrid) return;
+        
+        string originalText = (string)dataGrid.GetValue(SavedOriginalTextProperty) ?? string.Empty;
+        
+        if (e.EditingEventArgs is TextCompositionEventArgs textArgs)
+        {
+            textBox.Text = originalText + textArgs.Text;
+            
+            textArgs.Handled = true;
+            
+            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
-                dataGrid.PreparingCellForEdit += DataGrid_PreparingCellForEdit;
-            }
-            else
+                textBox.Focus();
+                textBox.SelectionLength = 0;
+                textBox.CaretIndex = textBox.Text.Length;
+            }), DispatcherPriority.Normal);
+        }
+        else
+        {
+            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
-                dataGrid.PreparingCellForEdit -= DataGrid_PreparingCellForEdit;
-            }
+                textBox.Focus();
+                textBox.SelectionLength = 0;
+                textBox.CaretIndex = textBox.Text.Length;
+            }), DispatcherPriority.Background);
         }
     }
 
-    private static void DataGrid_PreparingCellForEdit(object? sender, DataGridPreparingCellForEditEventArgs e)
+    private static void OnAutoFormatGeneratedColumnsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        // Шукаємо TextBox всередині клітинки
-        if (e.EditingElement is TextBox textBox)
+        if (d is not DataGrid dataGrid) return;
+
+        if ((bool)e.NewValue)
         {
-            // Ця магія змушує DataGrid "забути", що він хотів замінити текст
-            textBox.Focus();
-            
-            // Ставимо курсор в самий кінець тексту
-            textBox.Select(textBox.Text.Length, 0);
+            dataGrid.AutoGeneratingColumn += DataGrid_AutoGeneratingColumn;
+            dataGrid.AutoGeneratedColumns += DataGrid_AutoGeneratedColumns;
         }
+        else
+        {
+            dataGrid.AutoGeneratingColumn -= DataGrid_AutoGeneratingColumn;
+            dataGrid.AutoGeneratedColumns -= DataGrid_AutoGeneratedColumns;
+        }
+    }
+
+    private static void DataGrid_AutoGeneratingColumn(object? sender, DataGridAutoGeneratingColumnEventArgs e)
+    {
+        // 1. Приховуємо властивості, які ми ВЖЕ прописали в XAML вручну
+        // Увага: ЗАМІНИ ці імена на реальні назви властивостей з твоєї моделі!
+        if (e.PropertyName == "IsConfirmed" || 
+            e.PropertyName == "MeasureUnit" ||
+            e.PropertyName == "QuantitySent" || 
+            e.PropertyName == "CategorySent" || 
+            e.PropertyName == "QuantityReceived" || 
+            e.PropertyName == "CategoryReceived")
+        {
+            // Кажемо WPF: "Не роби для них окремих колонок, ми самі з ними розібралися!"
+            e.Cancel = true;
+            return;
+        }
+
+        // ==========================================
+        // НОВА ЛОГІКА: Читаємо аліаси (DisplayName)
+        // ==========================================
+        if (e.PropertyDescriptor is PropertyDescriptor descriptor)
+        {
+            // Шукаємо атрибут DisplayName серед усіх атрибутів властивості
+            var displayNameAttr = descriptor.Attributes.OfType<DisplayNameAttribute>().FirstOrDefault();
+            
+            // Якщо знайшли і він не порожній — підміняємо заголовок колонки
+            if (displayNameAttr != null && !string.IsNullOrEmpty(displayNameAttr.DisplayName))
+            {
+                e.Column.Header = displayNameAttr.DisplayName;
+            }
+        }
+        // ==========================================
+
+        // 2. Стилізуємо автоматично згенеровані текстові колонки
+        if (e.Column is DataGridTextColumn textColumn && sender is FrameworkElement element)
+        {
+            textColumn.ElementStyle = (Style)element.FindResource("WrapTextElementStyle");
+            textColumn.EditingElementStyle = (Style)element.FindResource("WrapTextEditingStyle");
+            textColumn.CellStyle = (Style)element.FindResource("LockableCellStyle");
+            
+            // Налаштовуємо ширину, щоб дозволити перенесення тексту
+            textColumn.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+        }
+    }
+
+    private static void DataGrid_AutoGeneratedColumns(object? sender, EventArgs e)
+    {
+        if (sender is not DataGrid grid) return;
+
+        // 1. Знаходимо всі колонки, які DataGrid згенерував сам 
+        // (у DataGridColumn є вбудована властивість IsAutoGenerated, яка ідеально нам підходить)
+        var autoGeneratedColumns = grid.Columns.Where(c => c.IsAutoGenerated).ToList();
+
+        // 2. Визначаємо, з якого індексу ми почнемо їх вставляти.
+        // Індекс 0 залізно зарезервований за нашим кастомним Чекбоксом, тому починаємо з 1.
+        int insertIndex = 1;
+
+        // 3. Беремо кожну згенеровану колонку і ставимо її одразу після чекбоксу
+        foreach (var col in autoGeneratedColumns)
+        {
+            if ((string)col.Header == "Notes") // Якщо це колонка "Notes", ставимо її в кінець (перед Operations)
+            {
+                col.DisplayIndex = grid.Columns.Count - 3; // Передостанній індекс
+                continue;
+            }
+
+            col.DisplayIndex = insertIndex;
+            insertIndex++; // Наступна згенерована колонка стане після цієї
+        }
+
+        // РЕЗУЛЬТАТ:
+        // [0: Чекбокс] -> [1: АвтоКолонка_1] -> [2: АвтоКолонка_2] -> 
+        // [3: Об'єднана 1] -> [4: Об'єднана 2] -> [5: Operations]
     }
 }

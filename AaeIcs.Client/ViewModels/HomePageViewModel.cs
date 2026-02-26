@@ -1,10 +1,12 @@
-﻿using AAEICS.Shared.Dto;
+﻿using AAEICS.Core.DTO.Certificates;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Windows;
+using AAEICS.Client.Models;
 using AAEICS.Services.IncomingCertificates;
 
 namespace AAEICS.Client.ViewModels;
@@ -19,12 +21,31 @@ public partial class TableRowItem : ObservableObject
     
     [ObservableProperty]
     private string _value;
+    
+    [ObservableProperty]
+    private string _value1;
+    
+    [ObservableProperty]
+    private string _value2;
 
 }
 
 public partial class HomePageViewModel : ObservableObject
 {
-    [ObservableProperty] private ObservableCollection<IncomingCertificateDto> _incomingCertificates = new();
+    
+    // Це і є та сама властивість DashboardItems, до якої ми робили Binding у XAML!
+    [ObservableProperty]
+    private ObservableCollection<DashboardCard> _dashboardItems = new();
+    
+    // Приклад того, як ви зможете оновлювати значення з коду пізніше
+    public void UpdateSalesData(string newSalesValue)
+    {
+        // Оскільки це ObservableProperty, зміна цього поля автоматично оновить цифру на екрані!
+        DashboardItems[0].CardValue = newSalesValue; 
+    }
+
+    [ObservableProperty]
+    private ObservableCollection<IncomingCertificateDTO> _incomingCertificates = new();
     
     private bool _isSyncing;
     
@@ -38,9 +59,53 @@ public partial class HomePageViewModel : ObservableObject
     {
         TableItems =
         [
-            new TableRowItem { Description = "Приклад запису 1", Value = "100", IsConfirmed = true },
-            new TableRowItem { Description = "Приклад запису 2", Value = "250", IsConfirmed = false }
+            new TableRowItem { Description = "Приклад запису 1", Value = "100", IsConfirmed = true, Value1 = "100", Value2 = "100" },
+            new TableRowItem { Description = "Приклад запису 2", Value = "250", IsConfirmed = false, Value1 = "100", Value2 = "100" }
         ];
+        
+        // Ініціалізуємо наш список
+        DashboardItems =
+        [
+            new DashboardCard(
+                // ВИКОРИСТОВУЄМО nameof() ! Ми передаємо КЛЮЧ, а не сам текст.
+                titleKey: nameof(Resources.Languages.Resources.CreatedIncomingCertificatesTodayDashboardTitle),
+                descriptionKey: nameof(Resources.Languages.Resources.CreatedIncomingCertificatesTodayDashboardTitle),
+                icon: Application.Current.Resources["Icon.Product"],
+                initialValue: "0"
+            ),
+
+            new DashboardCard(
+                titleKey: nameof(Resources.Languages.Resources.CreatedIssuanceCertificatesTodayDashboardTitle),
+                descriptionKey: nameof(Resources.Languages.Resources.CreatedIssuanceCertificatesTodayDashboardTitle),
+                icon: Application.Current.Resources["Icon.User"],
+                initialValue: "0"
+            ),
+            
+            new DashboardCard(
+                titleKey: nameof(Resources.Languages.Resources.CreatedWtriteOffCertificatesTodayDashboardTitle), // Наприклад: "Продажі"
+                icon: Application.Current.Resources["Icon.Product"],
+                descriptionKey: nameof(Resources.Languages.Resources.CreatedIncomingCertificatesTodayDashboardTitle), // Наприклад: "За цей місяць"
+                initialValue: "0" // Початкове значення
+            ),
+
+
+            new DashboardCard(
+                titleKey: nameof(Resources.Languages.Resources.CreatedIssuanceCertificatesTodayDashboardTitle),
+                descriptionKey: nameof(Resources.Languages.Resources.CreatedIssuanceCertificatesTodayDashboardTitle),
+                icon: Application.Current.Resources["Icon.User"],
+                initialValue: "0"
+            )
+
+            // Ви можете додати стільки карток, скільки вам потрібно!
+            // 1. Слухаємо зміни в колекції (додавання/видалення рядків)
+
+        ];
+
+        // Заповнюємо мозаїку дашбордів. 
+        // Підтягуємо текст із файлів локалізації (Resources)
+        // Іконки беремо з ресурсів додатку (якщо вони у вас там лежать)
+
+        // Ви можете додати стільки карток, скільки вам потрібно!
         // 1. Слухаємо зміни в колекції (додавання/видалення рядків)
         TableItems.CollectionChanged += OnTableItemsCollectionChanged;
 

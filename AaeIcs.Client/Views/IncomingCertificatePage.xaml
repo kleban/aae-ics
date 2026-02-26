@@ -3,20 +3,29 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:local="clr-namespace:AAEICS.Client.Views"
+      xmlns:helpers="clr-namespace:AAEICS.Client.Helpers"
+      xmlns:controls="clr-namespace:AAEICS.Client.Views.IncomingCertificatePageComponents.Controls"
       xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
       mc:Ignorable="d"
-      Title="HomePage" 
-      d:DesignHeight="800" d:DesignWidth="1000">
+      Title="HomePage"
+      Width="Auto"
+      Loaded="Page_Loaded">
+    <Page.CommandBindings>
+        <CommandBinding Command="NavigationCommands.BrowseBack" 
+                        CanExecute="BlockBrowseBack_CanExecute"/>
+    </Page.CommandBindings>
     <Page.Resources>
         <Style x:Key="CellBorder" TargetType="Border">
             <Setter Property="BorderBrush" Value="Black"/>
             <Setter Property="BorderThickness" Value="0.5"/>
             <Setter Property="Padding" Value="5"/>
+            <Setter Property="Margin" Value="6"/>
         </Style>
 
         <Style x:Key="InputBox" TargetType="Border" BasedOn="{StaticResource CellBorder}">
-            <Setter Property="Height" Value="40"/> <Setter Property="Margin" Value="0,0,0,10"/> <Setter Property="Background" Value="White"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
+            <Setter Property="Background" Value="White"/>
         </Style>
         
         <Style x:Key="TableHeader" TargetType="TextBlock">
@@ -25,82 +34,142 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
     </Page.Resources>
-
-    <Grid Background="White">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/> <RowDefinition Height="Auto"/> <RowDefinition Height="*"/>    </Grid.RowDefinitions>
-
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/> <ColumnDefinition Width="50"/> <ColumnDefinition Width="1*"/> </Grid.ColumnDefinitions>
-
-            <StackPanel Grid.Column="0">
-                <Border Style="{StaticResource InputBox}">
-                    <TextBlock Text="Компанія А (Ліворуч)" VerticalAlignment="Center"/>
-                </Border>
-                <Border Style="{StaticResource InputBox}" Width="200" HorizontalAlignment="Left">
-                     <TextBlock Text="Код" VerticalAlignment="Center"/>
-                </Border>
-            </StackPanel>
-
-            <StackPanel Grid.Column="2">
-                <Border Style="{StaticResource InputBox}">
-                     <TextBlock Text="Компанія Б (Праворуч)" VerticalAlignment="Center"/>
-                </Border>
-                <Border Style="{StaticResource InputBox}">
-                     <TextBlock Text="Деталі" VerticalAlignment="Center"/>
-                </Border>
-            </StackPanel>
-        </Grid>
-
-        <Border Grid.Row="1" Style="{StaticResource CellBorder}" Margin="0,20,0,0">
-            <TextBlock Text="ЗАГОЛОВОК ДОКУМЕНТА" HorizontalAlignment="Center"/>
-        </Border>
-
-        <Grid Grid.Row="2">
+    <Border CornerRadius="10"
+            BorderThickness="0"
+            Background="White"
+            Margin="10">
+        <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="50"/> <RowDefinition Height="30"/> <RowDefinition Height="*"/>  <RowDefinition Height="30"/> </Grid.RowDefinitions>
-            
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1.5*"/>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+        <TabControl Grid.Row="0" Style="{StaticResource TabControlStyle}">
+            <TabItem Style="{StaticResource TabItemStyle}" Header="Загальна інформація">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0" Padding="0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
 
-            <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Style="{StaticResource CellBorder}">
-                <TextBlock Text="№ / Назва" Style="{StaticResource TableHeader}"/>
-            </Border>
-            
-            <Border Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource CellBorder}">
-                <TextBlock Text="Параметри" Style="{StaticResource TableHeader}"/>
-            </Border>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <Border Grid.Column="0" Style="{StaticResource InputBox}" CornerRadius="10" HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="5">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="5">
+                                    <TextBlock Text="Код ЄДРПОУ" Margin="5" Foreground="Black" VerticalAlignment="Center"/>
+                                    <TextBox Width="150" Margin="5" Text="{Binding IncomingCertificate.Edrpou, UpdateSourceTrigger=PropertyChanged}"/>
+                                </StackPanel>
+                            </Border>
+                            
+                            <Border Grid.Column="1" Style="{StaticResource InputBox}" CornerRadius="10" HorizontalAlignment="Right" VerticalAlignment="Stretch" Margin="5">
+                                <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="5">
+                                    <TextBlock Text="Посадова особа (введи ID)" Margin="5" Foreground="Black"/>
+                                    <TextBox Width="200" Margin="5" Text="{Binding IncomingCertificate.ApprovePersonId, UpdateSourceTrigger=PropertyChanged}" />
+                                    <syncfusion:SfDatePicker Margin="5" Value="{Binding IncomingCertificate.ApproveDate, UpdateSourceTrigger=PropertyChanged}"/>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
 
-            <Border Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="3" Style="{StaticResource CellBorder}">
-                <TextBlock Text="Результати" Style="{StaticResource TableHeader}"/>
-            </Border>
+                        <Border Grid.Row="1" Style="{StaticResource CellBorder}" CornerRadius="10" Margin="5,15,5,15">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">
+                                <TextBlock Text="Акт приймання-передачі запасів" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Bold"/>
+                            </StackPanel>
+                        </Border>
 
-            <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource CellBorder}"/>
-            <Border Grid.Row="1" Grid.Column="2" Style="{StaticResource CellBorder}"/>
-            
-            <Border Grid.Row="1" Grid.Column="3" Style="{StaticResource CellBorder}"/>
-            <Border Grid.Row="1" Grid.Column="4" Style="{StaticResource CellBorder}"/>
-            <Border Grid.Row="1" Grid.Column="5" Style="{StaticResource CellBorder}"/>
+                        <Grid Grid.Row="2" Margin="5">
+                            <helpers:FormGrid Background="White">
+                                <helpers:FormGrid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </helpers:FormGrid.ColumnDefinitions>
 
+                                <helpers:FormGrid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </helpers:FormGrid.RowDefinitions>
 
-            <Border Grid.Row="2" Grid.Column="0" Style="{StaticResource CellBorder}"/>
-            <Border Grid.Row="2" Grid.Column="1" Style="{StaticResource CellBorder}"/>
-            <Border Grid.Row="2" Grid.Column="2" Style="{StaticResource CellBorder}"/>
-            <Border Grid.Row="2" Grid.Column="3" Style="{StaticResource CellBorder}"/>
-            <Border Grid.Row="2" Grid.Column="4" Style="{StaticResource CellBorder}"/>
-            <Border Grid.Row="2" Grid.Column="5" Style="{StaticResource CellBorder}"/>
+                                <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource CellBorder}" HorizontalAlignment="Stretch">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Дата складання:" VerticalAlignment="Center" Margin="5" Foreground="Black"/>
+                                        <syncfusion:SfDatePicker Margin="5" Value="{Binding IncomingCertificate.RegistrationDate, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </StackPanel>
+                                </Border>
+                                <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource CellBorder}" HorizontalAlignment="Stretch">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Місце складання:" VerticalAlignment="Center" Margin="5" Foreground="Black"/>
+                                        <TextBox Margin="5" VerticalAlignment="Center" BorderThickness="0" Foreground="Black" MinWidth="150" Text="{Binding IncomingCertificate.RegistrationPlace, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </StackPanel>
+                                </Border>
 
-            <Border Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6" Style="{StaticResource CellBorder}">
-                <TextBlock Text="Всього:" FontWeight="Bold" HorizontalAlignment="Right" Margin="0,0,20,0"/>
-            </Border>
+                                <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource CellBorder}" HorizontalAlignment="Stretch">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Початок передачі:" VerticalAlignment="Center" Margin="5" Foreground="Black"/>
+                                        <syncfusion:SfDatePicker Margin="5" Value="{Binding IncomingCertificate.TransferDateStart, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </StackPanel>
+                                </Border>
+                                <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource CellBorder}" HorizontalAlignment="Stretch">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Кінець передачі:" VerticalAlignment="Center" Margin="5" Foreground="Black"/>
+                                        <syncfusion:SfDatePicker Margin="5" Value="{Binding IncomingCertificate.TransferDateEnd, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </StackPanel>
+                                </Border>
 
+                                <Border Grid.Row="2" Grid.Column="0" Style="{StaticResource CellBorder}" HorizontalAlignment="Stretch">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Відправник (ID донора):" VerticalAlignment="Center" Margin="5" Foreground="Black"/>
+                                        <TextBox Margin="5" VerticalAlignment="Center" BorderThickness="0" MinWidth="150" Text="{Binding IncomingCertificate.DonorId, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </StackPanel>
+                                </Border>
+                                <Border Grid.Row="2" Grid.Column="1" Style="{StaticResource CellBorder}" HorizontalAlignment="Stretch">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Одержувач (ID):" VerticalAlignment="Center" Margin="5" Foreground="Black"/>
+                                        <TextBox Margin="5" VerticalAlignment="Center" BorderThickness="0" MinWidth="150" Text="{Binding IncomingCertificate.RecipientId, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </StackPanel>
+                                </Border>
+
+                                <Border Grid.Row="3" Grid.Column="0" Style="{StaticResource CellBorder}" HorizontalAlignment="Stretch">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Компанія-перевізник (ID):" VerticalAlignment="Center" Margin="5" Foreground="Black"/>
+                                        <TextBox Margin="5" VerticalAlignment="Center" BorderThickness="0" MinWidth="150" Text="{Binding IncomingCertificate.DeliveryCompanyId, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </StackPanel>
+                                </Border>
+                                <Border Grid.Row="3" Grid.Column="1" Style="{StaticResource CellBorder}" HorizontalAlignment="Stretch">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Підстава (ID причини):" VerticalAlignment="Center" Margin="5" Foreground="Black"/>
+                                        <TextBox Margin="5" VerticalAlignment="Center" BorderThickness="0" MinWidth="150" Text="{Binding IncomingCertificate.ReasonId, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </StackPanel>
+                                </Border>
+
+                            </helpers:FormGrid>
+                        </Grid>
+                    </Grid>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Style="{StaticResource TabItemStyle}" Header="Товари">
+                <controls:ActLinesDataGrid SourceItems="{Binding IncomingCertificateLines}" />
+            </TabItem>
+        </TabControl>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Content="Зберегти" 
+                        Margin="5" Height="40" 
+                        Background="#007ACC" 
+                        Foreground="White" 
+                        BorderThickness="0" 
+                        helpers:ButtonHelper.CornerRadius="10"
+                        Command="{Binding AddCertificateCommand}"/>
+                <Button Grid.Column="1" Content="Скасувати" Margin="5" Height="40" Background="#CCCCCC" Foreground="Black" BorderThickness="0" helpers:ButtonHelper.CornerRadius="10"/>
+            </Grid>
         </Grid>
-    </Grid>
+    </Border>
 </Page>

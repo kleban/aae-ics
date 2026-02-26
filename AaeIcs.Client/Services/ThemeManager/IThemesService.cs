@@ -1,4 +1,4 @@
-﻿using AAEICS.Shared.Models;
+﻿using AAEICS.Client.Models;
 
 namespace AAEICS.Client.Services.ThemeManager;
 

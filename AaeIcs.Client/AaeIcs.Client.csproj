@@ -202,22 +202,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\AAEICS.Database\AAEICS.Database.csproj" />
       <ProjectReference Include="..\AaeIcs.Services\AaeIcs.Services.csproj" />
-      <ProjectReference Include="..\AAEICS.Shared\AAEICS.Shared.csproj" />
+      <ProjectReference Include="..\AAEICS.Core\AAEICS.Core.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <Page Update="Resources\Languages\Lang.en-US.xaml">
-        <Generator>MSBuild:Compile</Generator>
-        <XamlRuntime>Wpf</XamlRuntime>
-        <SubType>Designer</SubType>
-      </Page>
-      <Page Update="Resources\Languages\Lang.uk-UA.xaml">
-        <Generator>MSBuild:Compile</Generator>
-        <XamlRuntime>Wpf</XamlRuntime>
-        <SubType>Designer</SubType>
-      </Page>
       <Page Update="Resources\Controls\UniFillIcon.xaml">
         <Generator>MSBuild:Compile</Generator>
         <XamlRuntime>Wpf</XamlRuntime>
@@ -302,11 +291,40 @@
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
       </Page>
+      <Page Update="Views\MainWindowComponents\Controls\NavBar.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Views\IncomingCertificatePage\" />
+      <Folder Include="Views\IncomingCertificatePageComponents\Layouts\" />
       <Folder Include="Views\SplashScreenComponents\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Resources\Languages\Resources.en-US.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Resources.en-US.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Languages\Resources.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Resources\Languages\Resources.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Resources.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Languages\Resources.en-US.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Resources.en-US.resx</DependentUpon>
+      </Compile>
     </ItemGroup>
 
 </Project>

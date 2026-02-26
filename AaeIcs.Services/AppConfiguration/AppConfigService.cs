@@ -1,12 +1,17 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using AAEICS.Core.Contracts;
+using AAEICS.Core.DTO.AppConfig;
+
+using Microsoft.Extensions.Configuration;
+
 using System.Text;
 using System.Text.Json;
+using AAEICS.Core.Contracts.Services;
 
 namespace AAEICS.Services.AppConfiguration;
 
 public class AppConfigService : IAppConfigService
 {
-    public const string ConfigFileName = "appsettings.json";
+    private const string ConfigFileName = "appsettings.json";
 
     private readonly string _configPath;
 
@@ -34,15 +39,15 @@ public class AppConfigService : IAppConfigService
             .Build();
     }
 
-    public AppConfig GetAppConfig()
+    public AppConfigDTO GetAppConfig()
     {
         if (!File.Exists(_configPath))
-            return new AppConfig(); 
+            return new AppConfigDTO(); 
 
         var json = File.ReadAllText(_configPath, Encoding.UTF8);
 
-        var cfg = JsonSerializer.Deserialize<AppConfig>(json, Options);
-        return cfg ?? new AppConfig();
+        var cfg = JsonSerializer.Deserialize<AppConfigDTO>(json, Options);
+        return cfg ?? new AppConfigDTO();
     }
 
     public string? Get(string key) => Configuration[key];
@@ -79,7 +84,7 @@ public class AppConfigService : IAppConfigService
         ReloadConfiguration();
     }
 
-    private void SaveAppConfig(AppConfig cfg)
+    private void SaveAppConfig(AppConfigDTO cfg)
     {
         var json = JsonSerializer.Serialize(cfg, Options);
         var tmp = _configPath + ".tmp";

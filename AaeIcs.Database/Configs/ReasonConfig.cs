@@ -11,7 +11,7 @@ public class ReasonConfig : IEntityTypeConfiguration<Reason>
         entity.HasIndex(e => e.ReasonId, "IX_Reasons_reason_id").IsUnique();
 
         entity.Property(e => e.ReasonId)
-            .ValueGeneratedNever()
+            .ValueGeneratedOnAdd()
             .HasColumnName("reason_id");
         entity.Property(e => e.Date)
             .HasColumnType("DATE")

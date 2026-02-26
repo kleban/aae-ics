@@ -22,9 +22,11 @@ namespace AAEICS.Client.ViewModels;
 public partial class MainViewModel : ObservableObject
 {
     private readonly INavigationService _navigationService;
+    private readonly ILanguageService _languageService;
       // Прапорець, щоб уникнути зациклення подій
     
     private string _currentPageKey = "HomeAppTitle";
+    private double _currentPageMinWidth;
 
     [ObservableProperty]
     private bool _isSideMenuVisible = true;
@@ -37,20 +39,25 @@ public partial class MainViewModel : ObservableObject
     
     [ObservableProperty]
     private string _appTitle = "";
-
-
-
-    public MainViewModel(INavigationService navigationService)
+    
+    public MainViewModel(INavigationService navigationService, ILanguageService languageService)
     {
         _navigationService = navigationService;
-        WeakReferenceMessenger.Default.Register<LanguageChangedMessage>(this, (r, m) =>
-        {
-            UpdateTitle();
-        });
+        _languageService = languageService;
         
-        UpdateTitle(); // Первинне встановлення
+        UpdateTitle();
+        
+        WeakReferenceMessenger.Default.Register<LanguageChangedMessage>(this, (r, m) => UpdateTitle());
+        WeakReferenceMessenger.Default.Register<NewCertificateMessage>(this, (r, m) => ShowResultPage(m.Value));
     }
 
+    private void ShowResultPage(bool isSuccess)
+    {
+        if (isSuccess)
+            _navigationService.NavigateTo(App.Services.GetRequiredService<SuccessPage>());
+        else
+            _navigationService.NavigateTo(App.Services.GetRequiredService<FailPage>());
+    }
     
     [RelayCommand]
     private void CloseApp(ChromelessWindow window)
@@ -94,36 +101,20 @@ public partial class MainViewModel : ObservableObject
         IsFlyoutMenuVisible = false;
     }
     
-    // partial void OnWindowWidthChanged(double value)
-    // {
-    //     if (value > 1200 && IsFlyoutMenuVisible)
-    //     {
-    //         IsFlyoutMenuVisible = false;
-    //         IsSideMenuVisible = true;
-    //     }
-    // }
-    
-    private double _currentPageMinWidth;
-
-    // Цей метод викликає сторінка, коли вона завантажується
     public void RegisterPageConstraints(double minWidth)
     {
         _currentPageMinWidth = minWidth;
         UpdateWindowConstraints();
     }
-
-    // Цей метод викликає сторінка, коли змінюється розмір вікна
+    
     public void CheckLayoutRules(double currentWindowWidth)
     {
-        // ПРАВИЛО 1: Якщо нам тісно (ширина менше суми сторінки і меню) -> ховаємо меню
         double threshold = _currentPageMinWidth + UIConfig.SideMenuWidth;
 
-        if (IsSideMenuVisible && currentWindowWidth < threshold)
-        {
+        if ((IsSideMenuVisible && currentWindowWidth < threshold) || Math.Abs(currentWindowWidth - WindowMinWidth) < 1)
             IsSideMenuVisible = false;
-        }
-        // ПРАВИЛО 2: Якщо місця стало багато -> показуємо меню назад (опціонально)
-        else if (!IsSideMenuVisible && currentWindowWidth > threshold + 50) // +50 буфер, щоб не миготіло
+        
+        else if (!IsSideMenuVisible && currentWindowWidth > threshold + UIConfig.SideMenuBuffer)
         {
             IsSideMenuVisible = true;
             IsFlyoutMenuVisible = false;
@@ -132,7 +123,6 @@ public partial class MainViewModel : ObservableObject
 
     private void UpdateWindowConstraints()
     {
-        // Мінімальна ширина вікна = Мінімум сторінки + (Ширина меню, якщо воно є)
         double menuPart = IsSideMenuVisible ? UIConfig.SideMenuWidth : 0;
         WindowMinWidth = _currentPageMinWidth + menuPart;
     }
@@ -156,13 +146,21 @@ public partial class MainViewModel : ObservableObject
                 _navigationService.NavigateTo(App.Services.GetRequiredService<IncomingCertificatePage>());
                 _currentPageKey = "NewIncomingCertificateAppTitle";
                 break;
+            case "newIssuanceCertificate":
+                _navigationService.NavigateTo(App.Services.GetRequiredService<IssuanceCertificatePage>());
+                _currentPageKey = "NewIssuanceCertificateAppTitle";
+                break;
+            case "newWriteOffCertificate":
+                _navigationService.NavigateTo(App.Services.GetRequiredService<WriteOffCertificatePage>());
+                _currentPageKey = "NewWriteOffCertificateAppTitle";
+                break;
         }
         UpdateTitle();
     }
     
     private void UpdateTitle()
     {
-        string pageName = Application.Current.TryFindResource(_currentPageKey) as string ?? "";
+        string pageName = _languageService[_currentPageKey];
         AppTitle = $"{pageName}";
     }
 }

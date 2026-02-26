@@ -1,6 +1,7 @@
-﻿
-using AAEICS.Services.InitialCheckupService.CheckupForm;
-using AAEICS.Services.InitialCheckupService.Contracts;
+﻿using AAEICS.Core.Contracts.Services.GuardFS;
+using AAEICS.Core.DTO.GuardFS;
+using AAEICS.Core.Enums;
+
 using System.Text.Json;
 
 namespace AAEICS.Services.InitialCheckupService.Checkups.AppConfigCheckup.Steps;
@@ -10,13 +11,13 @@ public class AppConfigRawValidator(string name, string description, string appse
     public string Name { get; set; } = name;
     public string Description { get; set; } = description;
 
-    public CheckupStepResultForm Execute()
+    public CheckupStepResultDTO Execute()
     {
         try
         {
             if (!File.Exists(appsettings_path))
             {
-                return new CheckupStepResultForm
+                return new CheckupStepResultDTO
                 {
                     Result = CheckupStepResults.Failed,
                     Message = "Configuration file missing during raw validation."
@@ -27,7 +28,7 @@ public class AppConfigRawValidator(string name, string description, string appse
 
             if (string.IsNullOrWhiteSpace(content))
             {
-                return new CheckupStepResultForm
+                return new CheckupStepResultDTO
                 {
                     Result = CheckupStepResults.Failed,
                     Message = "The appsettings.json file is empty."
@@ -40,14 +41,14 @@ public class AppConfigRawValidator(string name, string description, string appse
             // Перевіряємо наявність секції Database, яку ви згадували
             if (!jsonDoc.RootElement.TryGetProperty("Database", out _))
             {
-                return new CheckupStepResultForm
+                return new CheckupStepResultDTO
                 {
                     Result = CheckupStepResults.Warning,
                     Message = "JSON is valid, but 'Database' section is missing. Will use defaults."
                 };
             }
 
-            return new CheckupStepResultForm
+            return new CheckupStepResultDTO
             {
                 Result = CheckupStepResults.Successful,
                 Message = "JSON structure is valid and contains required sections."
@@ -55,7 +56,7 @@ public class AppConfigRawValidator(string name, string description, string appse
         }
         catch (JsonException)
         {
-            return new CheckupStepResultForm
+            return new CheckupStepResultDTO
             {
                 Result = CheckupStepResults.Failed,
                 Message = "The appsettings.json file has invalid JSON format."
@@ -63,7 +64,7 @@ public class AppConfigRawValidator(string name, string description, string appse
         }
         catch (Exception ex)
         {
-            return new CheckupStepResultForm
+            return new CheckupStepResultDTO
             {
                 Result = CheckupStepResults.Failed,
                 Message = $"Unexpected error during config validation: {ex.Message}"

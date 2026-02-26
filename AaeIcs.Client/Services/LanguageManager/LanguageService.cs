@@ -1,73 +1,41 @@
-﻿using System.Collections.ObjectModel;
-using System.Diagnostics;
-using AAEICS.Shared.Models;
-using System.Windows;
-using AAEICS.Client.Messages;
+﻿using AAEICS.Client.Messages;
+
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
+
+using System.ComponentModel;
+using System.Globalization;
+using System.Windows.Data;
 
 namespace AAEICS.Client.Services.LanguageManager;
 
-public class LanguageService: ILanguageService
+public class LanguageService: ObservableObject, ILanguageService
 {
-    private readonly ObservableCollection<Language> _languages = new();
-
-    public LanguageService()
+    private CultureInfo _currentCulture = CultureInfo.CurrentUICulture;
+    
+    public string this[string key]
     {
-        _languages.Add(new Language 
+        get
         {
-            Name="English",
-            Code="en-US",
-            Path="Resources/Languages/Lang.en-US.xaml"
-        });
+            var translation = Resources.Languages.Resources.ResourceManager.GetString(key, _currentCulture);
+            
+            return translation ?? $"#{key}#"; 
+        }
+    }
+    
+    public string GetDefaultLanguage()
+    {
+        return CultureInfo.CurrentUICulture.Name;
+    }
+    
+    public void SetLanguage(string cultureCode)
+    {
+        _currentCulture = new CultureInfo(cultureCode);
         
-        _languages.Add(new Language 
-        {
-            Name="Ukrainian",
-            Code="uk-UA",
-            Path="Resources/Languages/Lang.uk-UA.xaml"
-        });
-    }
-    
-    public IEnumerable<Language> GetAllLanguages()
-    {
-        return _languages;
-    }
-    
-    public Language GetDefaultLanguage()
-    {
-        return _languages[0];
-    }
-    
-    public Language? GetLanguageByName(string name)
-    {
-        foreach (var language in _languages)
-        {
-            if (string.Equals(language.Name, name, StringComparison.OrdinalIgnoreCase))
-            {
-                return language;
-            }
-        }
-        Trace.WriteLine($"Theme not found: {name}");
-        return null;
-    }
-    
-    public void SetLanguage(Language language)
-    {
-        if (language == null)
-        {
-            Trace.WriteLine("Error setting theme: Attempting to set theme to null.");
-            return;
-        }
-
-        try
-        {
-            var languageUri = new Uri(language.Path, UriKind.RelativeOrAbsolute);
-            Application.Current.Resources.MergedDictionaries[2].Source = languageUri;
-            WeakReferenceMessenger.Default.Send(new LanguageChangedMessage(language.Code));
-        }
-        catch (Exception ex)
-        {
-            Trace.WriteLine("Error setting language: " + ex.Message);
-        }
+        Thread.CurrentThread.CurrentCulture = _currentCulture;
+        Thread.CurrentThread.CurrentUICulture = _currentCulture;
+        
+        OnPropertyChanged(new PropertyChangedEventArgs(Binding.IndexerName));
+        WeakReferenceMessenger.Default.Send(new LanguageChangedMessage(cultureCode));
     }
 }

@@ -31,7 +31,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\AAEICS.Shared\AAEICS.Shared.csproj" />
+      <ProjectReference Include="..\AAEICS.Repositories\AAEICS.Repositories.csproj" />
+      <ProjectReference Include="..\AAEICS.Core\AAEICS.Core.csproj" />
     </ItemGroup>
 
 </Project>

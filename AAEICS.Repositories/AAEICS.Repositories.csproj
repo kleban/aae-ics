@@ -6,4 +6,9 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\AAEICS.Database\AAEICS.Database.csproj" />
+      <ProjectReference Include="..\AAEICS.Core\AAEICS.Core.csproj" />
+    </ItemGroup>
+
 </Project>

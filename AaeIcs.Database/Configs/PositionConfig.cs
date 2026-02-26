@@ -11,7 +11,7 @@ public class PositionConfig : IEntityTypeConfiguration<Position>
         entity.HasIndex(e => e.PositionId, "IX_Positions_position_id").IsUnique();
 
         entity.Property(e => e.PositionId)
-            .ValueGeneratedNever()
+            .ValueGeneratedOnAdd()
             .HasColumnName("position_id");
         entity.Property(e => e.Name)
             .HasColumnType("VARCHAR")

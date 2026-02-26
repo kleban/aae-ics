@@ -20,7 +20,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\AAEICS.Services\AAEICS.Services.csproj" />
+      <ProjectReference Include="..\AAEICS.Core\AAEICS.Core.csproj" />
     </ItemGroup>
 
 </Project>

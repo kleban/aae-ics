@@ -1,11 +1,10 @@
-﻿using AAEICS.Shared.Models;
+﻿using System.ComponentModel;
 
 namespace AAEICS.Client.Services.LanguageManager;
 
-public interface ILanguageService
+public interface ILanguageService: INotifyPropertyChanged
 {
-    IEnumerable<Language> GetAllLanguages();
-    Language GetDefaultLanguage();
-    Language? GetLanguageByName(string name);
-    void SetLanguage(Language language);
+    string this[string key] { get; }
+    string GetDefaultLanguage();
+    void SetLanguage(string cultureCode);
 }

@@ -13,7 +13,7 @@ public class IncomingCertificateConfig : IEntityTypeConfiguration<IncomingCertif
         entity.HasIndex(e => e.IncCertificateId, "IX_IncomingCertificates_inc_certificate_id").IsUnique();
 
         entity.Property(e => e.IncCertificateId)
-            .ValueGeneratedNever()
+            .ValueGeneratedOnAdd()
             .HasColumnName("inc_certificate_id");
         entity.Property(e => e.ApproveDate)
             .HasColumnType("DATE")

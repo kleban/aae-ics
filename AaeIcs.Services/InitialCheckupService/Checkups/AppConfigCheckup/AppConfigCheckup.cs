@@ -1,7 +1,8 @@
-﻿using AAEICS.Services.AppConfiguration;
-using AAEICS.Services.InitialCheckupService.CheckupForm;
+﻿using AAEICS.Core.Contracts.Services.GuardFS;
+using AAEICS.Core.DTO.GuardFS;
+using AAEICS.Core.Enums;
+
 using AAEICS.Services.InitialCheckupService.Checkups.AppConfigCheckup.Steps;
-using AAEICS.Services.InitialCheckupService.Contracts;
 
 namespace AAEICS.Services.InitialCheckupService.Checkups.AppConfigCheckup;
 
@@ -26,7 +27,7 @@ public class AppConfigCheckup(string name, string description, string appsetting
     private List<ICheckupStep> _failedSteps = [];
     private List<string> _messages = [];
     
-    public CheckupResultForm Execute()
+    public CheckupResultDTO Execute()
     {
         foreach (var step in _steps)
         {
@@ -37,7 +38,7 @@ public class AppConfigCheckup(string name, string description, string appsetting
                 if (!string.IsNullOrEmpty(stepResultForm.Message))
                     _messages.Add(stepResultForm.Message);
                 
-                return new CheckupResultForm
+                return new CheckupResultDTO
                 {
                     IsSuccessful = false,
                     HasWarnings = _hasWarnings,
@@ -60,7 +61,7 @@ public class AppConfigCheckup(string name, string description, string appsetting
                 _messages.Add(stepResultForm.Message);
         }
 
-        return new CheckupResultForm
+        return new CheckupResultDTO
         {
             IsSuccessful = _failedSteps.Count == 0,
             HasWarnings = _hasWarnings,

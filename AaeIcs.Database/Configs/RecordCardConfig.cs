@@ -13,7 +13,7 @@ public class RecordCardConfig : IEntityTypeConfiguration<RecordCard>
         entity.HasIndex(e => e.CardId, "IX_RecordCards_card_id").IsUnique();
 
         entity.Property(e => e.CardId)
-            .ValueGeneratedNever()
+            .ValueGeneratedOnAdd()
             .HasColumnName("card_id");
         entity.Property(e => e.ArmyBaseName)
             .HasColumnType("VARCHAR")

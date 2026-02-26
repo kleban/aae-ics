@@ -1,4 +1,4 @@
-﻿using AAEICS.Services.AppConfiguration;
+﻿using AAEICS.Core.Contracts.Services;
 
 namespace AAEICS.Services.InitialFolders;
 
@@ -8,22 +8,22 @@ public class InitialFoldersService(IAppConfigService configService) : IInitialFo
     {
         var folders = configService.GetAppConfig().Path;
 
-        if (!System.IO.Directory.Exists(folders.AssetsPath))
+        if (!Directory.Exists(folders.AssetsPath))
         {
             var dir = Directory.CreateDirectory(folders.AssetsPath);
             configService.UpdatePath("AssetsPath", dir.FullName);
             configService.UpdatePath("DbPath", Path.Combine(dir.FullName, "aaeics.db"));
         }
 
-        if (!System.IO.Directory.Exists(folders.LogsPath))
+        if (!Directory.Exists(folders.LogsPath))
         {
-            var logs = System.IO.Directory.CreateDirectory(folders.LogsPath);
+            var logs = Directory.CreateDirectory(folders.LogsPath);
             configService.UpdatePath("LogsPath", logs.FullName);
         }
 
-        if (!System.IO.Directory.Exists(folders.DbBackupPath))
+        if (!Directory.Exists(folders.DbBackupPath))
         {
-            var backup = System.IO.Directory.CreateDirectory(folders.DbBackupPath);
+            var backup = Directory.CreateDirectory(folders.DbBackupPath);
             configService.UpdatePath("DbBackupPath", backup.FullName);
         }
     }

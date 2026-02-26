@@ -13,8 +13,6 @@ namespace AAEICS.Client.Views;
 
 public partial class MainWindow: ChromelessWindow, IWindowController
 {
-    private Point _startPoint;
-    private bool _isDoubleClick;
     private MainViewModel ViewModel => DataContext as MainViewModel;
     
     public MainWindow(MainViewModel viewModel)
@@ -22,8 +20,6 @@ public partial class MainWindow: ChromelessWindow, IWindowController
         InitializeComponent();
         DataContext = viewModel;
         App.Services.GetRequiredService<INavigationService>().MainFrame = MainFrame;
-
-        MainFrame.Navigated += MainFrame_Navigated;
     }
     
     public void ShowMenu() => ViewModel.IsSideMenuVisible = true;
@@ -35,18 +31,8 @@ public partial class MainWindow: ChromelessWindow, IWindowController
     
     public bool IsMenuVisible => ViewModel.IsSideMenuVisible;
     
-    private void MainFrame_Navigated(object sender, NavigationEventArgs e)
+    private void MainWindow_SizeChanged(object sender, SizeChangedEventArgs e)
     {
-        if (e.Content is not FrameworkElement page) return;
-        
-        var pageMinWidth = page.MinWidth; 
-            
-        var menuWidth = IsMenuVisible ? UIConfig.SideMenuWidth : 0; 
-        var totalRequiredWidth = pageMinWidth + menuWidth;
-            
-        MinWidth = totalRequiredWidth;
-
-        if (ActualWidth < totalRequiredWidth)
-            Width = totalRequiredWidth;
+        CheckLayoutRules(e.NewSize.Width);
     }
 }

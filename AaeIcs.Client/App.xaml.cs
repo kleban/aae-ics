@@ -6,11 +6,13 @@ using AAEICS.Client.ViewModels;
 using AAEICS.Database;
 using AAEICS.Database.Context;
 using AAEICS.Services;
-using AAEICS.Services.InitialFolders;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
+using AAEICS.Client.Services.LanguageManager;
+using AAEICS.Core.Contracts.Services;
+using AAEICS.Repositories;
 using SplashScreen = AAEICS.Client.Views.SplashScreen;
 
 namespace AAEICS.Client;
@@ -18,6 +20,8 @@ namespace AAEICS.Client;
 public partial class App : Application
 {
     public static IServiceProvider Services { get; private set; } = default!;
+    
+    public static ILanguageService LanguageService { get; private set; }
 
     protected override async void OnStartup(StartupEventArgs e)
     {
@@ -25,11 +29,13 @@ public partial class App : Application
         var splashScreen = new SplashScreen();
         splashScreen.Show();
         var services = new ServiceCollection();
+        services.AddDatabase();
+        splashScreen.ProgressBarStatus.Value += 10;
+        services.AddRepositories();
+        splashScreen.ProgressBarStatus.Value += 10;
         services.AddServices();
         splashScreen.ProgressBarStatus.Value += 10;
         services.AddClientServices();
-        splashScreen.ProgressBarStatus.Value += 10;
-        services.AddDatabase();
         splashScreen.ProgressBarStatus.Value += 10;
         services.AddViewModels();
         splashScreen.ProgressBarStatus.Value += 10;
@@ -46,6 +52,8 @@ public partial class App : Application
             using var scope = Services.CreateScope();
             var dbContext = scope.ServiceProvider.GetRequiredService<AAEICSDbContext>();
             await dbContext.Database.MigrateAsync();
+            
+            LanguageService = Services.GetRequiredService<ILanguageService>();
         }
         catch (Exception ex)
         {
@@ -53,7 +61,7 @@ public partial class App : Application
                 MessageBoxImage.Error);
             Shutdown();
         } 
-        splashScreen.ProgressBarStatus.Value += 20;
+        splashScreen.ProgressBarStatus.Value += 10;
 
         Services.GetRequiredService<ISyncfusionLicenseInitializerService>().Register();
 

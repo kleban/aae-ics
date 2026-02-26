@@ -1,5 +1,6 @@
-﻿using Syncfusion.Licensing;
-using AAEICS.Services.AppConfiguration;
+﻿using AAEICS.Core.Contracts.Services;
+
+using Syncfusion.Licensing;
 
 namespace AAEICS.Client.Services.SyncfusionLicenseInitializer;
 

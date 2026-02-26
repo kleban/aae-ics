@@ -4,8 +4,9 @@ using System.Windows.Input;
 namespace AAEICS.Client.Helpers;
 
 public static class WindowBehaviors
-{
-    // 1. Створюємо Attached Property "EnableDrag"
+{   
+    private static bool _isDoubleClick;
+    
     public static readonly DependencyProperty EnableDragProperty =
         DependencyProperty.RegisterAttached(
             "EnableDrag",
@@ -22,38 +23,53 @@ public static class WindowBehaviors
     {
         obj.SetValue(EnableDragProperty, value);
     }
-
-    // 2. Коли властивість змінюється (ми ставимо True в XAML), підписуємось на подію
+    
     private static void OnEnableDragChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        if (d is UIElement element)
+        if (d is not UIElement element) return;
+
+        if ((bool)e.NewValue)
         {
-            if ((bool)e.NewValue)
-            {
-                element.MouseLeftButtonDown += Element_MouseLeftButtonDown;
-            }
-            else
-            {
-                element.MouseLeftButtonDown -= Element_MouseLeftButtonDown;
-            }
+            element.MouseDown += Element_MouseDown;
+            element.MouseMove += Element_MouseMove;
+        }
+
+
+        else
+        {
+            element.MouseDown -= Element_MouseDown; 
+            element.MouseMove -= Element_MouseMove;
         }
     }
-
-    // 3. Сама логіка перетягування
-    private static void Element_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    
+    private static void Element_MouseDown(object sender, MouseButtonEventArgs e)
     {
-        // Знаходимо вікно, якому належить цей елемент
+        if (e.ChangedButton != MouseButton.Left) return;
+        
         var window = Window.GetWindow((DependencyObject)sender);
-            
-        // Якщо клікнули двічі - розгортаємо (бонус!)
+        
         if (e.ClickCount == 2)
         {
-            window.WindowState = window.WindowState == WindowState.Normal ? WindowState.Maximized : WindowState.Normal;
+            _isDoubleClick = true;
+            window?.WindowState = window.WindowState == WindowState.Normal ? WindowState.Maximized : WindowState.Normal;
             e.Handled = true;
-            return;
         }
-
-        // Запускаємо стандартне перетягування
-        window?.DragMove();
+        else
+            _isDoubleClick = false;
+    }
+    
+    private static void Element_MouseMove(object sender, MouseEventArgs e)
+    {
+        if (_isDoubleClick) return;
+        if (e.LeftButton != MouseButtonState.Pressed) return;
+        
+        var window = Window.GetWindow((DependencyObject)sender);
+        
+        try
+        {
+            window?.WindowState = WindowState.Normal;
+            window?.DragMove();
+        }
+        catch { }
     }
 }

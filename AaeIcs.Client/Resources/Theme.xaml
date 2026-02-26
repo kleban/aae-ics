@@ -11,6 +11,8 @@
         <ResourceDictionary Source="Styles/DashBoard.xaml"/>
         <ResourceDictionary Source="Styles/MainWindow.xaml"/>
         <ResourceDictionary Source="Styles/NavBar.xaml"/>
+        <ResourceDictionary Source="Styles/TabControl.xaml"/>
+        <ResourceDictionary Source="Styles/ScrollBar.xaml"/>
         <ResourceDictionary Source="Styles/SideMenu.xaml"/>
         <ResourceDictionary Source="Styles/UniFillIcon.xaml"/>
     </ResourceDictionary.MergedDictionaries>

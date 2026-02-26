@@ -8,10 +8,9 @@
       xmlns:local="clr-namespace:AAEICS.Client"
       xmlns:converters="clr-namespace:AAEICS.Client.Converters"
       mc:Ignorable="d" Width="auto"
-      Loaded="Page_Loaded"
-      SizeChanged="Page_SizeChanged">
-    <Grid Margin="20">
-            <ContentControl Content="{Binding}">
+      Loaded="Page_Loaded">
+    <Grid Margin="10,0,10,0">
+        <ContentControl Content="{Binding}">
                 <ContentControl.Style>
                     <Style TargetType="ContentControl">
                         <Setter Property="ContentTemplate" Value="{DynamicResource LaptopLayout}" />

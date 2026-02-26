@@ -1,4 +1,5 @@
-﻿using AAEICS.Services.AppConfiguration;
+﻿using AAEICS.Core.Contracts.Services;
+using AAEICS.Services.AppConfiguration;
 using AAEICS.Services.InitialFolders;
 using AAEICS.Services.IncomingCertificates;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,7 +11,7 @@ public static class ServicesExtensions {
     {
         services.AddSingleton<IAppConfigService, AppConfigService>();
         services.AddSingleton<IInitialFoldersService, InitialFoldersService>();
-        services.AddScoped<IIncomingCertificateService, IncomingCertificateService>();
+        services.AddTransient<IIncomingCertificateService, IncomingCertificateService>();
         return services;
     }
 }

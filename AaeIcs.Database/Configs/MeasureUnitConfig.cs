@@ -13,7 +13,7 @@ public class MeasureUnitConfig : IEntityTypeConfiguration<MeasureUnit>
         entity.HasIndex(e => e.UnitId, "IX_MeasureUnits_unit_id").IsUnique();
 
         entity.Property(e => e.UnitId)
-            .ValueGeneratedNever()
+            .ValueGeneratedOnAdd()
             .HasColumnName("unit_id");
         entity.Property(e => e.Name)
             .HasColumnType("VARCHAR")

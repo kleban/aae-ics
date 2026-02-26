@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AAEICS.Services", "AAEICS.S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AAEICS.Repositories", "AAEICS.Repositories\AAEICS.Repositories.csproj", "{42354883-6054-4DF2-8FCB-5A7F0851BCAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AAEICS.Shared", "AAEICS.Shared\AAEICS.Shared.csproj", "{508D69B3-037C-49A6-BDD8-D38726C367A5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AAEICS.Core", "AAEICS.Core\AAEICS.Core.csproj", "{508D69B3-037C-49A6-BDD8-D38726C367A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

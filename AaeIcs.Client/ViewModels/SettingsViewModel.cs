@@ -1,7 +1,7 @@
 ﻿using AAEICS.Client.Services.LanguageManager;
 using AAEICS.Client.Services.ThemeManager;
 
-using AAEICS.Shared.Models;
+using AAEICS.Client.Models;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -12,9 +12,6 @@ public partial class SettingsViewModel: ObservableObject
 {
     [ObservableProperty]
     private IEnumerable<Theme> _availableThemes;
-    
-    [ObservableProperty]
-    private IEnumerable<string> _availableLanguageNames;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsDarkTheme))]
@@ -22,7 +19,7 @@ public partial class SettingsViewModel: ObservableObject
     
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsEnglishLanguage))]
-    private Language _currentLanguage;
+    private string _currentLanguage;
     
     private readonly IThemesService _themesService;
     private readonly ILanguageService _languageService;
@@ -57,21 +54,20 @@ public partial class SettingsViewModel: ObservableObject
     }
     
     [RelayCommand]
-    private void ChangeLanguage(string language)
+    private void ChangeLanguage(string cultureCode)
     {
-        var newLanguage = _languageService.GetLanguageByName(language);
-        _languageService.SetLanguage(newLanguage);
-        CurrentLanguage = newLanguage;
+        _languageService.SetLanguage(cultureCode);
+        CurrentLanguage = cultureCode;
     }
     
     public bool IsEnglishLanguage
     {
-        get => CurrentLanguage.Path.Contains("Lang.en-US");
+        get => CurrentLanguage.Equals("en-US");
         set
         {
             if (IsEnglishLanguage == value) return;
             
-            var targetLanguage = value ? "English" : "Ukrainian";
+            var targetLanguage = value ? "en-US" : "uk-UA";
             ChangeLanguage(targetLanguage);
         }
     }

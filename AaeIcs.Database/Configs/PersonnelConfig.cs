@@ -13,7 +13,7 @@ public class PersonnelConfig : IEntityTypeConfiguration<Personnel>
         entity.HasIndex(e => e.PersonId, "IX_Personnel_person_id").IsUnique();
 
         entity.Property(e => e.PersonId)
-            .ValueGeneratedNever()
+            .ValueGeneratedOnAdd()
             .HasColumnName("person_id");
         entity.Property(e => e.FirstName)
             .HasColumnType("VARCHAR")

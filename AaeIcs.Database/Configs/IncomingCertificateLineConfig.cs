@@ -13,7 +13,7 @@ public class IncomingCertificateLineConfig : IEntityTypeConfiguration<IncomingCe
         entity.HasIndex(e => e.IncLineId, "IX_IncomingCertificateLines_inc_line_id").IsUnique();
 
         entity.Property(e => e.IncLineId)
-            .ValueGeneratedNever()
+            .ValueGeneratedOnAdd()
             .HasColumnName("inc_line_id");
         entity.Property(e => e.BatchNumber)
             .HasColumnType("VARCHAR")
