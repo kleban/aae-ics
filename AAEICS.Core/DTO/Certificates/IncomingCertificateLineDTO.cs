@@ -16,17 +16,17 @@ public class IncomingCertificateLineDTO
 
     public string BatchNumber { get; set; } = null!;
 
-    public MeasureUnitDTO MeasureUnit { get; set; }
+    public MeasureUnitDTO MeasureUnit { get; set; } = null!;
 
     public double PricePerUnit { get; set; }
 
     public decimal QuantitySent { get; set; }
 
-    public CategoryDTO CategorySent { get; set; }
+    public CategoryDTO CategorySent { get; set; } = null!;
 
     public decimal QuantityReceived { get; set; }
 
-    public CategoryDTO CategoryReceived { get; set; }
+    public CategoryDTO CategoryReceived { get; set; } = null!;
 
     public string? Notes { get; set; }
 

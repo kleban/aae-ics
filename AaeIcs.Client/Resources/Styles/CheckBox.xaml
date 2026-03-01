@@ -2,6 +2,9 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
     <Style x:Key="CheckBoxStyle" TargetType="{x:Type CheckBox}">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Background" Value="{DynamicResource CheckBoxBackgroundBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource CheckBoxBorderBrush}"/>
@@ -16,29 +19,32 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Border x:Name="CheckBoxBorder" 
-                                CornerRadius="3" 
-                                Padding="1" Margin="1" 
-                                Background="{TemplateBinding Background}" 
-                                BorderThickness="{TemplateBinding BorderThickness}" 
-                                BorderBrush="{TemplateBinding BorderBrush}" 
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Padding="1" Margin="1" 
+                                CornerRadius="3" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}">
                             <Grid x:Name="MarkGrid">
                                 <Path x:Name="OptionMark"
                                       Data="{DynamicResource OptionMark}"
-                                      Fill="{DynamicResource CheckBoxGlyphForegroundBrush}" 
-                                      Margin="1" Opacity="0" Stretch="None"/>
-                                <Rectangle x:Name="IndeterminateMark" Fill="{DynamicResource CheckBoxGlyphForegroundBrush}" 
-                                           Margin="2" Opacity="0"/>
+                                      Margin="1" Opacity="0" 
+                                      Stretch="None"
+                                      Fill="{DynamicResource CheckBoxGlyphForegroundBrush}"/>
+                                <Rectangle x:Name="IndeterminateMark" 
+                                           Margin="2"
+                                           Fill="{DynamicResource CheckBoxGlyphForegroundBrush}" 
+                                           Opacity="0"/>
                             </Grid>
                         </Border>
-                        <ContentPresenter Grid.Column="1" 
-                                          x:Name="ContentPresenter" 
-                                          Focusable="False" 
+                        <ContentPresenter x:Name="ContentPresenter" 
+                                          Grid.Column="1" 
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                           Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" 
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
-                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                          Focusable="False" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="HasContent" Value="true">

@@ -5,14 +5,17 @@
         <ResourceDictionary Source="Fonts.xaml"/>
         <ResourceDictionary Source="Icons.xaml"/>
         <ResourceDictionary Source="Images.xaml"/>
-        <!-- <ResourceDictionary Source="Controls/ActLinesDataGrid.xaml"/> -->
+
         <ResourceDictionary Source="Styles/Buttons.xaml"/>
         <ResourceDictionary Source="Styles/ComboBox.xaml"/>
         <ResourceDictionary Source="Styles/CheckBox.xaml"/>
+        <ResourceDictionary Source="Styles/DataGrid.xaml"/>
+        <ResourceDictionary Source="Styles/DataGridHelpers.xaml"/>
         <ResourceDictionary Source="Styles/DashBoard.xaml"/>
         <ResourceDictionary Source="Styles/MainWindow.xaml"/>
         <ResourceDictionary Source="Styles/NavBar.xaml"/>
         <ResourceDictionary Source="Styles/TabControl.xaml"/>
+        <ResourceDictionary Source="Styles/TextBox.xaml"/>
         <ResourceDictionary Source="Styles/ScrollBar.xaml"/>
         <ResourceDictionary Source="Styles/SideMenu.xaml"/>
         <ResourceDictionary Source="Styles/UniFillIcon.xaml"/>

@@ -17,10 +17,6 @@
                         Content="{Binding [NewIssuanceCertificateNavBarOption], Source={x:Static local:App.LanguageService}}"
                         Command="{Binding NavigateToCommand}"
                         CommandParameter="newIssuanceCertificate"/>
-                <Button Style="{DynamicResource NavBarButtonStyle}" 
-                        Content="{Binding [NewWriteOffCertificateNavBarOption], Source={x:Static local:App.LanguageService}}"
-                        Command="{Binding NavigateToCommand}"
-                        CommandParameter="newWriteOffCertificate"/>
             </UniformGrid>
         </Border>
     </ControlTemplate>

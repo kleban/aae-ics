@@ -1,5 +1,8 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using AAEICS.Client.ViewModels.Components;
+using AAEICS.Core.Contracts.Services;
+using AAEICS.Core.DTO.General;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.VisualBasic;
 
@@ -13,33 +16,50 @@ public partial class IncomingCertificateLine: ObservableObject
     [ObservableProperty] [property: Display(Name = "CertificateLineName", ResourceType = typeof(Resources.Languages.Resources))]
     private string _name;
 
-    [ObservableProperty] [property: DisplayName("Nomenclature Code")]
+    [ObservableProperty] [property: Display(Name = "CertificateLineNomenclatureCode", ResourceType = typeof(Resources.Languages.Resources))]
     private string? _nomenclatureCode;
     
-    [ObservableProperty] [property: DisplayName("Batch Number")]
+    [ObservableProperty] [property: Display(Name = "CertificateLineBatchNumber", ResourceType = typeof(Resources.Languages.Resources))]
     private string _batchNumber;
 
-    [ObservableProperty] [property: DisplayName("Measure Unit")]
+    [ObservableProperty] [property: Display(Name = "CertificateLineMeasureUnit", ResourceType = typeof(Resources.Languages.Resources))]
     private int _measureUnit;
 
-    [ObservableProperty] [property: DisplayName("Price Per Unit")]
+    [ObservableProperty] [property: Display(Name = "CertificateLinePricePerUnit", ResourceType = typeof(Resources.Languages.Resources))]
     private double _pricePerUnit;
 
-    [ObservableProperty] [property: DisplayName("Quantity Sent")]
+    [ObservableProperty]
     private decimal _quantitySent;
 
-    [ObservableProperty] [property: DisplayName("Category Sent")]
+    [ObservableProperty]
     private decimal _categorySent;
 
-    [ObservableProperty] [property: DisplayName("Quantity Received")]
+    [ObservableProperty]
     private decimal _quantityReceived;
 
-    [ObservableProperty] [property: DisplayName("Category Received")]
+    [ObservableProperty]
     private decimal _categoryReceived;
 
-    [ObservableProperty] [property: DisplayName("Notes")]
+    [ObservableProperty] [property: Display(Name = "CertificateLineNotes", ResourceType = typeof(Resources.Languages.Resources))]
     private string? _notes;
 
-    [ObservableProperty] [property: DisplayName("Made In")]
+    [ObservableProperty] [property: Display(Name = "CertificateLineMadeIn", ResourceType = typeof(Resources.Languages.Resources))]
     private string? _madeIn;
+    
+    // ВЛАСНІ "мізки" для кожного ComboBox у цьому рядку
+    public SearchBoxViewModel<MeasureUnitDTO> MeasureUnitSearchBox { get; }
+    public SearchBoxViewModel<CategoryDTO> CategorySentSearchBox { get; }
+    public SearchBoxViewModel<CategoryDTO> CategoryReceivedSearchBox { get; }
+
+    // У конструктор рядка ми передаємо сервіси пошуку з головної ViewModel
+    public IncomingCertificateLine(
+        IFuzzySearchService<MeasureUnitDTO> measureUnitSearch,
+        IFuzzySearchService<CategoryDTO> categorySentSearch,
+        IFuzzySearchService<CategoryDTO> categoryReceivedSearch)
+    {
+        // Створюємо незалежні екземпляри для конкретно цього рядка
+        MeasureUnitSearchBox = new SearchBoxViewModel<MeasureUnitDTO>(measureUnitSearch, u => u.Name);
+        CategorySentSearchBox = new SearchBoxViewModel<CategoryDTO>(categorySentSearch, c => c.Name);
+        CategoryReceivedSearchBox = new SearchBoxViewModel<CategoryDTO>(categoryReceivedSearch, c => c.Name);
+    }
 }

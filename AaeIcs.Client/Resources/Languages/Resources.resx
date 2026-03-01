@@ -124,7 +124,7 @@
     <value>Incoming Equipment</value>
   </data>
   <data name="CertificateLineName" xml:space="preserve">
-    <value>Name of military equipment</value>
+    <value>Name of Military Equipment</value>
   </data>
   <data name="CreatedIncomingCertificatesTodayDashboardTitle" xml:space="preserve">
     <value>Created Incoming Certificates Today</value>
@@ -200,5 +200,38 @@
   </data>
   <data name="UkLanguageSettingsOption" xml:space="preserve">
     <value>Ukrainian</value>
+  </data>
+  <data name="CertificateLineNomenclatureCode" xml:space="preserve">
+    <value>Nomenclature Code</value>
+  </data>
+  <data name="CertificateLineBatchNumber" xml:space="preserve">
+    <value>Batch Number</value>
+  </data>
+  <data name="CertificateLineMeasureUnit" xml:space="preserve">
+    <value>Measure Unit</value>
+  </data>
+  <data name="CertificateLinePricePerUnit" xml:space="preserve">
+    <value>Price Per Unit</value>
+  </data>
+  <data name="CertificateLineQuantity" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="CertificateLineCategory" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="CertificateLineNotes" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="CertificateLineMadeIn" xml:space="preserve">
+    <value>Made in</value>
+  </data>
+  <data name="CertificateLineSent" xml:space="preserve">
+    <value>Sent</value>
+  </data>
+  <data name="CertificateLineReceived" xml:space="preserve">
+    <value>Received</value>
+  </data>
+  <data name="CertificateLineOperations" xml:space="preserve">
+    <value>Operations</value>
   </data>
 </root>

@@ -201,4 +201,37 @@
   <data name="UkLanguageSettingsOption" xml:space="preserve">
     <value>Українська</value>
   </data>
+  <data name="CertificateLineNomenclatureCode" xml:space="preserve">
+    <value>Код номенклатури</value>
+  </data>
+  <data name="CertificateLineBatchNumber" xml:space="preserve">
+    <value>Номер партії</value>
+  </data>
+  <data name="CertificateLineMeasureUnit" xml:space="preserve">
+    <value>Одиниця виміру</value>
+  </data>
+  <data name="CertificateLinePricePerUnit" xml:space="preserve">
+    <value>Ціна за одиницю</value>
+  </data>
+  <data name="CertificateLineQuantity" xml:space="preserve">
+    <value>Кількість</value>
+  </data>
+  <data name="CertificateLineCategory" xml:space="preserve">
+    <value>Категорія</value>
+  </data>
+  <data name="CertificateLineNotes" xml:space="preserve">
+    <value>Примітка</value>
+  </data>
+  <data name="CertificateLineMadeIn" xml:space="preserve">
+    <value>Зроблено в</value>
+  </data>
+  <data name="CertificateLineSent" xml:space="preserve">
+    <value>Відправлено</value>
+  </data>
+  <data name="CertificateLineReceived" xml:space="preserve">
+    <value>Отримано</value>
+  </data>
+  <data name="CertificateLineOperations" xml:space="preserve">
+    <value>Дії</value>
+  </data>
 </root>

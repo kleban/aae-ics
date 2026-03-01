@@ -24,4 +24,31 @@ public class IncomingCertificateRepository(AAEICSDbContext dbContext, IMapper ma
             .Include(c => c.IncomingCertificateLines)
                 .ThenInclude(l => l.MeasureUnit);
     }
+    
+    // Перевизначаємо метод додавання для контролю над збереженням графа об'єктів
+    public override async Task AddAsync(IncomingCertificateDTO dto)
+    {
+        // 1. Мапимо DTO в сутність
+        var entity = Mapper.Map<IncomingCertificate>(dto);
+
+        // 2. Відділяємо рядки від головного об'єкта
+        var lines = entity.IncomingCertificateLines.ToList();
+        entity.IncomingCertificateLines.Clear();
+
+        // 3. Додаємо головний об'єкт (Сертифікат) в контекст бази даних.
+        // EF починає його відслідковувати (Track).
+        await DbSet.AddAsync(entity);
+
+        // 4. Явно додаємо рядки, вказуючи їх зв'язок з головним об'єктом.
+        foreach (var line in lines)
+        {
+            // Явно пов'язуємо рядок з сертифікатом через об'єкт-посилання.
+            // Завдяки цьому EF знає, що ці рядки належать щойно доданому entity,
+            // і під час UnitOfWork.CompleteAsync() сам проставить правильний CertificateId.
+            line.Certificate = entity; 
+            
+            // Додаємо рядок до контексту
+            await DbContext.Set<IncomingCertificateLine>().AddAsync(line);
+        }
+    }
 }

@@ -4,7 +4,7 @@ namespace AAEICS.Core.DTO.Certificates;
 
 public class IssuanceCertificateDTO
 {
-    public int IssueCertificateId { get; set; }
+    public int? IssueCertificateId { get; set; }
 
     public int Edrpou { get; set; }
 

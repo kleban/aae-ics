@@ -9,6 +9,7 @@
              xmlns:helpers="clr-namespace:AAEICS.Client.Helpers"
              xmlns:components="clr-namespace:AAEICS.Client.Views.Components"
              mc:Ignorable="d">
+    
     <Border CornerRadius="10"
             BorderThickness="0"
             Background="White"
@@ -55,22 +56,16 @@
                         </DataGridCheckBoxColumn.HeaderTemplate>
                     </DataGridCheckBoxColumn>
                     
-                    <DataGridTemplateColumn Header="Одиниця виміру" Width="66" CellStyle="{StaticResource BaseDataGridCellStyle}">
+                    <DataGridTemplateColumn Header="{Binding [CertificateLineMeasureUnit], Source={x:Static local:App.LanguageService}}"  Width="66" CellStyle="{StaticResource BaseDataGridCellStyle}">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <components:SearchBoxControl DataContext="{Binding DataContext.MeasureUnitsSearchBox, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
-                                <!-- <ComboBox -->
-                                <!--     ItemsSource="{Binding DataContext.MeasureUnitsList, RelativeSource={RelativeSource AncestorType=DataGrid}}" -->
-                                <!--     DisplayMemberPath="Name"  -->
-                                <!--     SelectedValuePath="UnitId"  -->
-                                <!--     SelectedValue="{Binding MeasureUnit, UpdateSourceTrigger=PropertyChanged}" -->
-                                <!--     Style="{StaticResource StandardEditableComboBoxStyle}" -->
-                                <!--     DropDownClosed="ComboBox_DropDownClosed"/> -->
+                                <components:SearchBoxControl DataContext="{Binding MeasureUnitSearchBox}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     
-                    <DataGridTemplateColumn Width="160" CellStyle="{StaticResource LockableCellStyle}">
+                    <DataGridTemplateColumn Width="160" 
+                                            CellStyle="{StaticResource LockableCellStyle}">
                         <DataGridTemplateColumn.HeaderTemplate>
                             <DataTemplate>
                             <Grid Width="auto">
@@ -79,7 +74,7 @@
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="0" Text="Sent" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,0,0,5"/>
+                                <TextBlock Grid.Row="0" Text="{Binding [CertificateLineSent], Source={x:Static local:App.LanguageService}}"  HorizontalAlignment="Center" FontWeight="Bold" Margin="0,0,0,5"/>
                                 <Rectangle Grid.Row="1" Height="1" Fill="{DynamicResource DataGridColumnHeaderBackgroundBrush}" Margin="0,2,0,5"/>
                                 <Grid Grid.Row="2">
                                     <Grid.ColumnDefinitions>
@@ -87,9 +82,9 @@
                                         <ColumnDefinition Width="1"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="0" Text="Quantity Sent" HorizontalAlignment="Center" Margin="10,0,10,0" TextWrapping="Wrap"/>
+                                    <TextBlock Grid.Column="0" Text="{Binding [CertificateLineQuantity], Source={x:Static local:App.LanguageService}}"  HorizontalAlignment="Center" Margin="10,0,10,0" TextWrapping="Wrap"/>
                                     <Rectangle Grid.Column="1" Fill="{DynamicResource DataGridColumnHeaderBackgroundBrush}"/>
-                                    <TextBlock Grid.Column="2" Text="Category Sent" HorizontalAlignment="Center" Margin="10,0,10,0" TextWrapping="Wrap"/>
+                                    <TextBlock Grid.Column="2" Text="{Binding [CertificateLineCategory], Source={x:Static local:App.LanguageService}}" HorizontalAlignment="Center" Margin="10,0,10,0" TextWrapping="Wrap"/>
                                 </Grid>
                             </Grid>
                                 </DataTemplate>
@@ -97,18 +92,48 @@
                         
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Grid Width="auto" HorizontalAlignment="Stretch">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="1"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBox Grid.Column="0" Text="{Binding QuantitySent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="Transparent" BorderThickness="0"/>
-                                    <Rectangle Grid.Column="1" Fill="#E0E0E0" />
-                                    <TextBox Grid.Column="2" Text="{Binding CategorySent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="Transparent" BorderThickness="0"/>
-                                </Grid>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="1"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                
+                                        <TextBlock Grid.Column="0" Text="{Binding QuantitySent}"
+                                                   Style="{StaticResource WrapTextElementStyle}"/>
+                                        <Rectangle Grid.Column="1" Fill="#E0E0E0" />
+                                        <components:SearchBoxControl Grid.Column="2" DataContext="{Binding CategorySentSearchBox}" />
+                                    </Grid>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
+                        
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="1"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                
+                                        <TextBox x:Name="FirstInput" Grid.Column="0" 
+                                                 Text="{Binding QuantitySent, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                                                 Style="{StaticResource WrapTextEditingStyle}"
+                                                 VerticalContentAlignment="Center"
+                                                 VerticalAlignment="Center" />
+                
+                                        <Rectangle Grid.Column="1" Fill="#E0E0E0" />
+                                        
+                                        <components:SearchBoxControl Grid.Column="2" DataContext="{Binding CategorySentSearchBox}" />
+                                    </Grid>
+                                
+                                <DataTemplate.Triggers>
+                                    <Trigger SourceName="FirstInput" Property="IsVisible" Value="True">
+                                        <Setter TargetName="FirstInput" Property="FocusManager.FocusedElement" Value="{Binding ElementName=FirstInput}"/>
+                                    </Trigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>
                     </DataGridTemplateColumn>
 
                     <DataGridTemplateColumn Width="160" CellStyle="{StaticResource LockableCellStyle}">
@@ -120,7 +145,7 @@
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="0" Text="Received" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,0,0,5"/>
+                                <TextBlock Grid.Row="0" Text="{Binding [CertificateLineReceived], Source={x:Static local:App.LanguageService}}" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,0,0,5"/>
                                 <Rectangle Grid.Row="1" Width="auto" Height="1" Fill="{DynamicResource DataGridColumnHeaderBackgroundBrush}" Margin="0,2,0,5"/>
                                 <Grid Grid.Row="2">
                                     <Grid.ColumnDefinitions>
@@ -128,9 +153,9 @@
                                         <ColumnDefinition Width="1"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="0" Text="Quantity Received" HorizontalAlignment="Center" Margin="10,0,10,0" TextWrapping="Wrap"/>
+                                    <TextBlock Grid.Column="0" Text="{Binding [CertificateLineQuantity], Source={x:Static local:App.LanguageService}}" HorizontalAlignment="Center" Margin="10,0,10,0" TextWrapping="Wrap"/>
                                     <Rectangle Grid.Column="1" Fill="{DynamicResource DataGridColumnHeaderBackgroundBrush}"/>
-                                    <TextBlock Grid.Column="2" Text="Category Received" HorizontalAlignment="Center" Margin="10,0,10,0" TextWrapping="Wrap"/>
+                                    <TextBlock Grid.Column="2" Text="{Binding [CertificateLineCategory], Source={x:Static local:App.LanguageService}}" HorizontalAlignment="Center" Margin="10,0,10,0" TextWrapping="Wrap"/>
                                 </Grid>
                             </Grid>
                                 </DataTemplate>
@@ -138,21 +163,46 @@
 
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="1"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBox Grid.Column="0" Text="{Binding QuantityReceived, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="Transparent" BorderThickness="0"/>
-                                    <Rectangle Grid.Column="1" Fill="#E0E0E0" />
-                                    <TextBox Grid.Column="2" Text="{Binding CategoryReceived, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="Transparent" BorderThickness="0"/>
-                                </Grid>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="1"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        
+                                        <TextBlock Grid.Column="0" Padding="2" Text="{Binding QuantityReceived, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="Transparent" VerticalAlignment="Center"/>
+                                        <Rectangle Grid.Column="1" Fill="#E0E0E0" />
+                                        <components:SearchBoxControl Grid.Column="2" DataContext="{Binding CategoryReceivedSearchBox}" />
+                                    </Grid>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
+                        
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="1"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBox x:Name="FirstInput" Grid.Column="0" 
+                                                 Text="{Binding QuantityReceived, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                                                 Style="{StaticResource WrapTextEditingStyle}"
+                                                 VerticalContentAlignment="Center"
+                                                 VerticalAlignment="Center" />
+                                        <Rectangle Grid.Column="1" Fill="#E0E0E0" />
+                                        <components:SearchBoxControl Grid.Column="2" DataContext="{Binding CategoryReceivedSearchBox}" />
+                                    </Grid>
+                                <DataTemplate.Triggers>
+                                    <Trigger SourceName="FirstInput" Property="IsVisible" Value="True">
+                                        <Setter TargetName="FirstInput" Property="FocusManager.FocusedElement" Value="{Binding ElementName=FirstInput}"/>
+                                    </Trigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>
                     </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn Header="Operations" Width="auto" CellStyle="{StaticResource LockableCellStyle}">
+                    <DataGridTemplateColumn Header="{Binding [CertificateLineOperations], Source={x:Static local:App.LanguageService}}" Width="auto" CellStyle="{StaticResource LockableCellStyle}" MinWidth="30">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Style="{DynamicResource GridRemoveButton}"

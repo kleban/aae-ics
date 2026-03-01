@@ -4,13 +4,13 @@ namespace AAEICS.Core.DTO.Certificates;
 
 public class IncomingCertificateDTO
 {
-    public int IncCertificateId { get; set; }
+    public int? IncCertificateId { get; set; }
     
     public int Edrpou { get; set; }
     
     public PersonnelDTO ApprovePerson { get; set; }
     
-    public DateTime? ApproveDate { get; set; }
+    public DateTime ApproveDate { get; set; }
     
     public DateTime RegistrationDate { get; set; }
     

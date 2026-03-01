@@ -18,10 +18,9 @@ public class MappingProfile : Profile
         CreateMap<TransferInstance, TransferInstanceDTO>().ReverseMap();
 
         // 2. Персонал
-        CreateMap<Personnel, PersonnelDTO>(); // Оскільки імена властивостей (Rank, Position) збігаються, AutoMapper зробить все сам
+        CreateMap<Personnel, PersonnelDTO>();
 
         CreateMap<PersonnelDTO, Personnel>()
-            // При зворотньому маппінгу ми ігноруємо навігаційні об'єкти, щоб Entity Framework не намагався створити їх заново
             .ForMember(dest => dest.Rank, opt => opt.Ignore())
             .ForMember(dest => dest.Position, opt => opt.Ignore());
 
@@ -29,6 +28,14 @@ public class MappingProfile : Profile
         CreateMap<IncomingCertificate, IncomingCertificateDTO>();
 
         CreateMap<IncomingCertificateDTO, IncomingCertificate>()
+            .ForMember(dest => dest.IncCertificateId, opt => opt.Ignore())
+            // ДОДАНО: Мапимо ID із вкладених DTO в поля зовнішніх ключів сутності
+            .ForMember(dest => dest.ApprovePersonId, opt => opt.MapFrom(src => src.ApprovePerson.PersonId))
+            .ForMember(dest => dest.DeliveryCompanyId, opt => opt.MapFrom(src => src.DeliveryCompany.InstanceId))
+            .ForMember(dest => dest.DonorId, opt => opt.MapFrom(src => src.Donor.InstanceId))
+            .ForMember(dest => dest.RecipientId, opt => opt.MapFrom(src => src.Recipient.InstanceId))
+            .ForMember(dest => dest.ReasonId, opt => opt.MapFrom(src => src.Reason.ReasonId))
+            // Ігноруємо самі об'єкти
             .ForMember(dest => dest.ApprovePerson, opt => opt.Ignore())
             .ForMember(dest => dest.DeliveryCompany, opt => opt.Ignore())
             .ForMember(dest => dest.Donor, opt => opt.Ignore())
@@ -38,15 +45,28 @@ public class MappingProfile : Profile
         CreateMap<IncomingCertificateLine, IncomingCertificateLineDTO>();
 
         CreateMap<IncomingCertificateLineDTO, IncomingCertificateLine>()
+            // ІГНОРУЄМО ПЕРВИННИЙ КЛЮЧ РЯДКА ТА ЗОВНІШНІЙ КЛЮЧ СЕРТИФІКАТА
+            .ForMember(dest => dest.IncLineId, opt => opt.Ignore())
+            .ForMember(dest => dest.CertificateId, opt => opt.Ignore()) // EF сам проставить цей ID через зв'язок!
+            // ДОДАНО: Мапимо ID для рядків акту
+            .ForMember(dest => dest.MeasureUnitId, opt => opt.MapFrom(src => src.MeasureUnit.UnitId))
+            .ForMember(dest => dest.CategorySentId, opt => opt.MapFrom(src => src.CategorySent.Id))
+            .ForMember(dest => dest.CategoryReceivedId, opt => opt.MapFrom(src => src.CategoryReceived.Id))
+            // Ігноруємо об'єкти
             .ForMember(dest => dest.MeasureUnit, opt => opt.Ignore())
             .ForMember(dest => dest.CategorySent, opt => opt.Ignore())
             .ForMember(dest => dest.CategoryReceived, opt => opt.Ignore())
             .ForMember(dest => dest.Certificate, opt => opt.Ignore());
 
-        // 4. Сертифікати видачі
+        // 4. Сертифікати видачі (Відразу виправляємо на майбутнє)
         CreateMap<IssuanceCertificate, IssuanceCertificateDTO>();
 
         CreateMap<IssuanceCertificateDTO, IssuanceCertificate>()
+            .ForMember(dest => dest.ApprovePersonId, opt => opt.MapFrom(src => src.ApprovePerson.PersonId))
+            .ForMember(dest => dest.DeliveryCompanyId, opt => opt.MapFrom(src => src.DeliveryCompany.InstanceId))
+            .ForMember(dest => dest.DonorId, opt => opt.MapFrom(src => src.Donor.InstanceId))
+            .ForMember(dest => dest.RecipientId, opt => opt.MapFrom(src => src.Recipient.InstanceId))
+            .ForMember(dest => dest.ReasonId, opt => opt.MapFrom(src => src.Reason.ReasonId))
             .ForMember(dest => dest.ApprovePerson, opt => opt.Ignore())
             .ForMember(dest => dest.DeliveryCompany, opt => opt.Ignore())
             .ForMember(dest => dest.Donor, opt => opt.Ignore())
@@ -56,6 +76,9 @@ public class MappingProfile : Profile
         CreateMap<IssueCertificateLine, IssueCertificateLineDTO>();
 
         CreateMap<IssueCertificateLineDTO, IssueCertificateLine>()
+            .ForMember(dest => dest.MeasureUnitId, opt => opt.MapFrom(src => src.MeasureUnit.UnitId))
+            .ForMember(dest => dest.CategorySentId, opt => opt.MapFrom(src => src.CategorySent.Id))
+            .ForMember(dest => dest.CategoryReceivedId, opt => opt.MapFrom(src => src.CategoryReceived.Id))
             .ForMember(dest => dest.MeasureUnit, opt => opt.Ignore())
             .ForMember(dest => dest.CategorySent, opt => opt.Ignore())
             .ForMember(dest => dest.CategoryReceived, opt => opt.Ignore())

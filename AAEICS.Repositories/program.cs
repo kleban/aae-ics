@@ -24,9 +24,10 @@ public static class ServicesExtensions
         services.AddScoped<IGenericRepository<RankDTO>, DictionaryDataRepository<Rank, RankDTO>>();
         services.AddScoped<IGenericRepository<PositionDTO>, DictionaryDataRepository<Position, PositionDTO>>();
         services.AddScoped<IGenericRepository<ReasonDTO>, DictionaryDataRepository<Reason, ReasonDTO>>();
-        services
-            .AddScoped<IGenericRepository<MeasureUnitDTO>, DictionaryDataRepository<MeasureUnit, MeasureUnitDTO>>();
+        services.AddScoped<IGenericRepository<MeasureUnitDTO>, DictionaryDataRepository<MeasureUnit, MeasureUnitDTO>>();
+        services.AddScoped<IGenericRepository<CategoryDTO>, DictionaryDataRepository<Category, CategoryDTO>>();
         services.AddScoped<IGenericRepository<PersonnelDTO>, DictionaryDataRepository<Personnel, PersonnelDTO>>();
+        services.AddScoped<IGenericRepository<TransferInstanceDTO>, DictionaryDataRepository<TransferInstance, TransferInstanceDTO>>();
 
         return services;
     }

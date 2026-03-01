@@ -4,9 +4,9 @@ namespace AAEICS.Core.DTO.Certificates;
 
 public class IssueCertificateLineDTO
 {
-    public int IssueLineId { get; set; }
+    public int? IssueLineId { get; set; }
     
-    public int CertificateId { get; set; }
+    public int? CertificateId { get; set; }
     
     public int OrdinalNumber { get; set; }
     
@@ -16,17 +16,17 @@ public class IssueCertificateLineDTO
     
     public int MeasureUnitId { get; set; }
     
-    public MeasureUnitDTO? MeasureUnit { get; set; }
+    public MeasureUnitDTO MeasureUnit { get; set; }  = null!;
     
     public double PricePerUnit { get; set; }
     
     public decimal QuantitySent { get; set; }
     
-    public CategoryDTO? CategorySent { get; set; }
+    public CategoryDTO CategorySent { get; set; } = null!;
     
     public decimal QuantityReceived { get; set; }
     
-    public CategoryDTO? CategoryReceived { get; set; }
+    public CategoryDTO CategoryReceived { get; set; } = null!;
     
     public string? Notes { get; set; }
 }

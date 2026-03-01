@@ -7,7 +7,8 @@
                 <ResourceDictionary Source="/Syncfusion.Themes.Windows11Light.WPF;component/chromelesswindow/chromelesswindow.xaml " />
                 <ResourceDictionary Source="Resources/Palettes/LightColors.xaml" />
                 <ResourceDictionary Source="Resources/Effects.xaml"/>
-                <ResourceDictionary Source="Resources/Styles/ActLinesDataGrid.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/DataGrid.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/DataGridHelpers.xaml"/>
                 <ResourceDictionary Source="Resources/Theme.xaml"/>
                 <ResourceDictionary Source="Views/Views.xaml"/>
             </ResourceDictionary.MergedDictionaries>

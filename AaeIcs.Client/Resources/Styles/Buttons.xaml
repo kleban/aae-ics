@@ -1,8 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:helpers="clr-namespace:AAEICS.Client.Helpers">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
         
     <Style x:Key="PrimaryButton" TargetType="{x:Type Button}">
+        <Setter Property="FontSize" Value="16"/>
         <Setter Property="Background" Value="{DynamicResource PrimaryBrandBrush}" />
         <Setter Property="Template">
             <Setter.Value>
@@ -10,7 +10,7 @@
                     <Border x:Name="border"
                             BorderThickness="0"
                             Background="{DynamicResource PrimaryBrandBrush}"
-                            CornerRadius="{Binding Path=(helpers:ButtonHelper.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}">
+                            CornerRadius="6"> <!-- {Binding Path=(helpers:ButtonHelper.CornerRadius), RelativeSource={RelativeSource TemplatedParent}} -->
                         <TextBlock x:Name="BtnText"
                                    Text="{TemplateBinding Content}"
                                    Foreground="{DynamicResource PrimaryTextBrush}"
@@ -35,6 +35,7 @@
     </Style>
     
     <Style x:Key="SecondaryButton" TargetType="{x:Type Button}">
+        <Setter Property="FontSize" Value="16"/>
         <Setter Property="Background" Value="{DynamicResource SecondaryBrandBrush}" />
         <Setter Property="Template">
             <Setter.Value>
@@ -42,7 +43,7 @@
                     <Border x:Name="border"
                             BorderThickness="0"
                             Background="{DynamicResource SecondaryBrandBrush}"
-                            CornerRadius="{Binding Path=(helpers:ButtonHelper.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}">
+                            CornerRadius="6">
                         <TextBlock x:Name="BtnText"
                                    Text="{TemplateBinding Content}"
                                    Foreground="{DynamicResource SecondaryTextBrush}"

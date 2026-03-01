@@ -6,7 +6,9 @@
              xmlns:local="clr-namespace:AAEICS.Client.Views.Components"
              mc:Ignorable="d"
              Name="RootControl">
-    <Border CornerRadius="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" Background="White">
+    <Border CornerRadius="10" 
+            HorizontalAlignment="Stretch" 
+            VerticalAlignment="Stretch" Margin="5" Background="White">
         <Border.Style>
             <Style TargetType="Border">
                 <Setter Property="BorderBrush" Value="#D3D3D3"/>
@@ -23,14 +25,12 @@
         </Border.Style>
 
         <WrapPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="5">
-            
-            <TextBlock Text="{Binding ElementName=RootControl, Path=QuestionText}" 
+            <TextBlock Text="{Binding ElementName=RootControl, Path=QuestionText}"
                        Margin="5" 
                        Foreground="Black" 
                        VerticalAlignment="Center"
                        TextWrapping="Wrap"
                        MaxWidth="300"/>
-            
             <ContentPresenter Content="{Binding ElementName=RootControl, Path=InputControls}" 
                               Margin="5" 
                               VerticalAlignment="Center"/>

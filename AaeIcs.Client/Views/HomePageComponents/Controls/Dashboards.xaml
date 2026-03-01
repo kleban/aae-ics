@@ -72,7 +72,7 @@
                 </DockPanel>
                 <DataGrid x:Name="ReadonlyDashboardGrid"
                           Grid.Row="1" 
-                          ItemsSource="{Binding TableItems}"
+                          ItemsSource="{Binding IncomingCertificates}"
                           Style="{DynamicResource ReadOnlyDataGridStyle}"
                           RowStyle="{DynamicResource DataGridRowStyle}"
                           ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}"
@@ -90,17 +90,7 @@
                                 </DataTemplate>
                             </DataGridCheckBoxColumn.HeaderTemplate>
                         </DataGridCheckBoxColumn>
-                
-                        <DataGridTextColumn Header="Description" Width="2*" IsReadOnly="True"
-                                            Binding="{Binding Description}"
-                                            ElementStyle="{StaticResource WrapTextElementStyle}"
-                                            CellStyle="{StaticResource LockableCellStyle}"/>
-                
-                        <DataGridTextColumn Header="Value" Width="*" IsReadOnly="True"
-                                            Binding="{Binding Value}"
-                                            ElementStyle="{StaticResource WrapTextElementStyle}"
-                                            CellStyle="{StaticResource LockableCellStyle}"/>
-                
+                        
                         <DataGridTemplateColumn Header="Operations" Width="auto" CellStyle="{StaticResource LockableCellStyle}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>

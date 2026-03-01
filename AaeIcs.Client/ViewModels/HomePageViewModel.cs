@@ -5,7 +5,10 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Windows;
 using AAEICS.Client.Models;
+using AAEICS.Core.Contracts.Services;
 using AAEICS.Core.DTO.Certificates;
+using AAEICS.Services;
+using Syncfusion.Windows.Automation.Peers;
 
 namespace AAEICS.Client.ViewModels;
 
@@ -30,10 +33,13 @@ public partial class TableRowItem : ObservableObject
 
 public partial class HomePageViewModel : ObservableObject
 {
-    
+    private readonly IIncomingCertificateService _incomingCertificateService;
     // Це і є та сама властивість DashboardItems, до якої ми робили Binding у XAML!
     [ObservableProperty]
     private ObservableCollection<DashboardCard> _dashboardItems = new();
+    
+    [ObservableProperty]
+    private bool _isBusy; // Для відображення індикатора завантаження
     
     // Приклад того, як ви зможете оновлювати значення з коду пізніше
     public void UpdateSalesData(string newSalesValue)
@@ -43,24 +49,16 @@ public partial class HomePageViewModel : ObservableObject
     }
 
     [ObservableProperty]
-    private ObservableCollection<IncomingCertificateDTO> _incomingCertificates = new();
+    private ObservableCollection<IncomingCertificate> _incomingCertificates = new();
     
     private bool _isSyncing;
     
-    [ObservableProperty] 
-    private ObservableCollection<TableRowItem> _tableItems;
-
     [ObservableProperty]
     private bool _isAllConfirmed;
     
-    public HomePageViewModel()
+    public HomePageViewModel(IIncomingCertificateService incomingCertificateService)
     {
-        TableItems =
-        [
-            new TableRowItem { Description = "Приклад запису 1", Value = "100", IsConfirmed = true, Value1 = "100", Value2 = "100" },
-            new TableRowItem { Description = "Приклад запису 2", Value = "250", IsConfirmed = false, Value1 = "100", Value2 = "100" }
-        ];
-        
+        _incomingCertificateService = incomingCertificateService;
         // Ініціалізуємо наш список
         DashboardItems =
         [
@@ -93,124 +91,138 @@ public partial class HomePageViewModel : ObservableObject
                 icon: Application.Current.Resources["Icon.User"],
                 initialValue: "0"
             )
-
-            // Ви можете додати стільки карток, скільки вам потрібно!
-            // 1. Слухаємо зміни в колекції (додавання/видалення рядків)
-
         ];
-
-        // Заповнюємо мозаїку дашбордів. 
-        // Підтягуємо текст із файлів локалізації (Resources)
-        // Іконки беремо з ресурсів додатку (якщо вони у вас там лежать)
-
-        // Ви можете додати стільки карток, скільки вам потрібно!
-        // 1. Слухаємо зміни в колекції (додавання/видалення рядків)
-        TableItems.CollectionChanged += OnTableItemsCollectionChanged;
-
-        // 2. Підписуємось на події вже існуючих елементів
-        foreach (var item in TableItems)
+        
+        _ = LoadDataAsync();
+    }
+    
+    private async Task LoadDataAsync()
+    {
+        IsBusy = true;
+        try
         {
-            item.PropertyChanged += OnItemPropertyChanged;
+            // Отримуємо дані з сервісу
+            var data = await _incomingCertificateService.GetIncomingCertificates();
+            
+            // Очищуємо та заповнюємо колекцію
+            IncomingCertificates.Clear();
+            IncomingCertificates = new ObservableCollection<IncomingCertificate>(
+                data.Select(item => new IncomingCertificate
+                {
+                    Edrpou = item.Edrpou,
+                    ApproveDate = item.ApproveDate,
+                    RegistrationDate = item.RegistrationDate,
+                    RegistrationPlace = item.RegistrationPlace,
+                    TransferDateStart = item.TransferDateStart,
+                    TransferDateEnd = item.TransferDateEnd,
+                })
+            );
         }
-
-        // 3. Робимо первинну перевірку заголовка
-        CheckHeaderState();
+        catch (Exception ex)
+        {
+            // Тут можна додати логіку обробки помилок (наприклад, діалогове вікно)
+            MessageBox.Show($"Помилка завантаження даних: {ex.Message}");
+        }
+        finally
+        {
+            IsBusy = false;
+        }
     }
     
     
     // Логіка: Заголовок -> Рядки
     // Викликається, коли користувач клікає на Checkbox у шапці
-    partial void OnIsAllConfirmedChanged(bool value)
-    {
-        // Якщо ми зараз всередині процесу синхронізації (змінюємо заголовок через рядок),
-        // то не треба спускати зміни назад у рядки.
-        if (_isSyncing) return;
-
-        try
-        {
-            _isSyncing = true; // Блокуємо зворотній зв'язок
-
-            if (TableItems != null)
-            {
-                foreach (var item in TableItems)
-                {
-                    item.IsConfirmed = value;
-                }
-            }
-        }
-        finally
-        {
-            _isSyncing = false; // Знімаємо блокування
-        }
-    }
+    // partial void OnIsAllConfirmedChanged(bool value)
+    // {
+    //     // Якщо ми зараз всередині процесу синхронізації (змінюємо заголовок через рядок),
+    //     // то не треба спускати зміни назад у рядки.
+    //     if (_isSyncing) return;
+    //
+    //     try
+    //     {
+    //         _isSyncing = true; // Блокуємо зворотній зв'язок
+    //
+    //         if (TableItems != null)
+    //         {
+    //             foreach (var item in TableItems)
+    //             {
+    //                 item.IsConfirmed = value;
+    //             }
+    //         }
+    //     }
+    //     finally
+    //     {
+    //         _isSyncing = false; // Знімаємо блокування
+    //     }
+    // }
 
     // Логіка: Рядки -> Заголовок
     // Викликається, коли змінюється будь-яка властивість всередині рядка
-    private void OnItemPropertyChanged(object? sender, PropertyChangedEventArgs e)
-    {
-        if (e.PropertyName == nameof(TableRowItem.IsConfirmed))
-        {
-            CheckHeaderState();
-        }
-    }
+    // private void OnItemPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    // {
+    //     if (e.PropertyName == nameof(TableRowItem.IsConfirmed))
+    //     {
+    //         CheckHeaderState();
+    //     }
+    // }
 
-    // Допоміжний метод перевірки стану
-    private void CheckHeaderState()
-    {
-        if (_isSyncing) return;
-
-        try
-        {
-            _isSyncing = true; // Блокуємо спуск змін у рядки
-
-            // Якщо всі рядки IsConfirmed == true, то і заголовок ставимо в true.
-            // Інакше - false.
-            IsAllConfirmed = TableItems.All(x => x.IsConfirmed);
-        }
-        finally
-        {
-            _isSyncing = false;
-        }
-    }
+    // // Допоміжний метод перевірки стану
+    // private void CheckHeaderState()
+    // {
+    //     if (_isSyncing) return;
+    //
+    //     try
+    //     {
+    //         _isSyncing = true; // Блокуємо спуск змін у рядки
+    //
+    //         // Якщо всі рядки IsConfirmed == true, то і заголовок ставимо в true.
+    //         // Інакше - false.
+    //         IsAllConfirmed = TableItems.All(x => x.IsConfirmed);
+    //     }
+    //     finally
+    //     {
+    //         _isSyncing = false;
+    //     }
+    // }
 
     // Обробка додавання/видалення нових рядків
-    private void OnTableItemsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
-    {
-        // Якщо додали нові рядки - підписуємось на їх зміни
-        if (e.NewItems != null)
-        {
-            foreach (TableRowItem item in e.NewItems)
-            {
-                item.PropertyChanged += OnItemPropertyChanged;
-            }
-        }
-
-        // Якщо видалили рядки - відписуємось (щоб не було витоку пам'яті)
-        if (e.OldItems != null)
-        {
-            foreach (TableRowItem item in e.OldItems)
-            {
-                item.PropertyChanged -= OnItemPropertyChanged;
-            }
-        }
-
-        // Перевіряємо заголовок, бо кількість елементів змінилася
-        CheckHeaderState();
-    }
+    // private void OnTableItemsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    // {
+    //     // Якщо додали нові рядки - підписуємось на їх зміни
+    //     if (e.NewItems != null)
+    //     {
+    //         foreach (TableRowItem item in e.NewItems)
+    //         {
+    //             item.PropertyChanged += OnItemPropertyChanged;
+    //         }
+    //     }
+    //
+    //     // Якщо видалили рядки - відписуємось (щоб не було витоку пам'яті)
+    //     if (e.OldItems != null)
+    //     {
+    //         foreach (TableRowItem item in e.OldItems)
+    //         {
+    //             item.PropertyChanged -= OnItemPropertyChanged;
+    //         }
+    //     }
+    //
+    //     // Перевіряємо заголовок, бо кількість елементів змінилася
+    //     CheckHeaderState();
+    // }
     
-    [RelayCommand]
-    private void AddRow(object obj)
-    {
-        TableItems.Add(new TableRowItem { Description = "Новий запис", Value = "0", IsConfirmed = false });
-    }
-
-    [RelayCommand]
-    private void DeleteRow(object item)
-    {
-        if (item is TableRowItem rowItem)
-        { 
-            TableItems.Remove(rowItem); 
-        }
-        
-    }
+    // [RelayCommand]
+    // private void AddRow(object obj)
+    // {
+    //     TableItems.Add(new TableRowItem { Description = "Новий запис", Value = "0", IsConfirmed = false });
+    // }
+    //
+    // [RelayCommand]
+    // private void DeleteRow(object item)
+    // {
+    //     if (item is TableRowItem rowItem)
+    //     { 
+    //         TableItems.Remove(rowItem); 
+    //     }
+    //     
+    // }
 }

@@ -61,11 +61,101 @@ namespace AAEICS.Client.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Name of military equipment.
+        ///   Looks up a localized string similar to Batch Number.
+        /// </summary>
+        public static string CertificateLineBatchNumber {
+            get {
+                return ResourceManager.GetString("CertificateLineBatchNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Category.
+        /// </summary>
+        public static string CertificateLineCategory {
+            get {
+                return ResourceManager.GetString("CertificateLineCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Made in.
+        /// </summary>
+        public static string CertificateLineMadeIn {
+            get {
+                return ResourceManager.GetString("CertificateLineMadeIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Measure Unit.
+        /// </summary>
+        public static string CertificateLineMeasureUnit {
+            get {
+                return ResourceManager.GetString("CertificateLineMeasureUnit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name of Military Equipment.
         /// </summary>
         public static string CertificateLineName {
             get {
                 return ResourceManager.GetString("CertificateLineName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nomenclature Code.
+        /// </summary>
+        public static string CertificateLineNomenclatureCode {
+            get {
+                return ResourceManager.GetString("CertificateLineNomenclatureCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notes.
+        /// </summary>
+        public static string CertificateLineNotes {
+            get {
+                return ResourceManager.GetString("CertificateLineNotes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Operations.
+        /// </summary>
+        public static string CertificateLineOperations {
+            get {
+                return ResourceManager.GetString("CertificateLineOperations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Price Per Unit.
+        /// </summary>
+        public static string CertificateLinePricePerUnit {
+            get {
+                return ResourceManager.GetString("CertificateLinePricePerUnit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quantity.
+        /// </summary>
+        public static string CertificateLineQuantity {
+            get {
+                return ResourceManager.GetString("CertificateLineQuantity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Received.
+        /// </summary>
+        public static string CertificateLineReceived {
+            get {
+                return ResourceManager.GetString("CertificateLineReceived", resourceCulture);
             }
         }
         
@@ -84,6 +174,15 @@ namespace AAEICS.Client.Resources.Languages {
         public static string CertificateLinesDataGridTitle {
             get {
                 return ResourceManager.GetString("CertificateLinesDataGridTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sent.
+        /// </summary>
+        public static string CertificateLineSent {
+            get {
+                return ResourceManager.GetString("CertificateLineSent", resourceCulture);
             }
         }
         
