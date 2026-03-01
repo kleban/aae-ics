@@ -1,5 +1,4 @@
-﻿using AAEICS.Core.Contracts;
-using AAEICS.Core.Contracts.Services;
+﻿using AAEICS.Core.Contracts.Services;
 using AAEICS.Database.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;

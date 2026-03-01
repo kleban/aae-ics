@@ -24,11 +24,11 @@ public class PersonnelConfig : IEntityTypeConfiguration<Personnel>
         entity.Property(e => e.MiddleName)
             .HasColumnType("VARCHAR")
             .HasColumnName("middle_name");
-        entity.Property(e => e.Position).HasColumnName("position");
-        entity.Property(e => e.Rank).HasColumnName("rank");
+        entity.Property(e => e.PositionId).HasColumnName("position_id");
+        entity.Property(e => e.RankId).HasColumnName("rank_id");
 
-        entity.HasOne(d => d.PositionNavigation).WithMany(p => p.Personnel).HasForeignKey(d => d.Position);
+        entity.HasOne(d => d.Position).WithMany(p => p.Personnel).HasForeignKey(d => d.PositionId);
 
-        entity.HasOne(d => d.RankNavigation).WithMany(p => p.Personnel).HasForeignKey(d => d.Rank);
+        entity.HasOne(d => d.Rank).WithMany(p => p.Personnel).HasForeignKey(d => d.RankId);
     }
 }

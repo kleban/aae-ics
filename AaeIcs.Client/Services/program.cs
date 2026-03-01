@@ -1,8 +1,7 @@
-﻿using AAEICS.Client.Services.LanguageManager;
+﻿using AAEICS.Client.Services.Language;
+using AAEICS.Client.Services.Navigation;
 using AAEICS.Client.Services.SyncfusionLicenseInitializer;
-using AAEICS.Client.Services.ThemeManager;
-using AAEICS.Client.Services.NavigationManager;
-
+using AAEICS.Client.Services.Theme;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace AAEICS.Client.Services;

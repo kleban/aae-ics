@@ -61,6 +61,33 @@ namespace AAEICS.Client.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Name of military equipment.
+        /// </summary>
+        public static string CertificateLineName {
+            get {
+                return ResourceManager.GetString("CertificateLineName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add line.
+        /// </summary>
+        public static string CertificateLinesDataGridAddLine {
+            get {
+                return ResourceManager.GetString("CertificateLinesDataGridAddLine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Incoming Equipment.
+        /// </summary>
+        public static string CertificateLinesDataGridTitle {
+            get {
+                return ResourceManager.GetString("CertificateLinesDataGridTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Created Incoming Certificates Today.
         /// </summary>
         public static string CreatedIncomingCertificatesTodayDashboardTitle {
@@ -106,7 +133,7 @@ namespace AAEICS.Client.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAC-ICS | Home.
+        ///   Looks up a localized string similar to AAE-ICS | Home.
         /// </summary>
         public static string HomeAppTitle {
             get {
@@ -120,6 +147,15 @@ namespace AAEICS.Client.Resources.Languages {
         public static string HomeMenuOption {
             get {
                 return ResourceManager.GetString("HomeMenuOption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home.
+        /// </summary>
+        public static string HomeNavBarOption {
+            get {
+                return ResourceManager.GetString("HomeNavBarOption", resourceCulture);
             }
         }
         
@@ -151,7 +187,7 @@ namespace AAEICS.Client.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAC-ICS | New incoming certificate.
+        ///   Looks up a localized string similar to AAE-ICS | New incoming certificate.
         /// </summary>
         public static string NewIncomingCertificateAppTitle {
             get {
@@ -160,11 +196,47 @@ namespace AAEICS.Client.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAC-ICS | New issuance certificate.
+        ///   Looks up a localized string similar to New Incoming Certificate.
+        /// </summary>
+        public static string NewIncomingCertificateNavBarOption {
+            get {
+                return ResourceManager.GetString("NewIncomingCertificateNavBarOption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AAE-ICS | New issuance certificate.
         /// </summary>
         public static string NewIssuanceCertificateAppTitle {
             get {
                 return ResourceManager.GetString("NewIssuanceCertificateAppTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Issuance Certificate.
+        /// </summary>
+        public static string NewIssuanceCertificateNavBarOption {
+            get {
+                return ResourceManager.GetString("NewIssuanceCertificateNavBarOption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AAE-ICS | New write off certificate.
+        /// </summary>
+        public static string NewWriteOffCertificateAppTitle {
+            get {
+                return ResourceManager.GetString("NewWriteOffCertificateAppTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New act of clarification of the sample/write-off.
+        /// </summary>
+        public static string NewWriteOffCertificateNavBarOption {
+            get {
+                return ResourceManager.GetString("NewWriteOffCertificateNavBarOption", resourceCulture);
             }
         }
         
@@ -178,7 +250,7 @@ namespace AAEICS.Client.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAC-ICS | Record cards.
+        ///   Looks up a localized string similar to AAE-ICS | Record cards.
         /// </summary>
         public static string RecordCardAppTitle {
             get {
@@ -196,7 +268,7 @@ namespace AAEICS.Client.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAC-ICS | Reports.
+        ///   Looks up a localized string similar to AAE-ICS | Reports.
         /// </summary>
         public static string ReportsMenuAppTitle {
             get {
@@ -214,7 +286,7 @@ namespace AAEICS.Client.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAC-ICS | Settings.
+        ///   Looks up a localized string similar to AAE-ICS | Settings.
         /// </summary>
         public static string SettingsAppTitle {
             get {

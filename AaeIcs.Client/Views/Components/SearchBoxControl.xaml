@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="AAEICS.Client.Views.Components.SearchBoxControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="30" d:DesignWidth="300">
+    <Grid>
+        <ComboBox Style="{StaticResource StandardEditableComboBoxStyle}"
+                  StaysOpenOnEdit="True" 
+                  IsTextSearchEnabled="False" 
+                  ItemsSource="{Binding SearchResults}"
+                  SelectedItem="{Binding SelectedItem}"
+                  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                  DisplayMemberPath="{Binding DisplayPropertyName}"
+                  IsDropDownOpen="{Binding IsDropdownOpen, Mode=TwoWay}" 
+                  Height="30"
+                  TextBoxBase.TextChanged="ComboBox_TextChanged"
+                  DropDownClosed="ComboBox_DropDownClosed">
+            <ComboBox.InputBindings>
+                <KeyBinding Key="Enter" Command="{Binding HandleEnterCommand}" />
+            </ComboBox.InputBindings>
+        </ComboBox>
+    </Grid>
+</UserControl>

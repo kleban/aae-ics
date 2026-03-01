@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -127,31 +128,35 @@ public static class DataGridBehavior
             e.Cancel = true;
             return;
         }
-
-        // ==========================================
-        // НОВА ЛОГІКА: Читаємо аліаси (DisplayName)
+// ==========================================
+        // ЛОГІКА ЧИТАННЯ ЛОКАЛІЗАЦІЇ З .RESX
         // ==========================================
         if (e.PropertyDescriptor is PropertyDescriptor descriptor)
         {
-            // Шукаємо атрибут DisplayName серед усіх атрибутів властивості
-            var displayNameAttr = descriptor.Attributes.OfType<DisplayNameAttribute>().FirstOrDefault();
+            // Шукаємо атрибут DisplayAttribute замість DisplayNameAttribute
+            var displayAttr = descriptor.Attributes.OfType<DisplayAttribute>().FirstOrDefault();
             
-            // Якщо знайшли і він не порожній — підміняємо заголовок колонки
-            if (displayNameAttr != null && !string.IsNullOrEmpty(displayNameAttr.DisplayName))
+            if (displayAttr != null)
             {
-                e.Column.Header = displayNameAttr.DisplayName;
+                // Метод GetName() робить усю магію: він сам іде у файл .resx, 
+                // дивиться поточну культуру програми (Thread.CurrentUICulture) і дістає потрібний текст!
+                string localizedHeader = displayAttr.GetName();
+                
+                if (!string.IsNullOrEmpty(localizedHeader))
+                {
+                    e.Column.Header = localizedHeader;
+                }
             }
         }
         // ==========================================
 
-        // 2. Стилізуємо автоматично згенеровані текстові колонки
+        // 2. Стилізуємо автоматично згенеровані текстові колонки (залишається без змін)
         if (e.Column is DataGridTextColumn textColumn && sender is FrameworkElement element)
         {
             textColumn.ElementStyle = (Style)element.FindResource("WrapTextElementStyle");
             textColumn.EditingElementStyle = (Style)element.FindResource("WrapTextEditingStyle");
             textColumn.CellStyle = (Style)element.FindResource("LockableCellStyle");
             
-            // Налаштовуємо ширину, щоб дозволити перенесення тексту
             textColumn.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
         }
     }

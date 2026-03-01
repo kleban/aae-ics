@@ -1,5 +1,4 @@
 ﻿using AAEICS.Core.Contracts.Services;
-
 using Syncfusion.Licensing;
 
 namespace AAEICS.Client.Services.SyncfusionLicenseInitializer;

@@ -17,17 +17,17 @@ public partial class IncomingCertificateLine
 
     public string BatchNumber { get; set; } = null!;
 
-    public int MeasureUnit { get; set; }
+    public int MeasureUnitId { get; set; }
 
     public double PricePerUnit { get; set; }
 
     public decimal QuantitySent { get; set; }
 
-    public decimal CategorySent { get; set; }
+    public int CategorySentId { get; set; }
 
     public decimal QuantityReceived { get; set; }
 
-    public decimal CategoryReceived { get; set; }
+    public int CategoryReceivedId { get; set; }
 
     public string? Notes { get; set; }
 
@@ -35,7 +35,11 @@ public partial class IncomingCertificateLine
 
     public virtual IncomingCertificate Certificate { get; set; } = null!;
 
-    public virtual MeasureUnit MeasureUnitNavigation { get; set; } = null!;
+    public virtual MeasureUnit MeasureUnit { get; set; } = null!;
+    
+    public virtual Category CategorySent { get; set; } = null!;
+    
+    public virtual Category CategoryReceived { get; set; } = null!;
 
-    public virtual ICollection<RecordCard> RecordCards { get; set; } = new List<RecordCard>();
+    // public virtual ICollection<RecordCard> RecordCards { get; set; } = new List<RecordCard>();
 }

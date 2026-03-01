@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.VisualBasic;
 
 
 namespace AAEICS.Client.Models;
@@ -8,7 +10,7 @@ public partial class IncomingCertificateLine: ObservableObject
 {
     [ObservableProperty] private bool _isConfirmed;
     
-    [ObservableProperty] [property: DisplayName("Name")]
+    [ObservableProperty] [property: Display(Name = "CertificateLineName", ResourceType = typeof(Resources.Languages.Resources))]
     private string _name;
 
     [ObservableProperty] [property: DisplayName("Nomenclature Code")]

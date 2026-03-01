@@ -18,11 +18,11 @@ public class IncomingCertificateConfig : IEntityTypeConfiguration<IncomingCertif
         entity.Property(e => e.ApproveDate)
             .HasColumnType("DATE")
             .HasColumnName("approve_date");
-        entity.Property(e => e.ApprovePerson).HasColumnName("approve_person");
-        entity.Property(e => e.DeliveryCompany).HasColumnName("delivery_company");
+        entity.Property(e => e.ApprovePersonId).HasColumnName("approve_person_id");
+        entity.Property(e => e.DeliveryCompanyId).HasColumnName("delivery_company_id");
         entity.Property(e => e.DonorId).HasColumnName("donor_id");
         entity.Property(e => e.Edrpou).HasColumnName("edrpou");
-        entity.Property(e => e.Reason).HasColumnName("reason");
+        entity.Property(e => e.ReasonId).HasColumnName("reason_id");
         entity.Property(e => e.RecipientId).HasColumnName("recipient_id");
         entity.Property(e => e.RegistrationDate)
             .HasColumnType("DATE")
@@ -37,24 +37,24 @@ public class IncomingCertificateConfig : IEntityTypeConfiguration<IncomingCertif
             .HasColumnType("DATE")
             .HasColumnName("transfer_date_start");
 
-        entity.HasOne(d => d.ApprovePersonNavigation).WithMany(p => p.IncomingCertificates)
-            .HasForeignKey(d => d.ApprovePerson)
+        entity.HasOne(d => d.ApprovePerson).WithMany(p => p.IncomingCertificates)
+            .HasForeignKey(d => d.ApprovePersonId)
             .OnDelete(DeleteBehavior.ClientSetNull);
 
-        // entity.HasOne(d => d.DeliveryCompanyNavigation).WithMany(p => p.IncomingCertificateDeliveryCompanyNavigations)
-        //     .HasForeignKey(d => d.DeliveryCompany)
-        //     .OnDelete(DeleteBehavior.ClientSetNull);
-        //
-        // entity.HasOne(d => d.Donor).WithMany(p => p.IncomingCertificateDonors)
-        //     .HasForeignKey(d => d.DonorId)
-        //     .OnDelete(DeleteBehavior.ClientSetNull);
-
-        entity.HasOne(d => d.ReasonNavigation).WithMany(p => p.IncomingCertificates)
-            .HasForeignKey(d => d.Reason)
+        entity.HasOne(d => d.DeliveryCompany).WithMany(p => p.IncomingCertificateDeliveryCompanies)
+            .HasForeignKey(d => d.DeliveryCompanyId)
+            .OnDelete(DeleteBehavior.ClientSetNull);
+        
+        entity.HasOne(d => d.Donor).WithMany(p => p.IncomingCertificateDonors)
+            .HasForeignKey(d => d.DonorId)
             .OnDelete(DeleteBehavior.ClientSetNull);
 
-        // entity.HasOne(d => d.Recipient).WithMany(p => p.IncomingCertificateRecipients)
-        //     .HasForeignKey(d => d.RecipientId)
-        //     .OnDelete(DeleteBehavior.ClientSetNull);
+        entity.HasOne(d => d.Reason).WithMany(p => p.IncomingCertificates)
+            .HasForeignKey(d => d.ReasonId)
+            .OnDelete(DeleteBehavior.ClientSetNull);
+
+        entity.HasOne(d => d.Recipient).WithMany(p => p.IncomingCertificateRecipients)
+            .HasForeignKey(d => d.RecipientId)
+            .OnDelete(DeleteBehavior.ClientSetNull);
     }
 }

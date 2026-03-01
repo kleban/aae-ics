@@ -1,34 +1,33 @@
 ﻿using AAEICS.Core.Contracts.Repositories;
-
+using AAEICS.Core.DTO.General;
 using AAEICS.Database.Context;
+using AAEICS.Database.Models;
+using AutoMapper;
 
 namespace AAEICS.Repositories;
 
-public class UnitOfWork(AAEICSDbContext dbContext, IIncomingCertificateRepository incomingCertificateRepository) : IUnitOfWork
+public class UnitOfWork(AAEICSDbContext dbContext, IMapper mapper, IIncomingCertificateRepository incomingCertificatesRepository): IUnitOfWork
 {
-    public IIncomingCertificateRepository IncomingCertificatesRepository { get; set; } = incomingCertificateRepository;
+    public IIncomingCertificateRepository IncomingCertificates { get; } = incomingCertificatesRepository;
+    
+    public IGenericRepository<RankDTO> Ranks => 
+        field ??= new DictionaryDataRepository<Rank, RankDTO>(dbContext, mapper);
 
-    public IGenericRepository<T> Repository<T>() where T : class
-    {
-        return new GenericRepository<T>(dbContext);
-    }
+    public IGenericRepository<PositionDTO> Positions => 
+        field ??= new DictionaryDataRepository<Position, PositionDTO>(dbContext, mapper);
 
-    // Ось тут відбувається справжнє збереження
+    public IGenericRepository<ReasonDTO> Reasons => 
+        field ??= new DictionaryDataRepository<Reason, ReasonDTO>(dbContext, mapper);
+
     public async Task CompleteAsync()
     {
         try
         {
-            // Спробуємо зберегти дані
             await dbContext.SaveChangesAsync();
         }
         catch (Exception)
         {
-            // Якщо сталася помилка (наприклад ForeignKey) - примусово очищаємо 
-            // пам'ять DbContext від усіх "завислих" змін.
             dbContext.ChangeTracker.Clear();
-
-            // Перекидаємо помилку далі, щоб твоя ViewModel могла її спіймати 
-            // і показати користувачу через MessageBox.
             throw;
         }
     }

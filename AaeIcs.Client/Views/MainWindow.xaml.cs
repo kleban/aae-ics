@@ -7,7 +7,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Navigation;
 using AAEICS.Client.Services;
-using AAEICS.Client.Services.NavigationManager;
+using AAEICS.Client.Services.Navigation;
 
 namespace AAEICS.Client.Views;
 
@@ -20,6 +20,11 @@ public partial class MainWindow: ChromelessWindow, IWindowController
         InitializeComponent();
         DataContext = viewModel;
         App.Services.GetRequiredService<INavigationService>().MainFrame = MainFrame;
+        
+        viewModel.RequestExit = () => 
+        {
+            Application.Current.Shutdown();
+        };
     }
     
     public void ShowMenu() => ViewModel.IsSideMenuVisible = true;

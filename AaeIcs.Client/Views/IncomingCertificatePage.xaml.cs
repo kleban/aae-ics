@@ -12,12 +12,16 @@ public partial class IncomingCertificatePage : Page
     {
         InitializeComponent();
         DataContext = viewModel;
+        Loaded += async (s, e) => 
+        {
+            await viewModel.InitializeAsync();
+        };
     }
     
     private const double PageMinimumWidth = 840;
     
     // Коли сторінка з'являється - реєструємо її вимоги
-    private void Page_Loaded(object sender, RoutedEventArgs e)
+    private async void Page_Loaded(object sender, RoutedEventArgs e)
     {
         if (Window.GetWindow(this) is IWindowController windowController)
         {

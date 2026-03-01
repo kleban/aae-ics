@@ -25,7 +25,7 @@
         <Setter Property="CanUserResizeRows" Value="False" />
         <Setter Property="IsReadOnly" Value="False"/>
         <Setter Property="FontSize" Value="13" />
-        <Setter Property="GridLinesVisibility" Value="All" />
+        <Setter Property="GridLinesVisibility" Value="Vertical" />
         <Setter Property="ColumnWidth" Value="*" />
 
         <Setter Property="Template">
@@ -110,17 +110,9 @@
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property="Margin" Value="0 0" />
+        <Setter Property="Margin" Value="0" />
         <Setter Property="Padding" Value="0"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type DataGridCell}">
-                    <Border Background="{TemplateBinding Background}" BorderThickness="0" SnapsToDevicePixels="True" CornerRadius="5">
-                        <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center" />
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
+
         <Style.Triggers>
             <Trigger Property="IsFocused" Value="True">
                 <Setter Property="BorderThickness" Value="0"/>
@@ -134,6 +126,15 @@
     
 
     <Style x:Key="LockableCellStyle" TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource BaseDataGridCellStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridCell}">
+                    <Border Background="{TemplateBinding Background}" BorderThickness="0" SnapsToDevicePixels="True" CornerRadius="5">
+                        <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
         <Style.Triggers>
             <Trigger Property="IsSelected" Value="True">
                 <Setter Property="Background" Value="{DynamicResource PrimaryBrandBrush}" /> 
@@ -344,7 +345,8 @@
                                HorizontalAlignment="Center" VerticalAlignment="Center"
                                TextWrapping="Wrap" 
                                TextTrimming="CharacterEllipsis" 
-                               ToolTip="{Binding}"/> </DataTemplate>
+                               ToolTip="{Binding}"/>
+                </DataTemplate>
             </Setter.Value>
         </Setter>
         <Setter Property="Template">
@@ -378,7 +380,7 @@
         </Setter>
     </Style>
     
-<Style x:Key="WrapTextElementStyle" TargetType="TextBlock">
+    <Style x:Key="WrapTextElementStyle" TargetType="TextBlock">
         <Setter Property="TextWrapping" Value="Wrap" />
         <Setter Property="Padding" Value="5,2" />
         <Setter Property="VerticalAlignment" Value="Center" />

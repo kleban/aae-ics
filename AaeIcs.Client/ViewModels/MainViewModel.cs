@@ -7,8 +7,8 @@ using System.ComponentModel;
 using System.Windows;
 using AAEICS.Client.Messages;
 using AAEICS.Client.Services;
-using AAEICS.Client.Services.LanguageManager;
-using AAEICS.Client.Services.NavigationManager;
+using AAEICS.Client.Services.Language;
+using AAEICS.Client.Services.Navigation;
 using AAEICS.Client.Views;
 
 using CommunityToolkit.Mvvm.Messaging;
@@ -24,6 +24,10 @@ public partial class MainViewModel : ObservableObject
     private readonly INavigationService _navigationService;
     private readonly ILanguageService _languageService;
       // Прапорець, щоб уникнути зациклення подій
+      
+      // Це наша "змінна для коду". Action означає, що метод не приймає параметрів і нічого не повертає (void)
+    public Action RequestExit { get; set; }
+      
     
     private string _currentPageKey = "HomeAppTitle";
     private double _currentPageMinWidth;
@@ -60,9 +64,11 @@ public partial class MainViewModel : ObservableObject
     }
     
     [RelayCommand]
-    private void CloseApp(ChromelessWindow window)
+    private void CloseApp()
     {
-        window.Close();
+        // Знак питання перевіряє, чи хтось "поклав" туди код. 
+        // Invoke() - це команда "виконай той код, який лежить у цій змінній"
+        RequestExit?.Invoke();
     }
 
     [RelayCommand]

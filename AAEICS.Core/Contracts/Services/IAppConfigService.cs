@@ -5,10 +5,10 @@ namespace AAEICS.Core.Contracts.Services;
 
 public interface IAppConfigService
 {
-    AppConfigDTO GetAppConfig();
     IConfiguration Configuration { get; }
+    
+    AppConfigDTO GetAppConfig();
     string? Get(string key);
     string GetConnectionString();
     void UpdatePath(string key, string value);
 }
-

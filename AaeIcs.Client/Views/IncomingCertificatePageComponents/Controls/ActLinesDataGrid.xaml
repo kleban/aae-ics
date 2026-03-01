@@ -4,9 +4,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:AAEICS.Client.Views.IncomingCertificatePageComponents.Controls"
+             xmlns:local="clr-namespace:AAEICS.Client"
              xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:helpers="clr-namespace:AAEICS.Client.Helpers"
+             xmlns:components="clr-namespace:AAEICS.Client.Views.Components"
              mc:Ignorable="d">
     <Border CornerRadius="10"
             BorderThickness="0"
@@ -20,13 +21,13 @@
             </Grid.RowDefinitions>
             <DockPanel Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <TextBlock DockPanel.Dock="Left"
-                           Text="DATA TABLE" 
+                           Text="{Binding [CertificateLinesDataGridTitle], Source={x:Static local:App.LanguageService}}" 
                            Style="{DynamicResource DashboardTitleFont}" 
                            HorizontalAlignment="Left" VerticalAlignment="Center"
                            Margin="10,0,10,0"/>
                 <Button DockPanel.Dock="Right"
                         Style="{DynamicResource PrimaryButton}"
-                        Content="ADD ROW"
+                        Content="{Binding [CertificateLinesDataGridAddLine], Source={x:Static local:App.LanguageService}}"
                         FontSize="14"
                         helpers:ButtonHelper.CornerRadius="6"
                         Command="{Binding AddRowCommand}"
@@ -54,19 +55,17 @@
                         </DataGridCheckBoxColumn.HeaderTemplate>
                     </DataGridCheckBoxColumn>
                     
-                    <DataGridTemplateColumn Header="Одиниця виміру" Width="66" CellStyle="{StaticResource LockableCellStyle}">
+                    <DataGridTemplateColumn Header="Одиниця виміру" Width="66" CellStyle="{StaticResource BaseDataGridCellStyle}">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <ComboBox 
-                                    ItemsSource="{Binding DataContext.MeasureUnitsList, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                    DisplayMemberPath="Name" 
-                                    SelectedValuePath="UnitId" 
-                                    SelectedValue="{Binding MeasureUnit, UpdateSourceTrigger=PropertyChanged}" 
-                
-                                    BorderThickness="0" 
-                                    Background="Transparent"
-                                    Padding="5,2"
-                                    VerticalAlignment="Center"/>
+                                <components:SearchBoxControl DataContext="{Binding DataContext.MeasureUnitsSearchBox, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                                <!-- <ComboBox -->
+                                <!--     ItemsSource="{Binding DataContext.MeasureUnitsList, RelativeSource={RelativeSource AncestorType=DataGrid}}" -->
+                                <!--     DisplayMemberPath="Name"  -->
+                                <!--     SelectedValuePath="UnitId"  -->
+                                <!--     SelectedValue="{Binding MeasureUnit, UpdateSourceTrigger=PropertyChanged}" -->
+                                <!--     Style="{StaticResource StandardEditableComboBoxStyle}" -->
+                                <!--     DropDownClosed="ComboBox_DropDownClosed"/> -->
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -98,15 +97,15 @@
                         
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Grid>
+                                <Grid Width="auto" HorizontalAlignment="Stretch">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="1"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBox Grid.Column="0" Text="{Binding QuantitySent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource WrapTextEditingStyle}" Background="Transparent"/>
+                                    <TextBox Grid.Column="0" Text="{Binding QuantitySent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="Transparent" BorderThickness="0"/>
                                     <Rectangle Grid.Column="1" Fill="#E0E0E0" />
-                                    <TextBox Grid.Column="2" Text="{Binding CategorySent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource WrapTextEditingStyle}" Background="Transparent"/>
+                                    <TextBox Grid.Column="2" Text="{Binding CategorySent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="Transparent" BorderThickness="0"/>
                                 </Grid>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -145,9 +144,9 @@
                                         <ColumnDefinition Width="1"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBox Grid.Column="0" Text="{Binding QuantityReceived, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource WrapTextEditingStyle}" Background="Transparent"/>
+                                    <TextBox Grid.Column="0" Text="{Binding QuantityReceived, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="Transparent" BorderThickness="0"/>
                                     <Rectangle Grid.Column="1" Fill="#E0E0E0" />
-                                    <TextBox Grid.Column="2" Text="{Binding CategoryReceived, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource WrapTextEditingStyle}" Background="Transparent"/>
+                                    <TextBox Grid.Column="2" Text="{Binding CategoryReceived, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="Transparent" BorderThickness="0"/>
                                 </Grid>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

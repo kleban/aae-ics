@@ -1,8 +1,6 @@
-﻿using AAEICS.Client.Services.LanguageManager;
-using AAEICS.Client.Services.ThemeManager;
-
-using AAEICS.Client.Models;
-
+﻿using AAEICS.Client.Models;
+using AAEICS.Client.Services.Language;
+using AAEICS.Client.Services.Theme;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 

@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:helpers="clr-namespace:AAEICS.Client.Helpers"
       xmlns:controls="clr-namespace:AAEICS.Client.Views.IncomingCertificatePageComponents.Controls"
+      xmlns:components="clr-namespace:AAEICS.Client.Views.Components"
       xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
       mc:Ignorable="d"
       Title="HomePage"
@@ -59,27 +60,37 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             
-                            <Border Grid.Column="0" Style="{StaticResource InputBox}" CornerRadius="10" HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="5">
-                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="5">
-                                    <TextBlock Text="Код ЄДРПОУ" Margin="5" Foreground="Black" VerticalAlignment="Center"/>
-                                    <TextBox Width="150" Margin="5" Text="{Binding IncomingCertificate.Edrpou, UpdateSourceTrigger=PropertyChanged}"/>
-                                </StackPanel>
-                            </Border>
+                            <components:QuestionBoxControl Grid.Column="0" QuestionText="Код ЄДРПОУ">
+                                <components:QuestionBoxControl.InputControls>
+                                    <TextBox Width="150" Text="{Binding IncomingCertificate.Edrpou, UpdateSourceTrigger=PropertyChanged}"/>
+                                </components:QuestionBoxControl.InputControls>
+                            </components:QuestionBoxControl>
                             
-                            <Border Grid.Column="1" Style="{StaticResource InputBox}" CornerRadius="10" HorizontalAlignment="Right" VerticalAlignment="Stretch" Margin="5">
-                                <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="5">
-                                    <TextBlock Text="Посадова особа (введи ID)" Margin="5" Foreground="Black"/>
-                                    <TextBox Width="200" Margin="5" Text="{Binding IncomingCertificate.ApprovePersonId, UpdateSourceTrigger=PropertyChanged}" />
-                                    <syncfusion:SfDatePicker Margin="5" Value="{Binding IncomingCertificate.ApproveDate, UpdateSourceTrigger=PropertyChanged}"/>
-                                </StackPanel>
-                            </Border>
-                        </Grid>
-
-                        <Border Grid.Row="1" Style="{StaticResource CellBorder}" CornerRadius="10" Margin="5,15,5,15">
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">
-                                <TextBlock Text="Акт приймання-передачі запасів" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Bold"/>
+                            <StackPanel Grid.Column="1" Orientation="Vertical">
+                                <components:QuestionBoxControl QuestionText="Посадова особа">
+                                    <components:QuestionBoxControl.InputControls>
+                                        <components:SearchBoxControl DataContext="{Binding ApprovePersonSearchBox}" />
+                                    </components:QuestionBoxControl.InputControls>
+                                </components:QuestionBoxControl>
+                                <components:QuestionBoxControl QuestionText="Дата затвердження">
+                                    <components:QuestionBoxControl.InputControls>
+                                        <syncfusion:SfDatePicker Margin="5" Value="{Binding IncomingCertificate.ApproveDate, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </components:QuestionBoxControl.InputControls>
+                                </components:QuestionBoxControl>
                             </StackPanel>
-                        </Border>
+                        </Grid>
+                        
+                        <components:QuestionBoxControl Grid.Row="1" QuestionText="Акт приймання-передачі запасів №">
+                            <components:QuestionBoxControl.InputControls>
+                                <TextBox Width="150" /> <!-- Text="{Binding IncomingCertificate, UpdateSourceTrigger=PropertyChanged}" -->
+                            </components:QuestionBoxControl.InputControls>
+                        </components:QuestionBoxControl>
+
+                        <!-- <Border Grid.Row="1" Style="{StaticResource CellBorder}" CornerRadius="10" Margin="5,15,5,15"> -->
+                        <!--     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10"> -->
+                        <!--         <TextBlock Text="" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Bold"/> -->
+                        <!--     </StackPanel> -->
+                        <!-- </Border> -->
 
                         <Grid Grid.Row="2" Margin="5">
                             <helpers:FormGrid Background="White">
@@ -142,8 +153,8 @@
                                 </Border>
                                 <Border Grid.Row="3" Grid.Column="1" Style="{StaticResource CellBorder}" HorizontalAlignment="Stretch">
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Підстава (ID причини):" VerticalAlignment="Center" Margin="5" Foreground="Black"/>
-                                        <TextBox Margin="5" VerticalAlignment="Center" BorderThickness="0" MinWidth="150" Text="{Binding IncomingCertificate.ReasonId, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <TextBlock Text="Підстава (Reason):" FontWeight="Bold" VerticalAlignment="Center" Margin="5" Foreground="Black"/>
+                                        <components:SearchBoxControl DataContext="{Binding ReasonSearchBox}" Width="300" HorizontalAlignment="Left" />
                                     </StackPanel>
                                 </Border>
 

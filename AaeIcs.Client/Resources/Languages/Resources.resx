@@ -117,6 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CertificateLinesDataGridAddLine" xml:space="preserve">
+    <value>Add line</value>
+  </data>
+  <data name="CertificateLinesDataGridTitle" xml:space="preserve">
+    <value>Incoming Equipment</value>
+  </data>
+  <data name="CertificateLineName" xml:space="preserve">
+    <value>Name of military equipment</value>
+  </data>
   <data name="CreatedIncomingCertificatesTodayDashboardTitle" xml:space="preserve">
     <value>Created Incoming Certificates Today</value>
   </data>

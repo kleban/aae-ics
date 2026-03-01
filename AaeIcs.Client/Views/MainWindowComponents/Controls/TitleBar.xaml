@@ -49,8 +49,7 @@
                 </Button>
                 
                 <Button Style="{DynamicResource WindowCloseButtonStyle}"
-                        Command="{Binding CloseAppCommand}"
-                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=syncfusion:ChromelessWindow}}">
+                        Command="{Binding CloseAppCommand}">
                     <Path Data="{DynamicResource CloseIcon}" Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}" StrokeThickness="1.5" Width="14" Height="14" Stretch="Uniform"/>
                 </Button>
             </StackPanel>

@@ -1,4 +1,4 @@
-﻿using System.Runtime.InteropServices.Marshalling;
+﻿using AAEICS.Database.Database;
 using AAEICS.Database.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,27 +15,27 @@ public partial class AAEICSDbContext : DbContext
     {
     }
 
-    // public virtual DbSet<Category> Categories { get; set; }
-    //
+    public virtual DbSet<Category> Categories { get; set; }
+    
     // public virtual DbSet<Document> Documents { get; set; }
-    //
+    
     // public virtual DbSet<DocumentIncomingCardLine> DocumentIncomingCardLines { get; set; }
     //
     // public virtual DbSet<DocumentIssueCardLine> DocumentIssueCardLines { get; set; }
     //
     // public virtual DbSet<DocumentType> DocumentTypes { get; set; }
-    //
+    
     // public virtual DbSet<IncomingCardLine> IncomingCardLines { get; set; }
 
     public virtual DbSet<IncomingCertificate> IncomingCertificates { get; set; }
 
     public virtual DbSet<IncomingCertificateLine> IncomingCertificateLines { get; set; }
 
-    // public virtual DbSet<IssuanceCertificate> IssuanceCertificates { get; set; }
-    //
+    public virtual DbSet<IssuanceCertificate> IssuanceCertificates { get; set; }
+    
     // public virtual DbSet<IssueCardLine> IssueCardLines { get; set; }
-    //
-    // public virtual DbSet<IssueCertificateLine> IssueCertificateLines { get; set; }
+    
+    public virtual DbSet<IssueCertificateLine> IssueCertificateLines { get; set; }
 
     public virtual DbSet<MeasureUnit> MeasureUnits { get; set; }
 
@@ -47,9 +47,9 @@ public partial class AAEICSDbContext : DbContext
 
     public virtual DbSet<Reason> Reasons { get; set; }
 
-    public virtual DbSet<RecordCard> RecordCards { get; set; }
+    // public virtual DbSet<RecordCard> RecordCards { get; set; }
 
-    // public virtual DbSet<TransferInstance> TransferInstances { get; set; }
+    public virtual DbSet<TransferInstance> TransferInstances { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -59,5 +59,6 @@ public partial class AAEICSDbContext : DbContext
             .UseCollation("utf8mb4_0900_ai_ci");
 
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(AAEICSDbContext).Assembly);
+        modelBuilder.Seed();
     }
 }

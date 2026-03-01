@@ -11,5 +11,5 @@ public partial class MeasureUnit
 
     public virtual ICollection<IncomingCertificateLine> IncomingCertificateLines { get; set; } = new List<IncomingCertificateLine>();
 
-    // public virtual ICollection<IssueCertificateLine> IssueCertificateLines { get; set; } = new List<IssueCertificateLine>();
+    public virtual ICollection<IssueCertificateLine> IssueCertificateLines { get; set; } = new List<IssueCertificateLine>();
 }

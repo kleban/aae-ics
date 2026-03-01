@@ -1,10 +1,13 @@
-﻿namespace AAEICS.Core.Contracts.Repositories;
+﻿using AAEICS.Core.DTO.General;
+
+namespace AAEICS.Core.Contracts.Repositories;
 
 public interface IUnitOfWork : IDisposable
 {
-    public IIncomingCertificateRepository IncomingCertificatesRepository { get; }
-    // Generic для всього іншого (наприклад, Locations, Activities, якщо треба, просто CRUD)
-    IGenericRepository<T> Repository<T>() where T : class;
-
+    IIncomingCertificateRepository IncomingCertificates { get; }
+    IGenericRepository<RankDTO> Ranks { get; }
+    IGenericRepository<PositionDTO> Positions { get; }
+    IGenericRepository<ReasonDTO> Reasons { get; }
+    
     Task CompleteAsync();
 }

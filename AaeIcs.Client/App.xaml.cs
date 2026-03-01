@@ -1,5 +1,4 @@
 ﻿using AAEICS.Client.Services;
-using AAEICS.Client.Services.SyncfusionLicenseInitializer;
 using AAEICS.Client.Views;
 using AAEICS.Client.ViewModels;
 
@@ -10,7 +9,8 @@ using AAEICS.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
-using AAEICS.Client.Services.LanguageManager;
+using AAEICS.Client.Services.Language;
+using AAEICS.Client.Services.SyncfusionLicenseInitializer;
 using AAEICS.Core.Contracts.Services;
 using AAEICS.Repositories;
 using SplashScreen = AAEICS.Client.Views.SplashScreen;
@@ -29,6 +29,7 @@ public partial class App : Application
         var splashScreen = new SplashScreen();
         splashScreen.Show();
         var services = new ServiceCollection();
+        services.AddLogging();
         services.AddDatabase();
         splashScreen.ProgressBarStatus.Value += 10;
         services.AddRepositories();
