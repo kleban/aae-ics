@@ -48,70 +48,46 @@
     
     <ControlTemplate x:Key="DashboardCardDataGridTemplate">
         <Border Style="{DynamicResource DashboardCardStyle}">
-            <Grid Margin="10">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <DockPanel Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <TextBlock DockPanel.Dock="Left"
-                               Text="DATA TABLE" 
-                               Style="{DynamicResource DashboardTitleFont}" 
-                               HorizontalAlignment="Left" VerticalAlignment="Center"
-                               Margin="10,0,10,0"/>
-                    <Button DockPanel.Dock="Right"
-                            Style="{DynamicResource PrimaryButton}"
-                            Content="ADD ROW"
-                            FontSize="14"
-                            helpers:ButtonHelper.CornerRadius="6"
-                            Command="{Binding AddRowCommand}"
-                            VerticalAlignment="Center" HorizontalAlignment="Right"
-                            Margin="10,0,10,0"
-                            Width="100" Height="30"/>
-                </DockPanel>
-                <DataGrid x:Name="ReadonlyDashboardGrid"
-                          Grid.Row="1" 
-                          ItemsSource="{Binding IncomingCertificates}"
-                          Style="{DynamicResource ReadOnlyDataGridStyle}"
-                          RowStyle="{DynamicResource DataGridRowStyle}"
-                          ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}"
-                          HorizontalScrollBarVisibility="Hidden">
-                    <DataGrid.Columns>
-                        <DataGridCheckBoxColumn Header="C" Width="auto"
-                                                ElementStyle="{DynamicResource CheckBoxStyle}"
-                                                Binding="{Binding IsConfirmed, UpdateSourceTrigger=PropertyChanged}"
-                                                CellStyle="{StaticResource BaseDataGridCellStyle}">
-                            <DataGridCheckBoxColumn.HeaderTemplate>
-                                <DataTemplate>
-                                    <CheckBox Style="{DynamicResource CheckBoxStyle}"
-                                              IsChecked="{Binding DataContext.IsAllConfirmed,
-                                                          RelativeSource={RelativeSource AncestorType=DataGrid}, Mode=TwoWay}"/>
-                                </DataTemplate>
-                            </DataGridCheckBoxColumn.HeaderTemplate>
-                        </DataGridCheckBoxColumn>
-                        
-                        <DataGridTemplateColumn Header="Operations" Width="auto" CellStyle="{StaticResource LockableCellStyle}">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                        <Button Style="{DynamicResource GridEditButton}"
-                                                Command="{Binding DataContext.OpenEditViewCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                                CommandParameter="{Binding .}">
-                                            <icon:PackIconMaterial Kind="PencilOutline" Style="{DynamicResource GridButtonIcon}"/>
-                                        </Button>
-                                        <Button Margin="5 0 0 0" Style="{DynamicResource GridRemoveButton}"
-                                                Command="{Binding DataContext.DeleteRowCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                                CommandParameter="{Binding .}">
-                                            <icon:PackIconMaterial Kind="DeleteOutline" Style="{DynamicResource GridButtonIcon}"/>
-                                        </Button>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
-            </Grid>
+            <DataGrid x:Name="ReadonlyDashboardGrid"
+                      ItemsSource="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}"
+                      Style="{DynamicResource ReadOnlyDataGridStyle}"
+                      RowStyle="{DynamicResource DataGridRowStyle}"
+                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}"
+                      HorizontalScrollBarVisibility="Hidden">
+                <DataGrid.Columns>
+                    <DataGridCheckBoxColumn Header="C" Width="auto"
+                                            ElementStyle="{DynamicResource CheckBoxStyle}"
+                                            Binding="{Binding IsConfirmed, UpdateSourceTrigger=PropertyChanged}"
+                                            CellStyle="{StaticResource BaseDataGridCellStyle}">
+                        <DataGridCheckBoxColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <CheckBox Style="{DynamicResource CheckBoxStyle}"
+                                          IsChecked="{Binding DataContext.IsAllConfirmed,
+                                                      RelativeSource={RelativeSource AncestorType=DataGrid}, Mode=TwoWay}"/>
+                            </DataTemplate>
+                        </DataGridCheckBoxColumn.HeaderTemplate>
+                    </DataGridCheckBoxColumn>
+                    
+                    <DataGridTemplateColumn Header="Operations" Width="auto" CellStyle="{StaticResource LockableCellStyle}">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Button Style="{DynamicResource GridEditButton}"
+                                            Command="{Binding DataContext.OpenEditViewCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                            CommandParameter="{Binding .}">
+                                        <icon:PackIconMaterial Kind="PencilOutline" Style="{DynamicResource GridButtonIcon}"/>
+                                    </Button>
+                                    <Button Margin="5 0 0 0" Style="{DynamicResource GridRemoveButton}"
+                                            Command="{Binding DataContext.DeleteRowCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                            CommandParameter="{Binding .}">
+                                        <icon:PackIconMaterial Kind="DeleteOutline" Style="{DynamicResource GridButtonIcon}"/>
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
         </Border>
     </ControlTemplate>
 </ResourceDictionary>

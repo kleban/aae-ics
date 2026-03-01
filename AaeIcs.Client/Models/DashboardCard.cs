@@ -11,10 +11,10 @@ public partial class DashboardCard : ObservableObject
     
     [ObservableProperty] private string _cardTitle;
     [ObservableProperty] private string _cardDescription;
-    [ObservableProperty] private string _cardValue;
+    [ObservableProperty] private int _cardValue;
     public object CardIcon { get; }
 
-    public DashboardCard(string titleKey, string descriptionKey, object icon, string initialValue)
+    public DashboardCard(string titleKey, string descriptionKey, object icon, int initialValue)
     {
         _titleKey = titleKey;
         _descriptionKey = descriptionKey;

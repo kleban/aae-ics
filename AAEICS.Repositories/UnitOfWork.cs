@@ -1,4 +1,5 @@
 ﻿using AAEICS.Core.Contracts.Repositories;
+using AAEICS.Core.Contracts.Services;
 using AAEICS.Core.DTO.General;
 using AAEICS.Database.Context;
 using AAEICS.Database.Models;
@@ -6,9 +7,14 @@ using AutoMapper;
 
 namespace AAEICS.Repositories;
 
-public class UnitOfWork(AAEICSDbContext dbContext, IMapper mapper, IIncomingCertificateRepository incomingCertificatesRepository): IUnitOfWork
+public class UnitOfWork(
+    AAEICSDbContext dbContext, 
+    IMapper mapper,
+    IIncomingCertificateRepository incomingCertificatesRepository,
+    IIssuanceCertificateRepository issuanceCertificateRepository): IUnitOfWork
 {
     public IIncomingCertificateRepository IncomingCertificates { get; } = incomingCertificatesRepository;
+    public IIssuanceCertificateRepository IssuanceCertificates { get; } = issuanceCertificateRepository;
     
     public IGenericRepository<RankDTO> Ranks => 
         field ??= new DictionaryDataRepository<Rank, RankDTO>(dbContext, mapper);

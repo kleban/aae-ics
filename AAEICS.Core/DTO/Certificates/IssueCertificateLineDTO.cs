@@ -29,4 +29,6 @@ public class IssueCertificateLineDTO
     public CategoryDTO CategoryReceived { get; set; } = null!;
     
     public string? Notes { get; set; }
+    
+    public string? MadeIn { get; set; }
 }

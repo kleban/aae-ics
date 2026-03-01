@@ -62,6 +62,7 @@ public class MappingProfile : Profile
         CreateMap<IssuanceCertificate, IssuanceCertificateDTO>();
 
         CreateMap<IssuanceCertificateDTO, IssuanceCertificate>()
+            .ForMember(dest => dest.IssueCertificateId, opt => opt.Ignore())
             .ForMember(dest => dest.ApprovePersonId, opt => opt.MapFrom(src => src.ApprovePerson.PersonId))
             .ForMember(dest => dest.DeliveryCompanyId, opt => opt.MapFrom(src => src.DeliveryCompany.InstanceId))
             .ForMember(dest => dest.DonorId, opt => opt.MapFrom(src => src.Donor.InstanceId))
@@ -76,6 +77,8 @@ public class MappingProfile : Profile
         CreateMap<IssueCertificateLine, IssueCertificateLineDTO>();
 
         CreateMap<IssueCertificateLineDTO, IssueCertificateLine>()
+            .ForMember(dest => dest.IssueLineId, opt => opt.Ignore())
+            .ForMember(dest => dest.CertificateId, opt => opt.Ignore())
             .ForMember(dest => dest.MeasureUnitId, opt => opt.MapFrom(src => src.MeasureUnit.UnitId))
             .ForMember(dest => dest.CategorySentId, opt => opt.MapFrom(src => src.CategorySent.Id))
             .ForMember(dest => dest.CategoryReceivedId, opt => opt.MapFrom(src => src.CategoryReceived.Id))

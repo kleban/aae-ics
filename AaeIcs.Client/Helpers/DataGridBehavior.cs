@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Threading;
 using AAEICS.Client.ViewModels.Components;
@@ -161,6 +162,18 @@ public static class DataGridBehavior
         // 2. Стилізуємо автоматично згенеровані текстові колонки (залишається без змін)
         if (e.Column is DataGridTextColumn textColumn && sender is FrameworkElement element)
         {
+            // Перевіряємо, чи тип властивості є DateTime або Nullable<DateTime>
+            if (e.PropertyType == typeof(DateTime) || e.PropertyType == typeof(DateTime?))
+            {
+                // Отримуємо поточну прив'язку та копіюємо її з новим форматом
+                if (textColumn.Binding is Binding binding)
+                {
+                    binding.StringFormat = "MMMM dd, yyyy";
+            
+                    // Важливо: StringFormat у коді не потребує екранування \{0:\}, 
+                    // яке ми використовуємо в XAML. Просто пишемо маску.
+                }
+            }
             textColumn.ElementStyle = (Style)element.FindResource("WrapTextElementStyle");
             textColumn.EditingElementStyle = (Style)element.FindResource("WrapTextEditingStyle");
             textColumn.CellStyle = (Style)element.FindResource("LockableCellStyle");

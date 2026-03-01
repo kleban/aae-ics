@@ -28,6 +28,8 @@ public partial class IssueCertificateLine
     public int CategoryReceivedId { get; set; }
 
     public string? Notes { get; set; }
+    
+    public string? MadeIn { get; set; }
 
     public virtual IssuanceCertificate Certificate { get; set; } = null!;
 

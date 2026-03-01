@@ -1,4 +1,5 @@
-﻿using AAEICS.Client.Services;
+﻿using System.Globalization;
+using AAEICS.Client.Services;
 using AAEICS.Client.Views;
 using AAEICS.Client.ViewModels;
 
@@ -9,6 +10,7 @@ using AAEICS.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
+using System.Windows.Markup;
 using AAEICS.Client.Services.Language;
 using AAEICS.Client.Services.SyncfusionLicenseInitializer;
 using AAEICS.Core.Contracts.Services;
@@ -19,6 +21,14 @@ namespace AAEICS.Client;
 
 public partial class App : Application
 {
+    public App()
+    {
+        FrameworkElement.LanguageProperty.OverrideMetadata(
+        typeof(FrameworkElement),
+        new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
+    }
+    
+
     public static IServiceProvider Services { get; private set; } = default!;
     
     public static ILanguageService LanguageService { get; private set; }

@@ -3,10 +3,158 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:local="clr-namespace:AAEICS.Client.Views"
+      xmlns:helpers="clr-namespace:AAEICS.Client.Helpers"
+      xmlns:controls="clr-namespace:AAEICS.Client.Views.IncomingCertificatePageComponents.Controls"
+      xmlns:components="clr-namespace:AAEICS.Client.Views.Components"
+      xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
       mc:Ignorable="d"
-      Title="IssuanceCertificatePage" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+      Title="IssuanceCertificatePage"
+      Width="Auto"
+      Loaded="Page_Loaded">
+    <Page.CommandBindings>
+        <CommandBinding Command="NavigationCommands.BrowseBack" 
+                        CanExecute="BlockBrowseBack_CanExecute"/>
+    </Page.CommandBindings>
+
+    <Border CornerRadius="10"
+            BorderThickness="0"
+            Background="White"
+            Margin="10">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="0.12*"/>
+            </Grid.RowDefinitions>
+            <TabControl Grid.Row="0" Style="{StaticResource TabControlStyle}">
+                <TabItem Style="{StaticResource TabItemStyle}" Header="Загальна інформація">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0" Padding="0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <components:QuestionBoxControl Grid.Column="0" QuestionText="Код ЄДРПОУ" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                    <components:QuestionBoxControl.InputControls>
+                                        <TextBox Style="{StaticResource TextBoxStyle}"
+                                                 Margin="0" Padding="1,2"
+                                                 VerticalAlignment="Center"
+                                                 Width="150"
+                                                 Text="{Binding IssuanceCertificate.Edrpou, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </components:QuestionBoxControl.InputControls>
+                                </components:QuestionBoxControl>
+                                
+                                <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Right">
+                                    <components:QuestionBoxControl QuestionText="Посадова особа">
+                                        <components:QuestionBoxControl.InputControls>
+                                            <components:SearchBoxControl DataContext="{Binding ApprovePersonSearchBox}" />
+                                        </components:QuestionBoxControl.InputControls>
+                                    </components:QuestionBoxControl>
+                                    <components:QuestionBoxControl QuestionText="Дата затвердження">
+                                        <components:QuestionBoxControl.InputControls>
+                                            <syncfusion:SfDatePicker Margin="5" Value="{Binding IssuanceCertificate.ApproveDate, UpdateSourceTrigger=PropertyChanged}"/>
+                                        </components:QuestionBoxControl.InputControls>
+                                    </components:QuestionBoxControl>
+                                </StackPanel>
+                            </Grid>
+                            
+                            <components:QuestionBoxControl Grid.Row="1" QuestionText="Акт приймання-передачі запасів №" HorizontalAlignment="Center">
+                                <components:QuestionBoxControl.InputControls>
+                                    <TextBox Style="{StaticResource TextBoxStyle}"
+                                             Margin="0" Padding="1,2"
+                                             Width="150"/> <!-- Text="{Binding IncomingCertificate, UpdateSourceTrigger=PropertyChanged}" -->
+                                </components:QuestionBoxControl.InputControls>
+                            </components:QuestionBoxControl>
+
+                            <Grid Grid.Row="2" Margin="5">
+                                <helpers:FormGrid Background="White">
+                                    <helpers:FormGrid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </helpers:FormGrid.ColumnDefinitions>
+
+                                    <helpers:FormGrid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </helpers:FormGrid.RowDefinitions>
+                                    
+                                    <components:QuestionBoxControl Grid.Row="0" Grid.Column="0" QuestionText="Дата складання:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                        <components:QuestionBoxControl.InputControls>
+                                            <syncfusion:SfDatePicker Margin="5" Value="{Binding IssuanceCertificate.RegistrationDate, UpdateSourceTrigger=PropertyChanged}"/>
+                                        </components:QuestionBoxControl.InputControls>
+                                    </components:QuestionBoxControl>
+                                    <components:QuestionBoxControl Grid.Row="0" Grid.Column="1" QuestionText="Місце складання:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                        <components:QuestionBoxControl.InputControls>
+                                            <TextBox Style="{StaticResource TextBoxStyle}"
+                                                     Margin="0" Padding="1,2"
+                                                     Width="150"
+                                                     Text="{Binding IssuanceCertificate.RegistrationPlace, UpdateSourceTrigger=PropertyChanged}"/>
+                                        </components:QuestionBoxControl.InputControls>
+                                    </components:QuestionBoxControl>
+                                    <components:QuestionBoxControl Grid.Row="1" Grid.Column="0" QuestionText="Початок передачі:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                        <components:QuestionBoxControl.InputControls>
+                                            <syncfusion:SfDatePicker Margin="5" Value="{Binding IssuanceCertificate.TransferDateStart, UpdateSourceTrigger=PropertyChanged}"/>
+                                        </components:QuestionBoxControl.InputControls>
+                                    </components:QuestionBoxControl>
+                                    <components:QuestionBoxControl Grid.Row="1" Grid.Column="1" QuestionText="Кінець передачі:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                        <components:QuestionBoxControl.InputControls>
+                                            <syncfusion:SfDatePicker Margin="5" Value="{Binding IssuanceCertificate.TransferDateEnd, UpdateSourceTrigger=PropertyChanged}"/>
+                                         </components:QuestionBoxControl.InputControls>
+                                    </components:QuestionBoxControl>
+                                    <components:QuestionBoxControl Grid.Row="2" Grid.Column="0" QuestionText="Відправник:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                        <components:QuestionBoxControl.InputControls>
+                                            <components:SearchBoxControl DataContext="{Binding DonorSearchBox}" Width="300" HorizontalAlignment="Left" />
+                                        </components:QuestionBoxControl.InputControls>
+                                    </components:QuestionBoxControl>
+                                    <components:QuestionBoxControl Grid.Row="2" Grid.Column="1" QuestionText="Одержувач:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                        <components:QuestionBoxControl.InputControls>
+                                            <components:SearchBoxControl DataContext="{Binding RecipientSearchBox}" Width="300" HorizontalAlignment="Left" />
+                                        </components:QuestionBoxControl.InputControls>
+                                    </components:QuestionBoxControl>
+                                    <components:QuestionBoxControl Grid.Row="3" Grid.Column="0" QuestionText="Компанія-перевізник:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                        <components:QuestionBoxControl.InputControls>
+                                            <components:SearchBoxControl DataContext="{Binding DeliveryCompanySearchBox}" Width="300" HorizontalAlignment="Left" />
+                                        </components:QuestionBoxControl.InputControls>
+                                    </components:QuestionBoxControl>
+                                    <components:QuestionBoxControl Grid.Row="3" Grid.Column="1" QuestionText="Підстава:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                        <components:QuestionBoxControl.InputControls>
+                                            <components:SearchBoxControl DataContext="{Binding ReasonSearchBox}" Width="300" HorizontalAlignment="Left" />
+                                        </components:QuestionBoxControl.InputControls>
+                                    </components:QuestionBoxControl>
+                                </helpers:FormGrid>
+                            </Grid>
+                        </Grid>
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem Style="{StaticResource TabItemStyle}" Header="Товари">
+                    <controls:ActLinesDataGrid SourceItems="{Binding IssueCertificateLines}" />
+                </TabItem>
+            </TabControl>
+            <Grid Grid.Row="1" Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" 
+                        Margin="0,0,5,0"
+                        Style="{StaticResource PrimaryButton}"
+                        Content="Зберегти"
+                        Command="{Binding AddCertificateCommand}"/>
+                <Button Grid.Column="1"
+                        Margin="5,0,0,0"
+                        Style="{StaticResource SecondaryButton}"
+                        Content="Скасувати"
+                        Command="{Binding CancelCommand}"/>
+            </Grid>
+        </Grid>
+    </Border>
 </Page>

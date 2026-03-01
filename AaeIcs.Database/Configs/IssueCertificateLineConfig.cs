@@ -28,6 +28,9 @@ public class IssueCertificateLineConfig : IEntityTypeConfiguration<IssueCertific
         entity.Property(e => e.Notes)
             .HasColumnType("VARCHAR")
             .HasColumnName("notes");
+        entity.Property(e => e.MadeIn)
+            .HasColumnType("VARCHAR")
+            .HasColumnName("made_in");
         entity.Property(e => e.OrdinalNumber).HasColumnName("ordinal_number");
         entity.Property(e => e.PricePerUnit).HasColumnName("price_per_unit");
         entity.Property(e => e.QuantityReceived)

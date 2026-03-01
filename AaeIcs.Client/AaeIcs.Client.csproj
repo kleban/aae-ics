@@ -102,6 +102,7 @@
       <None Remove="Assets\DarkTheme\user_icon.png" />
       <None Remove="Assets\LightTheme\setting.png" />
       <None Remove="Assets\LightTheme\settings.png" />
+      <None Remove="Resources\Assets\images\warehouse.png" />
       <Resource Include="Resources\Assets\Images\analytics_icon.png">
         <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       </Resource>
@@ -191,6 +192,9 @@
       <None Remove="Resources\Assets\Fonts\Saira-SemiBold.ttf" />
       <Resource Include="Resources\Assets\Fonts\Saira-SemiBold.ttf" />
       <Resource Include="Resources\Assets\Images\user_icon.png">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Resources\Assets\images\warehouse.png">
         <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       </Resource>
     </ItemGroup>

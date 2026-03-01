@@ -25,4 +25,5 @@
     <BitmapImage x:Key="Icon.Stats" UriSource="pack://application:,,,/Resources/Assets/Images/stats_icon.png" />            
     <BitmapImage x:Key="Icon.Stocks" UriSource="pack://application:,,,/Resources/Assets/Images/stocks_icon.png" />
     <BitmapImage x:Key="Icon.User" UriSource="pack://application:,,,/Resources/Assets/Images/user_icon.png" />
+    <BitmapImage x:Key="Icon.Warehouse" UriSource="pack://application:,,,/Resources/Assets/Images/warehouse.png"/>
 </ResourceDictionary>

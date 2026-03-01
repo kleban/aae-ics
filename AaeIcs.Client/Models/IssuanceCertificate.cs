@@ -1,9 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace AAEICS.Client.Models;
 
-public partial class IncomingCertificate: ObservableObject
+public partial class IssuanceCertificate: ObservableObject
 {
     [ObservableProperty] [property: Display(Name = "CertificateEDRPOU", ResourceType = typeof(Resources.Languages.Resources))]
     private int _edrpou;

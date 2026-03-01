@@ -15,8 +15,10 @@ public class IssuanceCertificateDTO
     public DateTime RegistrationDate { get; set; }
 
     public string RegistrationPlace { get; set; } = null!;
+    
+    public DateTime TransferDateStart { get; set; }
 
-    public DateTime TransferEndDate { get; set; }
+    public DateTime TransferDateEnd { get; set; }
 
     public int DonorId { get; set; }
 

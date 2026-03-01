@@ -127,13 +127,13 @@
     <value>Name of Military Equipment</value>
   </data>
   <data name="CreatedIncomingCertificatesTodayDashboardTitle" xml:space="preserve">
-    <value>Created Incoming Certificates Today</value>
+    <value>Created Incoming Certificates</value>
   </data>
   <data name="CreatedIssuanceCertificatesTodayDashboardTitle" xml:space="preserve">
-    <value>Created Issuance Certificates Today</value>
+    <value>Created Issuance Certificates</value>
   </data>
   <data name="CreatedWtriteOffCertificatesTodayDashboardTitle" xml:space="preserve">
-    <value>Created acts of clarification of the sample/write-off today</value>
+    <value>Created acts of clarification of the sample/write-off</value>
   </data>
   <data name="DarkThemeSettingsOption" xml:space="preserve">
     <value>Dark</value>
@@ -233,5 +233,41 @@
   </data>
   <data name="CertificateLineOperations" xml:space="preserve">
     <value>Operations</value>
+  </data>
+  <data name="CreatedIncomingCertificatesTodayDashboardDescription" xml:space="preserve">
+    <value>Created Incoming Certificates (Click here to navigate)</value>
+  </data>
+  <data name="CreatedIssuanceCertificatesTodayDashboardDescription" xml:space="preserve">
+    <value>Created Issuance Certificates (Click here to navigate)</value>
+  </data>
+  <data name="CertificateEDRPOU" xml:space="preserve">
+    <value>EDRPOU</value>
+  </data>
+  <data name="CertificateApprovePerson" xml:space="preserve">
+    <value>Approve Person</value>
+  </data>
+  <data name="CertificateApproveDate" xml:space="preserve">
+    <value>Approve Date</value>
+  </data>
+  <data name="CertificateRegistrationDate" xml:space="preserve">
+    <value>Registration Date</value>
+  </data>
+  <data name="CertificateRegistrationPlace" xml:space="preserve">
+    <value>Registration Place</value>
+  </data>
+  <data name="CertificateTransferDateStart" xml:space="preserve">
+    <value>Transfer Date Start</value>
+  </data>
+  <data name="CertificateTransferDateEnd" xml:space="preserve">
+    <value>Transfer date End</value>
+  </data>
+  <data name="CertificateDonor" xml:space="preserve">
+    <value>Donor</value>
+  </data>
+  <data name="CertificateRecipient" xml:space="preserve">
+    <value>Recipient</value>
+  </data>
+  <data name="CertificateDeliveryCompany" xml:space="preserve">
+    <value>Delivery Company</value>
   </data>
 </root>

@@ -61,6 +61,51 @@ namespace AAEICS.Client.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Approve Date.
+        /// </summary>
+        public static string CertificateApproveDate {
+            get {
+                return ResourceManager.GetString("CertificateApproveDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Approve Person.
+        /// </summary>
+        public static string CertificateApprovePerson {
+            get {
+                return ResourceManager.GetString("CertificateApprovePerson", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delivery Company.
+        /// </summary>
+        public static string CertificateDeliveryCompany {
+            get {
+                return ResourceManager.GetString("CertificateDeliveryCompany", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Donor.
+        /// </summary>
+        public static string CertificateDonor {
+            get {
+                return ResourceManager.GetString("CertificateDonor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EDRPOU.
+        /// </summary>
+        public static string CertificateEDRPOU {
+            get {
+                return ResourceManager.GetString("CertificateEDRPOU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Batch Number.
         /// </summary>
         public static string CertificateLineBatchNumber {
@@ -187,7 +232,61 @@ namespace AAEICS.Client.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Created Incoming Certificates Today.
+        ///   Looks up a localized string similar to Recipient.
+        /// </summary>
+        public static string CertificateRecipient {
+            get {
+                return ResourceManager.GetString("CertificateRecipient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Registration Date.
+        /// </summary>
+        public static string CertificateRegistrationDate {
+            get {
+                return ResourceManager.GetString("CertificateRegistrationDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Registration Place.
+        /// </summary>
+        public static string CertificateRegistrationPlace {
+            get {
+                return ResourceManager.GetString("CertificateRegistrationPlace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transfer date End.
+        /// </summary>
+        public static string CertificateTransferDateEnd {
+            get {
+                return ResourceManager.GetString("CertificateTransferDateEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transfer Date Start.
+        /// </summary>
+        public static string CertificateTransferDateStart {
+            get {
+                return ResourceManager.GetString("CertificateTransferDateStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Created Incoming Certificates (Click here to navigate).
+        /// </summary>
+        public static string CreatedIncomingCertificatesTodayDashboardDescription {
+            get {
+                return ResourceManager.GetString("CreatedIncomingCertificatesTodayDashboardDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Created Incoming Certificates.
         /// </summary>
         public static string CreatedIncomingCertificatesTodayDashboardTitle {
             get {
@@ -196,7 +295,16 @@ namespace AAEICS.Client.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Created Issuance Certificates Today.
+        ///   Looks up a localized string similar to Created Issuance Certificates (Click here to navigate).
+        /// </summary>
+        public static string CreatedIssuanceCertificatesTodayDashboardDescription {
+            get {
+                return ResourceManager.GetString("CreatedIssuanceCertificatesTodayDashboardDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Created Issuance Certificates.
         /// </summary>
         public static string CreatedIssuanceCertificatesTodayDashboardTitle {
             get {
@@ -205,7 +313,7 @@ namespace AAEICS.Client.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Created acts of clarification of the sample/write-off today.
+        ///   Looks up a localized string similar to Created acts of clarification of the sample/write-off.
         /// </summary>
         public static string CreatedWtriteOffCertificatesTodayDashboardTitle {
             get {

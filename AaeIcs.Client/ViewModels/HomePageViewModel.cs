@@ -1,52 +1,22 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.ComponentModel;
+
 using System.Windows;
 using AAEICS.Client.Models;
 using AAEICS.Core.Contracts.Services;
-using AAEICS.Core.DTO.Certificates;
-using AAEICS.Services;
-using Syncfusion.Windows.Automation.Peers;
 
 namespace AAEICS.Client.ViewModels;
-
-public partial class TableRowItem : ObservableObject
-{
-    [ObservableProperty]
-    private bool _isConfirmed;
-    
-    [ObservableProperty]
-    private string _description;
-    
-    [ObservableProperty]
-    private string _value;
-    
-    [ObservableProperty]
-    private string _value1;
-    
-    [ObservableProperty]
-    private string _value2;
-
-}
 
 public partial class HomePageViewModel : ObservableObject
 {
     private readonly IIncomingCertificateService _incomingCertificateService;
-    // Це і є та сама властивість DashboardItems, до якої ми робили Binding у XAML!
+
     [ObservableProperty]
     private ObservableCollection<DashboardCard> _dashboardItems = new();
     
     [ObservableProperty]
-    private bool _isBusy; // Для відображення індикатора завантаження
-    
-    // Приклад того, як ви зможете оновлювати значення з коду пізніше
-    public void UpdateSalesData(string newSalesValue)
-    {
-        // Оскільки це ObservableProperty, зміна цього поля автоматично оновить цифру на екрані!
-        DashboardItems[0].CardValue = newSalesValue; 
-    }
+    private bool _isBusy;
 
     [ObservableProperty]
     private ObservableCollection<IncomingCertificate> _incomingCertificates = new();
@@ -59,41 +29,30 @@ public partial class HomePageViewModel : ObservableObject
     public HomePageViewModel(IIncomingCertificateService incomingCertificateService)
     {
         _incomingCertificateService = incomingCertificateService;
-        // Ініціалізуємо наш список
+
         DashboardItems =
         [
             new DashboardCard(
-                // ВИКОРИСТОВУЄМО nameof() ! Ми передаємо КЛЮЧ, а не сам текст.
                 titleKey: nameof(Resources.Languages.Resources.CreatedIncomingCertificatesTodayDashboardTitle),
-                descriptionKey: nameof(Resources.Languages.Resources.CreatedIncomingCertificatesTodayDashboardTitle),
-                icon: Application.Current.Resources["Icon.Product"],
-                initialValue: "0"
+                descriptionKey: nameof(Resources.Languages.Resources.CreatedIncomingCertificatesTodayDashboardDescription),
+                icon: Application.Current.Resources["Icon.Warehouse"],
+                initialValue: 0
             ),
 
             new DashboardCard(
                 titleKey: nameof(Resources.Languages.Resources.CreatedIssuanceCertificatesTodayDashboardTitle),
-                descriptionKey: nameof(Resources.Languages.Resources.CreatedIssuanceCertificatesTodayDashboardTitle),
-                icon: Application.Current.Resources["Icon.User"],
-                initialValue: "0"
+                descriptionKey: nameof(Resources.Languages.Resources.CreatedIssuanceCertificatesTodayDashboardDescription),
+                icon: Application.Current.Resources["Icon.Stocks"],
+                initialValue: 0
             ),
-            
-            new DashboardCard(
-                titleKey: nameof(Resources.Languages.Resources.CreatedWtriteOffCertificatesTodayDashboardTitle), // Наприклад: "Продажі"
-                icon: Application.Current.Resources["Icon.Product"],
-                descriptionKey: nameof(Resources.Languages.Resources.CreatedIncomingCertificatesTodayDashboardTitle), // Наприклад: "За цей місяць"
-                initialValue: "0" // Початкове значення
-            ),
-
-
-            new DashboardCard(
-                titleKey: nameof(Resources.Languages.Resources.CreatedIssuanceCertificatesTodayDashboardTitle),
-                descriptionKey: nameof(Resources.Languages.Resources.CreatedIssuanceCertificatesTodayDashboardTitle),
-                icon: Application.Current.Resources["Icon.User"],
-                initialValue: "0"
-            )
         ];
         
         _ = LoadDataAsync();
+    }
+    
+    public void UpdateDashboardData(DashboardCard dashboardCard, int newValue)
+    {
+        dashboardCard.CardValue = newValue;
     }
     
     private async Task LoadDataAsync()
@@ -110,13 +69,18 @@ public partial class HomePageViewModel : ObservableObject
                 data.Select(item => new IncomingCertificate
                 {
                     Edrpou = item.Edrpou,
+                    ApprovePerson = item.ApprovePerson.LastName,
                     ApproveDate = item.ApproveDate,
                     RegistrationDate = item.RegistrationDate,
                     RegistrationPlace = item.RegistrationPlace,
                     TransferDateStart = item.TransferDateStart,
                     TransferDateEnd = item.TransferDateEnd,
+                    Donor = item.Donor.Name,
+                    Recipient = item.Recipient.Name,
+                    DeliveryCompany = item.DeliveryCompany.Name,
                 })
             );
+            UpdateDashboardData(DashboardItems[0], IncomingCertificates.Count);
         }
         catch (Exception ex)
         {

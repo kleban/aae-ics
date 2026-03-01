@@ -14,6 +14,7 @@ public static class ServicesExtensions
 
         // 2. Реєструємо специфічні репозиторії
         services.AddScoped<IIncomingCertificateRepository, IncomingCertificateRepository>();
+        services.AddScoped<IIssuanceCertificateRepository, IssuanceCertificateRepository>();
 
         // 3. Реєструємо UnitOfWork
         services.AddScoped<IUnitOfWork, UnitOfWork>();

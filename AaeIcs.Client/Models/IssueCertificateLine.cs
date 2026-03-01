@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using AAEICS.Client.ViewModels.Components;
 using AAEICS.Core.Contracts.Services;
 using AAEICS.Core.DTO.General;
@@ -6,15 +6,12 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace AAEICS.Client.Models;
 
-public partial class IncomingCertificateLine: ObservableObject
+public partial class IssueCertificateLine: ObservableObject
 {
     [ObservableProperty] private bool _isConfirmed;
     
     [ObservableProperty] [property: Display(Name = "CertificateLineName", ResourceType = typeof(Resources.Languages.Resources))]
     private string _name;
-
-    [ObservableProperty] [property: Display(Name = "CertificateLineNomenclatureCode", ResourceType = typeof(Resources.Languages.Resources))]
-    private string? _nomenclatureCode;
     
     [ObservableProperty] [property: Display(Name = "CertificateLineBatchNumber", ResourceType = typeof(Resources.Languages.Resources))]
     private string _batchNumber;
@@ -49,7 +46,7 @@ public partial class IncomingCertificateLine: ObservableObject
     public SearchBoxViewModel<CategoryDTO> CategoryReceivedSearchBox { get; }
 
     // У конструктор рядка ми передаємо сервіси пошуку з головної ViewModel
-    public IncomingCertificateLine(
+    public IssueCertificateLine(
         IFuzzySearchService<MeasureUnitDTO> measureUnitSearch,
         IFuzzySearchService<CategoryDTO> categorySentSearch,
         IFuzzySearchService<CategoryDTO> categoryReceivedSearch)

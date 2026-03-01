@@ -127,13 +127,13 @@
     <value>Назва військового майна</value>
   </data>
   <data name="CreatedIncomingCertificatesTodayDashboardTitle" xml:space="preserve">
-    <value>Створено актів надходження сьогодні</value>
+    <value>Створено актів надходження</value>
   </data>
   <data name="CreatedIssuanceCertificatesTodayDashboardTitle" xml:space="preserve">
-    <value>Створено актів на видачу сьогодні</value>
+    <value>Створено актів на видачу</value>
   </data>
   <data name="CreatedWtriteOffCertificatesTodayDashboardTitle" xml:space="preserve">
-    <value>Створено актів уточнення зразку/списання сьогодні</value>
+    <value>Створено актів уточнення зразку/списання</value>
   </data>
   <data name="DarkThemeSettingsOption" xml:space="preserve">
     <value>Темна</value>
@@ -233,5 +233,41 @@
   </data>
   <data name="CertificateLineOperations" xml:space="preserve">
     <value>Дії</value>
+  </data>
+  <data name="CreatedIncomingCertificatesTodayDashboardDescription" xml:space="preserve">
+    <value>Створено актів надходження (клацніть тут, щоб перейти до перегляду)</value>
+  </data>
+  <data name="CreatedIssuanceCertificatesTodayDashboardDescription" xml:space="preserve">
+    <value>Створено актів на видачу (клацніть тут, щоб перейти до перегляду)</value>
+  </data>
+  <data name="CertificateEDRPOU" xml:space="preserve">
+    <value>ЄДРПОУ</value>
+  </data>
+  <data name="CertificateApprovePerson" xml:space="preserve">
+    <value>Затвердив</value>
+  </data>
+  <data name="CertificateApproveDate" xml:space="preserve">
+    <value>Дата затвердження</value>
+  </data>
+  <data name="CertificateRegistrationDate" xml:space="preserve">
+    <value>Дата реєстрації</value>
+  </data>
+  <data name="CertificateRegistrationPlace" xml:space="preserve">
+    <value>Місце складання</value>
+  </data>
+  <data name="CertificateTransferDateStart" xml:space="preserve">
+    <value>Дата початку приймання-передачі</value>
+  </data>
+  <data name="CertificateTransferDateEnd" xml:space="preserve">
+    <value>Дата закінчення приймання-передачі</value>
+  </data>
+  <data name="CertificateDonor" xml:space="preserve">
+    <value>Донор</value>
+  </data>
+  <data name="CertificateRecipient" xml:space="preserve">
+    <value>Отримувач</value>
+  </data>
+  <data name="CertificateDeliveryCompany" xml:space="preserve">
+    <value>Служба забезпечення</value>
   </data>
 </root>

@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using AAEICS.Client.Messages;
@@ -12,17 +12,17 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 
-using IncomingCertificate = AAEICS.Client.Models.IncomingCertificate;
-using IncomingCertificateLine = AAEICS.Client.Models.IncomingCertificateLine;
+using IssuanceCertificate = AAEICS.Client.Models.IssuanceCertificate;
+using IssueCertificateLine = AAEICS.Client.Models.IssueCertificateLine;
 
 namespace AAEICS.Client.ViewModels;
 
-public partial class IncomingCertificateViewModel : ObservableObject
+public partial class IssuanceCertificateViewModel : ObservableObject
 {
     private bool _isSyncing;
     
     // Сервіси
-    private readonly IIncomingCertificateService _incomingCertificateService;
+    private readonly IIssuanceCertificateService _issuanceCertificateService;
     private readonly IDictionaryDataService _dataService;
     private readonly IFuzzySearchService<ReasonDTO> _reasonSearch;
     private readonly IFuzzySearchService<PersonnelDTO> _personnelSearch;
@@ -37,10 +37,10 @@ public partial class IncomingCertificateViewModel : ObservableObject
     // ВЛАСТИВОСТІ ДЛЯ UI (BINDING)
     // ==========================================
     [ObservableProperty]
-    private IncomingCertificate _incomingCertificate = new();
+    private IssuanceCertificate _issuanceCertificate = new();
     
     [ObservableProperty]
-    private ObservableCollection<IncomingCertificateLine> _incomingCertificateLines = [];
+    private ObservableCollection<IssueCertificateLine> _issueCertificateLines = [];
 
     [ObservableProperty]
     private bool _isAllConfirmed;
@@ -54,8 +54,8 @@ public partial class IncomingCertificateViewModel : ObservableObject
     // ==========================================
     // КОНСТРУКТОР
     // ==========================================
-    public IncomingCertificateViewModel(
-        IIncomingCertificateService incomingCertificateService,
+    public IssuanceCertificateViewModel(
+        IIssuanceCertificateService issuanceCertificateService,
         IDictionaryDataService dataService,
         IFuzzySearchService<ReasonDTO> reasonSearch,
         IFuzzySearchService<PersonnelDTO> personnelSearch,
@@ -66,7 +66,7 @@ public partial class IncomingCertificateViewModel : ObservableObject
         IFuzzySearchService<CategoryDTO> categorySentSearch,
         IFuzzySearchService<CategoryDTO> categoryReceivedSearch)
     {
-        _incomingCertificateService = incomingCertificateService;
+        _issuanceCertificateService = issuanceCertificateService;
         _dataService = dataService;
         _reasonSearch = reasonSearch;
         _personnelSearch = personnelSearch;
@@ -85,7 +85,7 @@ public partial class IncomingCertificateViewModel : ObservableObject
         DeliveryCompanySearchBox = new SearchBoxViewModel<TransferInstanceDTO>(_deliveryCompanySearch, d => d.Name);
 
         // Підписуємося на події зміни колекції рядків
-        IncomingCertificateLines.CollectionChanged += OnIncomingCertificateLinesCollectionChanged;
+        IssueCertificateLines.CollectionChanged += OnIssueCertificateLinesCollectionChanged;
 
         // Реєструємо месенджери для створення нових довідників через DynamicDialog
         WeakReferenceMessenger.Default.Register<CreateNewItemMessage<ReasonDTO>>(this, async (r, m) => 
@@ -166,7 +166,7 @@ public partial class IncomingCertificateViewModel : ObservableObject
         try
         {
             _isSyncing = true;
-            foreach (var actLine in IncomingCertificateLines)
+            foreach (var actLine in IssueCertificateLines)
             {
                 actLine.IsConfirmed = value;
             }
@@ -176,29 +176,29 @@ public partial class IncomingCertificateViewModel : ObservableObject
 
     private void OnCertificateLinePropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (e.PropertyName == nameof(IncomingCertificateLine.IsConfirmed))
+        if (e.PropertyName == nameof(IssueCertificateLine.IsConfirmed))
             CheckHeaderState();
     }
 
     private void CheckHeaderState()
     {
-        if (_isSyncing || !IncomingCertificateLines.Any()) return;
+        if (_isSyncing || !IssueCertificateLines.Any()) return;
         try
         {
             _isSyncing = true;
-            IsAllConfirmed = IncomingCertificateLines.All(x => x.IsConfirmed);
+            IsAllConfirmed = IssueCertificateLines.All(x => x.IsConfirmed);
         }
         finally { _isSyncing = false; }
     }
 
-    private void OnIncomingCertificateLinesCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    private void OnIssueCertificateLinesCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         if (e.NewItems != null)
-            foreach (IncomingCertificateLine item in e.NewItems)
+            foreach (IssueCertificateLine item in e.NewItems)
                 item.PropertyChanged += OnCertificateLinePropertyChanged;
 
         if (e.OldItems != null)
-            foreach (IncomingCertificateLine item in e.OldItems)
+            foreach (IssueCertificateLine item in e.OldItems)
                 item.PropertyChanged -= OnCertificateLinePropertyChanged;
 
         CheckHeaderState();
@@ -211,20 +211,20 @@ public partial class IncomingCertificateViewModel : ObservableObject
     private void AddRow()
     {
 // Створюємо новий рядок і передаємо йому сервіси для створення його власних SearchBoxViewModel
-        var newLine = new IncomingCertificateLine(
+        var newLine = new IssueCertificateLine(
             _measureUnitSearch, 
             _categorySentSearch, 
             _categoryReceivedSearch
         );
     
-        IncomingCertificateLines.Add(newLine);
+        IssueCertificateLines.Add(newLine);
     }
 
     [RelayCommand]
-    private void DeleteRow(IncomingCertificateLine actLine)
+    private void DeleteRow(IssueCertificateLine actLine)
     {
         if (actLine != null)
-            IncomingCertificateLines.Remove(actLine); 
+            IssueCertificateLines.Remove(actLine); 
     }
 
     // ==========================================
@@ -233,17 +233,16 @@ public partial class IncomingCertificateViewModel : ObservableObject
     [RelayCommand]
     private async Task AddCertificateAsync() 
     {
-        // if (IncomingCertificate == null || ReasonSearchBox.SelectedItem == null || ApprovePersonSearchBox.SelectedItem == null)
+        // if (IssuanceCertificate == null || ReasonSearchBox.SelectedItem == null || ApprovePersonSearchBox.SelectedItem == null)
         // {
         //     System.Windows.MessageBox.Show("Заповніть усі обов'язкові поля (Підстава, Особа)!");
         //     return;
         // }
     
         // 1. Формуємо DTO рядків
-        var linesDto = IncomingCertificateLines.Select((line, index) => new IncomingCertificateLineDTO
+        var linesDto = IssueCertificateLines.Select((line, index) => new IssueCertificateLineDTO
         {
             Name = line.Name,
-            NomenclatureCode = line.NomenclatureCode,
             BatchNumber = line.BatchNumber,
             OrdinalNumber = index + 1,
             // Створюємо MeasureUnitDTO тільки з ID, AutoMapper на бекенді зрозуміє, що робити
@@ -258,14 +257,14 @@ public partial class IncomingCertificateViewModel : ObservableObject
         }).ToList();
     
         // 2. Формуємо головне DTO акту
-        var incomingCertificateDTO = new IncomingCertificateDTO
+        var IssuanceCertificateDTO = new IssuanceCertificateDTO
         {
-            Edrpou = IncomingCertificate.Edrpou,
-            ApproveDate = IncomingCertificate.ApproveDate,
-            RegistrationDate = IncomingCertificate.RegistrationDate,
-            RegistrationPlace = IncomingCertificate.RegistrationPlace,
-            TransferDateStart = IncomingCertificate.TransferDateStart,
-            TransferDateEnd = IncomingCertificate.TransferDateEnd,
+            Edrpou = IssuanceCertificate.Edrpou,
+            ApproveDate = IssuanceCertificate.ApproveDate,
+            RegistrationDate = IssuanceCertificate.RegistrationDate,
+            RegistrationPlace = IssuanceCertificate.RegistrationPlace,
+            TransferDateStart = IssuanceCertificate.TransferDateStart,
+            TransferDateEnd = IssuanceCertificate.TransferDateEnd,
             Donor = DonorSearchBox.SelectedItem,
             Recipient = RecipientSearchBox.SelectedItem,
             DeliveryCompany = DeliveryCompanySearchBox.SelectedItem,
@@ -273,20 +272,20 @@ public partial class IncomingCertificateViewModel : ObservableObject
             Reason = ReasonSearchBox.SelectedItem,
             ApprovePerson = ApprovePersonSearchBox.SelectedItem, 
             
-            IncomingCertificateLines = linesDto
+            IssueCertificateLines = linesDto
         };
     
         try
         {
             // 3. Відправляємо на бекенд (Сервіс сам викличе репозиторій і UnitOfWork.CompleteAsync)
-            var result = await _incomingCertificateService.AddIncomingCertificateAsync(incomingCertificateDTO);
+            var result = await _issuanceCertificateService.AddIssuanceCertificateAsync(IssuanceCertificateDTO);
             
             // Повідомляємо іншим частинам програми про успіх
             WeakReferenceMessenger.Default.Send(new NewCertificateMessage(result));
             
             // Очищення форми
-            IncomingCertificate = new IncomingCertificate();
-            IncomingCertificateLines.Clear();
+            IssuanceCertificate = new IssuanceCertificate();
+            IssueCertificateLines.Clear();
             
             System.Windows.MessageBox.Show("Акт успішно збережено!", "Успіх", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
         }

@@ -15,6 +15,7 @@ public static class ServicesExtensions {
         
         // Реєстрація специфічних сервісів
         services.AddTransient<IIncomingCertificateService, IncomingCertificateService>();
+        services.AddTransient<IIssuanceCertificateService, IssuanceCertificateService>();
         
         // Тепер це запрацює, бо DictionaryDataService успадковує IDictionaryDataService!
         services.AddTransient<IDictionaryDataService, DictionaryDataService>();

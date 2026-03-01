@@ -10,6 +10,7 @@ public static class ViewModelExtensions
         services.AddSingleton<SettingsViewModel>();
         services.AddSingleton<HomePageViewModel>();
         services.AddTransient<IncomingCertificateViewModel>();
+        services.AddTransient<IssuanceCertificateViewModel>();
         
         return services;
     }

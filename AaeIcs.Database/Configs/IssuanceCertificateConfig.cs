@@ -30,9 +30,12 @@ public class IssuanceCertificateConfig : IEntityTypeConfiguration<IssuanceCertif
         entity.Property(e => e.RegistrationPlace)
             .HasColumnType("VARCHAR")
             .HasColumnName("registration_place");
-        entity.Property(e => e.TransferEndDate)
+        entity.Property(e => e.TransferDateStart)
             .HasColumnType("DATE")
-            .HasColumnName("transfer_end_date");
+            .HasColumnName("transfer_date_start");
+        entity.Property(e => e.TransferDateEnd)
+            .HasColumnType("DATE")
+            .HasColumnName("transfer_date_end");
 
         entity.HasOne(d => d.ApprovePerson).WithMany(p => p.IssuanceCertificates)
             .HasForeignKey(d => d.ApprovePersonId)

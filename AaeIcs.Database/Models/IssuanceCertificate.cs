@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace AAEICS.Database.Models;
+﻿namespace AAEICS.Database.Models;
 
 public partial class IssuanceCertificate
 {
@@ -17,7 +14,9 @@ public partial class IssuanceCertificate
 
     public string RegistrationPlace { get; set; } = null!;
 
-    public DateTime TransferEndDate { get; set; }
+    public DateTime TransferDateStart { get; set; }
+
+    public DateTime TransferDateEnd { get; set; }
 
     public int DonorId { get; set; }
 
