@@ -13,7 +13,7 @@ public class TransferInstanceConfig : IEntityTypeConfiguration<TransferInstance>
         entity.HasIndex(e => e.InstanceId, "IX_TransferInstances_instance_id").IsUnique();
 
         entity.Property(e => e.InstanceId)
-            .ValueGeneratedNever()
+            .ValueGeneratedOnAdd()
             .HasColumnName("instance_id");
         entity.Property(e => e.Name)
             .HasColumnType("VARCHAR")
