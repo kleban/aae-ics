@@ -50,10 +50,6 @@
                                     Template="{DynamicResource DashboardCardDataGridTemplate}"
                                     Content="{Binding IncomingCertificates}"
                                     Margin="0,0,0,10" />
-
-                    <ContentControl Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
-                                    Template="{DynamicResource DashboardCardDataGridTemplate}"
-                                    Margin="0,0,0,10" />
                 </Grid>
             </ScrollViewer>
         </Grid>

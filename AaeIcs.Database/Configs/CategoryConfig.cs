@@ -11,7 +11,7 @@ public class CategoryConfig : IEntityTypeConfiguration<Category>
         entity.HasIndex(e => e.Id, "IX_Categories_id").IsUnique();
 
         entity.Property(e => e.Id)
-            .ValueGeneratedNever()
+            .ValueGeneratedOnAdd()
             .HasColumnName("id");
         entity.Property(e => e.Name)
             .HasColumnType("VARCHAR")

@@ -13,7 +13,7 @@ public class IssueCertificateLineConfig : IEntityTypeConfiguration<IssueCertific
         entity.HasIndex(e => e.IssueLineId, "IX_IssueCertificateLines_issue_line_id").IsUnique();
 
         entity.Property(e => e.IssueLineId)
-            .ValueGeneratedNever()
+            .ValueGeneratedOnAdd()
             .HasColumnName("issue_line_id");
         entity.Property(e => e.BatchNumber)
             .HasColumnType("VARCHAR")

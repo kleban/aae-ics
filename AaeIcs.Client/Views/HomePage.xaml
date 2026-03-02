@@ -16,13 +16,15 @@
                         <Setter Property="ContentTemplate" Value="{DynamicResource LaptopLayout}" />
                     
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding ElementName=ThisPage, Path=ActualWidth, Converter={x:Static converters:IsGreaterThanConverter.Instance}, ConverterParameter=1400}" Value="True">
+                            <DataTrigger Binding="{Binding ElementName=ThisPage, Path=ActualWidth, 
+                                         Converter={x:Static converters:IsGreaterThanConverter.Instance}, 
+                                         ConverterParameter=1400}" Value="True">
                                 <Setter Property="ContentTemplate" Value="{DynamicResource DesktopLayout}" />
                             </DataTrigger>
                         
                             <DataTrigger Binding="{Binding ElementName=ThisPage, Path=ActualWidth,
                                          Converter={x:Static converters:IsLessThanConverter.Instance},
-                                         ConverterParameter=1200}" Value="True">
+                                         ConverterParameter=860}" Value="True">
                                 <Setter Property="ContentTemplate" Value="{DynamicResource TabletLayout}" />
                             </DataTrigger>
                         </Style.Triggers>
