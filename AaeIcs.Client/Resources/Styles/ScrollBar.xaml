@@ -52,6 +52,29 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    <Style x:Key="ScrollBarHorizontalThumbStyle" TargetType="Thumb">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Thumb">
+                    <Border x:Name="ThumbBorder" 
+                            Background="{StaticResource ScrollColor}" 
+                            CornerRadius="2" 
+                            Height="4" 
+                            VerticalAlignment="Center" />
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="ThumbBorder" Property="Background" Value="{StaticResource ScrollHoverColor}" />
+                        </Trigger>
+                        <Trigger Property="IsDragging" Value="true">
+                            <Setter TargetName="ThumbBorder" Property="Background" Value="{StaticResource ScrollPressedColor}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 
     <Style TargetType="ScrollBar">
         <Style.Triggers>
@@ -81,6 +104,38 @@
                                               Style="{StaticResource ScrollBarButtonStyle}" 
                                               Command="ScrollBar.LineDownCommand"
                                               Content="M 0 0 L 4 4 L 8 0 Z" />
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="Orientation" Value="Horizontal">
+                <Setter Property="Height" Value="14" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ScrollBar">
+                            <Grid Background="Transparent">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition MaxWidth="18"/>
+                                    <ColumnDefinition Width="0.00001*"/>
+                                    <ColumnDefinition MaxWidth="18"/>
+                                </Grid.ColumnDefinitions>
+
+                                <RepeatButton Grid.Column="0" 
+                                              Style="{StaticResource ScrollBarButtonStyle}" 
+                                              Command="ScrollBar.LineLeftCommand"
+                                              Content="M 4 0 L 0 4 L 4 8 Z" />
+                    
+                                <Track Name="PART_Track" Grid.Column="1" IsDirectionReversed="False">
+                                    <Track.Thumb>
+                                        <Thumb Style="{StaticResource ScrollBarHorizontalThumbStyle}" />
+                                    </Track.Thumb>
+                                </Track>
+
+                                <RepeatButton Grid.Column="2" 
+                                              Style="{StaticResource ScrollBarButtonStyle}" 
+                                              Command="ScrollBar.LineRightCommand"
+                                              Content="M 0 0 L 4 4 L 0 8 Z" />
                             </Grid>
                         </ControlTemplate>
                     </Setter.Value>

@@ -56,10 +56,12 @@
 
                     <ContentControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                                     Template="{DynamicResource DashboardCardDataGridTemplate}"
+                                    Content="{Binding IncomingCertificates}"
                                     Margin="{StaticResource CardMarginLeft}" />
 
                     <ContentControl Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2"
                                     Template="{DynamicResource DashboardCardDataGridTemplate}"
+                                    Content="{Binding IncomingCertificates}"
                                     Margin="{StaticResource CardMarginRight}" />
                 </Grid>
             </ScrollViewer>

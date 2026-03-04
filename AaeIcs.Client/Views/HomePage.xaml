@@ -7,27 +7,166 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:AAEICS.Client"
       xmlns:converters="clr-namespace:AAEICS.Client.Converters"
-      mc:Ignorable="d" Width="auto"
+      xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+      mc:Ignorable="d"
       Loaded="Page_Loaded">
-    <Grid Margin="10,0,10,0">
-        <ContentControl Content="{Binding}">
-                <ContentControl.Style>
-                    <Style TargetType="ContentControl">
-                        <Setter Property="ContentTemplate" Value="{DynamicResource LaptopLayout}" />
+      
+    <Page.Resources>
+        <DataTemplate x:Key="CertificateCardTemplate">
+            <Border Background="{DynamicResource WindowMainFrameBackgroundBrush}" 
+                    BorderBrush="LightGray" BorderThickness="1" 
+                    CornerRadius="8" Margin="0,0,0,10" Padding="15">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
                     
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding ElementName=ThisPage, Path=ActualWidth, Converter={x:Static converters:IsGreaterThanConverter.Instance}, ConverterParameter=1400}" Value="True">
-                                <Setter Property="ContentTemplate" Value="{DynamicResource DesktopLayout}" />
-                            </DataTrigger>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="{Binding Edrpou, StringFormat='ЄДРПОУ: {0}'}" FontWeight="Bold" FontSize="16"/>
+                        <TextBlock Text="{Binding RegistrationPlace, StringFormat='Місце: {0}'}" Margin="0,5,0,0"/>
+                        <TextBlock Text="{Binding RegistrationDate, StringFormat='Дата: {0:dd.MM.yyyy}'}" Foreground="Gray" Margin="0,5,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top">
+                        <Button Style="{StaticResource GridEditButton}" Margin="0,0,5,0">
+                            <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource GridButtonIcon}"/>
+                        </Button>
+                        <Button Style="{StaticResource GridRemoveButton}">
+                            <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource GridButtonIcon}"/>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid Margin="10,0,10,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" /> <RowDefinition Height="*" />    </Grid.RowDefinitions>
+
+        <ItemsControl Grid.Row="0" ItemsSource="{Binding DashboardItems}" ItemTemplate="{StaticResource DashboardCardDataTemplate}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid>
+                        <UniformGrid.Style>
+                            <Style TargetType="UniformGrid">
+                                <Setter Property="Columns" Value="4" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ElementName=ThisPage, Path=ActualWidth, Converter={x:Static converters:IsLessThanConverter.Instance}, ConverterParameter=900}" Value="True">
+                                        <Setter Property="Columns" Value="2" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </UniformGrid.Style>
+                    </UniformGrid>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemContainerStyle>
+                <Style TargetType="ContentPresenter">
+                    <Setter Property="Margin" Value="5" />
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+        </ItemsControl>
+
+        <Grid Grid.Row="1" Margin="0,10,0,0">
+            
+<Grid x:Name="DesktopTableView">
+    <Grid.Style>
+        <Style TargetType="Grid">
+            <Setter Property="Visibility" Value="Visible"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=ThisPage, Path=ActualWidth, Converter={x:Static converters:IsLessThanConverter.Instance}, ConverterParameter=900}" Value="True">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Grid.Style>
+
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/> <RowDefinition Height="*"/>    </Grid.RowDefinitions>
+
+    <Border Grid.Row="0" BorderBrush="LightGray" BorderThickness="0,0,0,1" Padding="0,5,15,5">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="90" />   <ColumnDefinition Width="1.5*" /> <ColumnDefinition Width="90" />   <ColumnDefinition Width="2.5*" /> <ColumnDefinition Width="1.5*" /> <ColumnDefinition Width="1.5*" /> <ColumnDefinition Width="90" />   </Grid.ColumnDefinitions>
+            
+            <TextBlock Grid.Column="0" Text="ЄДРПОУ" FontWeight="SemiBold" Margin="5,0"/>
+            <TextBlock Grid.Column="1" Text="Затвердив" FontWeight="SemiBold" Margin="5,0"/>
+            <TextBlock Grid.Column="2" Text="Реєстрація" FontWeight="SemiBold" Margin="5,0"/>
+            <TextBlock Grid.Column="3" Text="Місце реєстрації" FontWeight="SemiBold" Margin="5,0"/>
+            <TextBlock Grid.Column="4" Text="Донор" FontWeight="SemiBold" Margin="5,0"/>
+            <TextBlock Grid.Column="5" Text="Отримувач" FontWeight="SemiBold" Margin="5,0"/>
+            <TextBlock Grid.Column="6" Text="Операції" FontWeight="SemiBold" Margin="5,0" HorizontalAlignment="Right"/>
+        </Grid>
+    </Border>
+
+    <ListBox Grid.Row="1" 
+             ItemsSource="{Binding IncomingCertificates}"
+             SelectedItem="{Binding SelectedCertificate}"
+             HorizontalContentAlignment="Stretch"
+             BorderThickness="0" Background="Transparent"
+             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <ListBox.ItemTemplate>
+            <DataTemplate>
+                <Border BorderBrush="#F0F0F0" BorderThickness="0,0,0,1" Padding="0,10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="90" />
+                            <ColumnDefinition Width="1.5*" />
+                            <ColumnDefinition Width="90" />
+                            <ColumnDefinition Width="2.5*" />
+                            <ColumnDefinition Width="1.5*" />
+                            <ColumnDefinition Width="1.5*" />
+                            <ColumnDefinition Width="90" />
+                        </Grid.ColumnDefinitions>
                         
-                            <DataTrigger Binding="{Binding ElementName=ThisPage, Path=ActualWidth,
-                                         Converter={x:Static converters:IsLessThanConverter.Instance},
-                                         ConverterParameter=1200}" Value="True">
-                                <Setter Property="ContentTemplate" Value="{DynamicResource TabletLayout}" />
+                        <TextBlock Grid.Column="0" Text="{Binding Edrpou}" Margin="5,0" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                        
+                        <TextBlock Grid.Column="1" Text="{Binding ApprovePerson}" Margin="5,0" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                        
+                        <TextBlock Grid.Column="2" Text="{Binding RegistrationDate, StringFormat=\{0:dd.MM.yyyy\}}" Margin="5,0" VerticalAlignment="Center"/>
+                        
+                        <TextBlock Grid.Column="3" Text="{Binding RegistrationPlace}" Margin="5,0,15,0" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                        
+                        <TextBlock Grid.Column="4" Text="{Binding Donor}" Margin="5,0" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                        
+                        <TextBlock Grid.Column="5" Text="{Binding Recipient}" Margin="5,0" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                        
+                        <StackPanel Grid.Column="6" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5,0">
+                            <Button Style="{StaticResource GridEditButton}">
+                                <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource GridButtonIcon}"/>
+                            </Button>
+                            <Button Margin="5,0,0,0" Style="{StaticResource GridRemoveButton}">
+                                <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource GridButtonIcon}"/>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </DataTemplate>
+        </ListBox.ItemTemplate>
+    </ListBox>
+</Grid>
+
+            <ListBox x:Name="MobileCardView"
+                     ItemsSource="{Binding IncomingCertificates}"
+                     SelectedItem="{Binding SelectedCertificate}"
+                     ItemTemplate="{StaticResource CertificateCardTemplate}"
+                     BorderThickness="0" Background="Transparent"
+                     HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListBox.Style>
+                    <Style TargetType="ListBox">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=ThisPage, Path=ActualWidth, Converter={x:Static converters:IsLessThanConverter.Instance}, ConverterParameter=900}" Value="True">
+                                <Setter Property="Visibility" Value="Visible"/>
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
-                </ContentControl.Style>
-            </ContentControl>
+                </ListBox.Style>
+            </ListBox>
+            
+        </Grid>
     </Grid>
 </Page>

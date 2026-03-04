@@ -105,7 +105,11 @@
                                 Template="{DynamicResource NavBar}"
                                 Margin="10"/>
             
-                <Frame Grid.Row="1" x:Name="MainFrame" NavigationUIVisibility="Hidden" Margin="0" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <Frame Grid.Row="1" x:Name="MainFrame" 
+                       NavigationUIVisibility="Hidden" 
+                       Margin="0" Padding="0" 
+                       HorizontalContentAlignment="Stretch" 
+                       VerticalContentAlignment="Stretch"/>
             </Grid>
         </Border>
     </Grid>

@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                    xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
                     xmlns:helpers="clr-namespace:AAEICS.Client.Helpers">
     
     <Thickness x:Key="CardMarginLeft">0,0,5,10</Thickness>
@@ -47,47 +47,104 @@
     </DataTemplate>
     
     <ControlTemplate x:Key="DashboardCardDataGridTemplate">
-        <Border Style="{DynamicResource DashboardCardStyle}">
-            <DataGrid x:Name="ReadonlyDashboardGrid"
-                      ItemsSource="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}"
-                      Style="{DynamicResource ReadOnlyDataGridStyle}"
-                      RowStyle="{DynamicResource DataGridRowStyle}"
-                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}"
-                      HorizontalScrollBarVisibility="Hidden">
-                <DataGrid.Columns>
-                    <DataGridCheckBoxColumn Header="C" Width="auto"
-                                            ElementStyle="{DynamicResource CheckBoxStyle}"
-                                            Binding="{Binding IsConfirmed, UpdateSourceTrigger=PropertyChanged}"
-                                            CellStyle="{StaticResource BaseDataGridCellStyle}">
-                        <DataGridCheckBoxColumn.HeaderTemplate>
-                            <DataTemplate>
-                                <CheckBox Style="{DynamicResource CheckBoxStyle}"
-                                          IsChecked="{Binding DataContext.IsAllConfirmed,
-                                                      RelativeSource={RelativeSource AncestorType=DataGrid}, Mode=TwoWay}"/>
-                            </DataTemplate>
-                        </DataGridCheckBoxColumn.HeaderTemplate>
-                    </DataGridCheckBoxColumn>
-                    
-                    <DataGridTemplateColumn Header="Operations" Width="auto" CellStyle="{StaticResource LockableCellStyle}">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                    <Button Style="{DynamicResource GridEditButton}"
-                                            Command="{Binding DataContext.OpenEditViewCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                            CommandParameter="{Binding .}">
-                                        <icon:PackIconMaterial Kind="PencilOutline" Style="{DynamicResource GridButtonIcon}"/>
-                                    </Button>
-                                    <Button Margin="5 0 0 0" Style="{DynamicResource GridRemoveButton}"
-                                            Command="{Binding DataContext.DeleteRowCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                            CommandParameter="{Binding .}">
-                                        <icon:PackIconMaterial Kind="DeleteOutline" Style="{DynamicResource GridButtonIcon}"/>
-                                    </Button>
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
+        <Border x:Name="HostBorder" Style="{DynamicResource DashboardCardStyle}">
+            <!-- <DataGrid x:Name="ReadonlyDashboardGrid" -->
+            <!--           ItemsSource="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}" -->
+            <!--           Style="{DynamicResource ReadOnlyDataGridStyle}" -->
+            <!--           RowStyle="{DynamicResource DataGridRowStyle}" -->
+            <!--           ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}"> -->
+            <!--     <DataGrid.Columns> -->
+            <!--         <DataGridCheckBoxColumn Header="C" Width="Auto" -->
+            <!--                                 ElementStyle="{DynamicResource CheckBoxStyle}" -->
+            <!--                                 Binding="{Binding IsConfirmed, UpdateSourceTrigger=PropertyChanged}" -->
+            <!--                                 CellStyle="{StaticResource BaseDataGridCellStyle}"> -->
+            <!--             <DataGridCheckBoxColumn.HeaderTemplate> -->
+            <!--                 <DataTemplate> -->
+            <!--                     <CheckBox Style="{DynamicResource CheckBoxStyle}" -->
+            <!--                               IsChecked="{Binding DataContext.IsAllConfirmed, -->
+            <!--                                           RelativeSource={RelativeSource AncestorType=DataGrid}, Mode=TwoWay}"/> -->
+            <!--                 </DataTemplate> -->
+            <!--             </DataGridCheckBoxColumn.HeaderTemplate> -->
+            <!--         </DataGridCheckBoxColumn> -->
+            <!--          -->
+            <!--         <DataGridTextColumn Header="ЄДРПОУ" Binding="{Binding Edrpou}" Width="Auto" ElementStyle="{StaticResource LockableCellStyle}"/> -->
+            <!--         <DataGridTextColumn Header="Особа, що затвердила" Binding="{Binding ApprovePerson}" Width="Auto" ElementStyle="{StaticResource LockableCellStyle}"/> -->
+            <!--         <DataGridTextColumn Header="Дата затвердження" Binding="{Binding ApproveDate, StringFormat=\{0:dd.MM.yyyy\}}" Width="Auto" ElementStyle="{StaticResource LockableCellStyle}"/> -->
+            <!--         <DataGridTextColumn Header="Дата реєстрації" Binding="{Binding RegistrationDate, StringFormat=\{0:dd.MM.yyyy\}}" Width="Auto" ElementStyle="{StaticResource LockableCellStyle}"/> -->
+            <!--         <DataGridTextColumn Header="Місце реєстрації" Binding="{Binding RegistrationPlace}" Width="Auto" ElementStyle="{StaticResource LockableCellStyle}"/> -->
+            <!--         <DataGridTextColumn Header="Дата початку передачі" Binding="{Binding TransferDateStart, StringFormat=\{0:dd.MM.yyyy\}}" Width="Auto" ElementStyle="{StaticResource LockableCellStyle}"/> -->
+            <!--         <DataGridTextColumn Header="Дата кінця передачі" Binding="{Binding TransferDateEnd, StringFormat=\{0:dd.MM.yyyy\}}" Width="Auto" ElementStyle="{StaticResource LockableCellStyle}"/> -->
+            <!--         <DataGridTextColumn Header="Донор" Binding="{Binding Donor}" Width="Auto" ElementStyle="{StaticResource LockableCellStyle}"/> -->
+            <!--         <DataGridTextColumn Header="Отримувач" Binding="{Binding Recipient}" Width="Auto" ElementStyle="{StaticResource LockableCellStyle}"/> -->
+            <!--         <DataGridTextColumn Header="Компанія доставки" Binding="{Binding DeliveryCompany}" Width="Auto" ElementStyle="{StaticResource LockableCellStyle}"/> -->
+            <!--          -->
+            <!--         <DataGridTemplateColumn Header="Operations" Width="*" CellStyle="{StaticResource LockableCellStyle}"> -->
+            <!--             <DataGridTemplateColumn.CellTemplate> -->
+            <!--                 <DataTemplate> -->
+            <!--                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center"> -->
+            <!--                         <Button Style="{DynamicResource GridEditButton}" -->
+            <!--                                 Command="{Binding DataContext.OpenEditViewCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" -->
+            <!--                                 CommandParameter="{Binding .}"> -->
+            <!--                             <icon:PackIconMaterial Kind="PencilOutline" Style="{DynamicResource GridButtonIcon}"/> -->
+            <!--                         </Button> -->
+            <!--                         <Button Margin="5 0 0 0" Style="{DynamicResource GridRemoveButton}" -->
+            <!--                                 Command="{Binding DataContext.DeleteRowCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" -->
+            <!--                                 CommandParameter="{Binding .}"> -->
+            <!--                             <icon:PackIconMaterial Kind="DeleteOutline" Style="{DynamicResource GridButtonIcon}"/> -->
+            <!--                         </Button> -->
+            <!--                     </StackPanel> -->
+            <!--                 </DataTemplate> -->
+            <!--             </DataGridTemplateColumn.CellTemplate> -->
+            <!--         </DataGridTemplateColumn> -->
+            <!--     </DataGrid.Columns> -->
+            <!-- </DataGrid> -->
+            
+
+                <DataGrid ItemsSource="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}"
+                          x:Name="membersDataGrid"
+                          HorizontalAlignment="Left"
+                          VerticalScrollBarVisibility="Auto"
+                          HorizontalScrollBarVisibility="Auto"
+                          AutoGenerateColumns="False"
+                          ColumnWidth="*">
+                    <DataGrid.Columns>
+                        <DataGridCheckBoxColumn Header="C" CanUserResize="False" ElementStyle="{StaticResource CheckBoxStyle}">
+                            <DataGridCheckBoxColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <CheckBox Style="{StaticResource CheckBoxStyle}"/>
+                                </DataTemplate>
+                            </DataGridCheckBoxColumn.HeaderTemplate>
+                        </DataGridCheckBoxColumn>
+                        
+                        
+                        <DataGridTextColumn Header="ЄДРПОУ" Binding="{Binding Edrpou}" />
+                        <DataGridTextColumn Header="Особа, що затвердила" Binding="{Binding ApprovePerson}" />
+                        <DataGridTextColumn Header="Дата затвердження" Binding="{Binding ApproveDate, StringFormat=\{0:dd.MM.yyyy\}}" />
+                        <DataGridTextColumn Header="Дата реєстрації" Binding="{Binding RegistrationDate, StringFormat=\{0:dd.MM.yyyy\}}"  />
+                        <DataGridTextColumn Header="Місце реєстрації" Binding="{Binding RegistrationPlace}"  />
+                        <DataGridTextColumn Header="Дата початку передачі" Binding="{Binding TransferDateStart, StringFormat=\{0:dd.MM.yyyy\}}"  />
+                        <DataGridTextColumn Header="Дата кінця передачі" Binding="{Binding TransferDateEnd, StringFormat=\{0:dd.MM.yyyy\}}"  />
+                        <DataGridTextColumn Header="Донор" Binding="{Binding Donor}"  />
+                        <DataGridTextColumn Header="Отримувач" Binding="{Binding Recipient}"  />
+                        <DataGridTextColumn Header="Компанія доставки" Binding="{Binding DeliveryCompany}"  />
+                        
+                        
+                        <DataGridTemplateColumn Header="Operations" IsReadOnly="True"  >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Style="{StaticResource GridEditButton}">
+                                            <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource GridButtonIcon}"/>
+                                        </Button>
+                                        <Button Margin="5 0 0 0" Style="{StaticResource GridRemoveButton}">
+                                            <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource GridButtonIcon}"/>
+                                        </Button>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
         </Border>
     </ControlTemplate>
 </ResourceDictionary>
