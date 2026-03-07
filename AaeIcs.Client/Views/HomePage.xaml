@@ -1,35 +1,60 @@
 ﻿<Page x:Class="AAEICS.Client.Views.HomePage"
       x:Name="ThisPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:AAEICS.Client"
       xmlns:converters="clr-namespace:AAEICS.Client.Converters"
-      mc:Ignorable="d" Width="auto"
+      xmlns:controls="clr-namespace:AAEICS.Client.Views.HomePageComponents.Controls"
+      mc:Ignorable="d"
       Loaded="Page_Loaded">
-    <Grid Margin="10,0,10,0">
-        <ContentControl Content="{Binding}">
-                <ContentControl.Style>
-                    <Style TargetType="ContentControl">
-                        <Setter Property="ContentTemplate" Value="{DynamicResource LaptopLayout}" />
+    
+    <Border 
+        Margin="10,0,10,10" 
+        Background="Transparent" 
+        CornerRadius="10"
+        BorderThickness="0">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" /> 
+                <RowDefinition Height="*" />    
+            </Grid.RowDefinitions>
+            
+            <ContentControl Grid.Row="0"
+                            ContentTemplate="{StaticResource DashboardCards}"
+                            Content="{Binding}"/>
+
+            <Border Grid.Row="1" Style="{StaticResource DashboardCardStyle}">
+                <Grid Margin="0" Background="Transparent">
+                    <controls:TableView ItemsSource="{Binding IncomingCertificates}"
+                                        ShowOperationsColumn="True">
+                        <controls:TableView.Style>
+                            <Style TargetType="controls:TableView">
+                                <Setter Property="Visibility" Value="Visible"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ElementName=ThisPage, Path=ActualWidth, Converter={x:Static converters:IsLessThanConverter.Instance}, ConverterParameter=900}" Value="True">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </controls:TableView.Style>
+                    </controls:TableView>
                     
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding ElementName=ThisPage, Path=ActualWidth, 
-                                         Converter={x:Static converters:IsGreaterThanConverter.Instance}, 
-                                         ConverterParameter=1400}" Value="True">
-                                <Setter Property="ContentTemplate" Value="{DynamicResource DesktopLayout}" />
-                            </DataTrigger>
-                        
-                            <DataTrigger Binding="{Binding ElementName=ThisPage, Path=ActualWidth,
-                                         Converter={x:Static converters:IsLessThanConverter.Instance},
-                                         ConverterParameter=860}" Value="True">
-                                <Setter Property="ContentTemplate" Value="{DynamicResource TabletLayout}" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </ContentControl.Style>
-            </ContentControl>
-    </Grid>
+                    <controls:CardView ItemsSource="{Binding IncomingCertificates}" ShowOperationsColumn="True">
+                        <controls:CardView.Style>
+                            <Style TargetType="controls:CardView">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ElementName=ThisPage, Path=ActualWidth, Converter={x:Static converters:IsLessThanConverter.Instance}, ConverterParameter=900}" Value="True">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </controls:CardView.Style>
+                    </controls:CardView>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
 </Page>

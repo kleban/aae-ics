@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="AAEICS.Client.Views.IncomingCertificatePageComponents.Controls.ActLinesDataGrid"
+﻿<UserControl x:Class="AAEICS.Client.Views.IncomingCertificatePageComponents.Controls.CertificateLinesEditor"
              x:Name="Root"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -56,7 +56,7 @@
                         </DataGridCheckBoxColumn.HeaderTemplate>
                     </DataGridCheckBoxColumn>
                     
-                    <DataGridTemplateColumn Header="{Binding [CertificateLineMeasureUnit], Source={x:Static local:App.LanguageService}}"  Width="66" CellStyle="{StaticResource BaseDataGridCellStyle}">
+                    <DataGridTemplateColumn Header="{Binding [CertificateLineMeasureUnit], Source={x:Static local:App.LanguageService}}"  Width="66" CellStyle="{StaticResource LockableCellStyle}">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <components:SearchBoxControl DataContext="{Binding MeasureUnitSearchBox}" />
@@ -64,7 +64,7 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     
-                    <DataGridTemplateColumn Width="160" 
+                    <DataGridTemplateColumn Width="170" 
                                             CellStyle="{StaticResource LockableCellStyle}">
                         <DataGridTemplateColumn.HeaderTemplate>
                             <DataTemplate>
@@ -136,7 +136,7 @@
                         </DataGridTemplateColumn.CellEditingTemplate>
                     </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn Width="160" CellStyle="{StaticResource LockableCellStyle}">
+                    <DataGridTemplateColumn Width="170" CellStyle="{StaticResource LockableCellStyle}">
                         <DataGridTemplateColumn.HeaderTemplate>
                             <DataTemplate>
                             <Grid Width="auto">
@@ -202,7 +202,11 @@
                         </DataGridTemplateColumn.CellEditingTemplate>
                     </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn Header="{Binding [CertificateLineOperations], Source={x:Static local:App.LanguageService}}" Width="auto" CellStyle="{StaticResource LockableCellStyle}" MinWidth="30">
+                    <DataGridTemplateColumn 
+                        CanUserResize="False"
+                        Header="{Binding [CertificateLineOperations], Source={x:Static local:App.LanguageService}}" 
+                        Width="auto" 
+                        CellStyle="{StaticResource LockableCellStyle}" MinWidth="30">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Style="{DynamicResource GridRemoveButton}"

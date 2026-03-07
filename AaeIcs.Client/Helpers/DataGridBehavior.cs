@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+﻿﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Windows;
 using System.Windows.Controls;
@@ -85,7 +85,7 @@ public static class DataGridBehavior
             {
                 textBox.Focus();
                 textBox.SelectionLength = 0;
-                textBox.CaretIndex = textBox.Text.Length;
+                textBox.CaretIndex = 0;
             }), DispatcherPriority.Normal);
         }
         else
@@ -94,7 +94,7 @@ public static class DataGridBehavior
             {
                 textBox.Focus();
                 textBox.SelectionLength = 0;
-                textBox.CaretIndex = textBox.Text.Length;
+                textBox.CaretIndex = 0;
             }), DispatcherPriority.Background);
         }
     }

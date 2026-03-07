@@ -22,7 +22,7 @@
     
     <SolidColorBrush x:Key="PrimaryBrandBrush" Color="#ED8F0C"/>
     <SolidColorBrush x:Key="PrimaryBrandActiveBrush" Color="#C7760A"/>
-    <SolidColorBrush x:Key="PrimaryTextBrush" Color="#555555"/>
+    <SolidColorBrush x:Key="PrimaryTextBrush" Color="#F4F6F8"/>
     <SolidColorBrush x:Key="PrimaryTextHoverBrush" Color="#292F34"/>
     <!-- <SolidColorBrush x:Key="PrimaryBrandActiveBrush" Color="#CF7D0A"/> -->
     

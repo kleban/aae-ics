@@ -20,8 +20,6 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
-    <ControlTemplate x:Key="EmptyErrorTemplate"/>
     
     <Style x:Key="LockableCellStyle" TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource BaseDataGridCellStyle}">
         <Setter Property="BorderBrush" Value="{DynamicResource PrimaryBrandBrush}"/>
@@ -32,8 +30,9 @@
                             BorderThickness="1.5" 
                             Background="{TemplateBinding Background}" 
                             SnapsToDevicePixels="True">
+                        
                         <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -70,14 +69,6 @@
                 <Setter Property="Background" Value="#FFF0F0"/>
             </DataTrigger>
         </Style.Triggers>
-    </Style>
-
-    <Style x:Key="ReadOnlyDataGridStyle" TargetType="{x:Type DataGrid}" BasedOn="{StaticResource DataGridStyle}">
-        <Setter Property="IsReadOnly" Value="True"/>
-        <Setter Property="HorizontalGridLinesBrush" Value="#E0E0E0"/>
-        <Setter Property="SnapsToDevicePixels" Value="True"/>
-        <Setter Property="RowHeight" Value="NaN" /> 
-        <Setter Property="MinRowHeight" Value="40" />
     </Style>
     
     <Style x:Key="GridButton" TargetType="Button">
@@ -121,10 +112,9 @@
         <Setter Property="Width" Value="12" />
         <Setter Property="Height" Value="12" />
     </Style>
-    <!--#region DataGrid Style-->
     
     <Style x:Key="ColumnHeaderGripperStyle" TargetType="{x:Type Thumb}">
-        <Setter Property="Width" Value="8"/>
+        <Setter Property="Width" Value="1"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Cursor" Value="SizeWE"/>
@@ -142,6 +132,8 @@
         <Setter Property="Padding" Value="4" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
+    
+    <ControlTemplate x:Key="EmptyErrorTemplate"/>
 
     <Style x:Key="WrapTextEditingStyle" TargetType="TextBox">
         <Setter Property="TextWrapping" Value="Wrap" />
@@ -183,7 +175,10 @@
 
     <Style x:Key="EditableDataGridStyle" TargetType="{x:Type DataGrid}" BasedOn="{StaticResource DataGridStyle}">
         <Setter Property="helpers:DataGridBehavior.KeepEditingText" Value="True" />
+        <Setter Property="AutoGenerateColumns" Value="True"/>
+        <Setter Property="helpers:DataGridBehavior.AutoFormatGeneratedColumns" Value="True"/>
         <Setter Property="HorizontalGridLinesBrush" Value="#E0E0E0"/>
+        <Setter Property="VerticalGridLinesBrush" Value="#E0E0E0"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         
         <Setter Property="RowHeight" Value="NaN" /> 
