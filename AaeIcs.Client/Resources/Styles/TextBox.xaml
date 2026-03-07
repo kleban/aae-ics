@@ -1,22 +1,17 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
-    <ControlTemplate x:Key="EmptyErrorTemplate"/>
-    
     <Style x:Key="TextBoxStyle" TargetType="TextBox">
         <Setter Property="TextWrapping" Value="Wrap"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="Padding" Value="8,10"/> 
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Validation.ErrorTemplate" Value="{StaticResource EmptyErrorTemplate}"/>
-    
         <Setter Property="Background" Value="White"/>
         <Setter Property="BorderBrush" Value="#B0B0B0"/> 
-        <Setter Property="BorderThickness" Value="2"/> 
+        <Setter Property="BorderThickness" Value="1"/> 
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TextBox">
-                
                     <Border x:Name="MainBorder"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
@@ -24,13 +19,11 @@
                             CornerRadius="4">
                          <ScrollViewer x:Name="PART_ContentHost" Margin="{TemplateBinding Padding}"/>
                     </Border>
-
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsKeyboardFocused" Value="True">
                             <Setter TargetName="MainBorder" Property="BorderBrush" Value="#ED8F0C"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
-                
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

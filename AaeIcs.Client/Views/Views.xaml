@@ -6,8 +6,5 @@
         <ResourceDictionary Source="MainWindowComponents/Controls/TitleBar.xaml" />
         <ResourceDictionary Source="MainWindowComponents/Controls/NavBar.xaml" />
         <ResourceDictionary Source="HomePageComponents/Controls/Dashboards.xaml" />
-        <ResourceDictionary Source="HomePageComponents/Layouts/DesktopLayout.xaml" />
-        <ResourceDictionary Source="HomePageComponents/Layouts/LaptopLayout.xaml" />
-        <ResourceDictionary Source="HomePageComponents/Layouts/TabletLayout.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

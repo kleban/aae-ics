@@ -19,7 +19,7 @@
     <Border CornerRadius="10"
             BorderThickness="0"
             Background="White"
-            Margin="10">
+            Margin="10,0,10,10">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -136,7 +136,7 @@
                     </ScrollViewer>
                 </TabItem>
                 <TabItem Style="{StaticResource TabItemStyle}" Header="Товари">
-                    <controls:ActLinesDataGrid SourceItems="{Binding IssueCertificateLines}" />
+                    <controls:CertificateLinesEditor SourceItems="{Binding IssueCertificateLines}" />
                 </TabItem>
             </TabControl>
             <Grid Grid.Row="1" Margin="10">

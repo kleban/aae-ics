@@ -21,16 +21,14 @@
         </Style.Triggers>
     </Style>
     
-    <Style x:Key="DataGridColumnHeaderStyle1" TargetType="{x:Type DataGridColumnHeader}">
+    <Style x:Key="DataGridColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
-        <Setter Property="SeparatorVisibility" Value="Visible"/>
-        <Setter Property="SeparatorBrush" Value="Black"/>
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Stretch"/>
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource DataGridColumnHeaderBackgroundBrush}" />
         <Setter Property="Margin" Value="0 0 0 10" />
-        <Setter Property="Padding" Value="10,0,10,0"/>
+        <Setter Property="Padding" Value="5,0,5,0"/>
         <Setter Property="ContentTemplate">
             <Setter.Value>
                 <DataTemplate>
@@ -88,7 +86,7 @@
         <Setter Property="CanUserReorderColumns" Value="False" />
         <Setter Property="CanUserResizeRows" Value="False" />
         <Setter Property="FontSize" Value="13" />
-        <Setter Property="GridLinesVisibility" Value="Vertical" />
+        <Setter Property="GridLinesVisibility" Value="All" />
         <Setter Property="ColumnWidth" Value="SizeToHeader" />
         <Setter Property="RowHeaderWidth" Value="12" />
         <Setter Property="RowHeaderStyle" Value="{StaticResource DataGridRowHeaderStyle}" />
@@ -178,54 +176,6 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border Background="Transparent" BorderThickness="0" />
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-    
-    <Style x:Key="DataGridColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-        <Setter Property="SeparatorVisibility" Value="Visible"/>
-        <Setter Property="SeparatorBrush" Value="Black"/>
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground" Value="{DynamicResource DataGridColumnHeaderBackgroundBrush}" />
-        <Setter Property="Margin" Value="0 0 0 10" />
-        <Setter Property="ContentTemplate">
-            <Setter.Value>
-                <DataTemplate>
-                    <TextBlock Text="{Binding}"
-                               HorizontalAlignment="Center" VerticalAlignment="Center"
-                               TextWrapping="Wrap"
-                               TextTrimming="CharacterEllipsis"
-                               ToolTip="{Binding}"/>
-                </DataTemplate>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
-                    <Grid>
-                        <theme:DataGridHeaderBorder Background="{TemplateBinding Background}"
-                                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                                    IsClickable="{TemplateBinding CanUserSort}"
-                                                    IsPressed="{TemplateBinding IsPressed}"
-                                                    IsHovered="{TemplateBinding IsMouseOver}"
-                                                    Padding="{TemplateBinding Padding}"
-                                                    SeparatorBrush="{TemplateBinding SeparatorBrush}"
-                                                    SortDirection="{TemplateBinding SortDirection}"
-                                                    SeparatorVisibility="{TemplateBinding SeparatorVisibility}">
-                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              RecognizesAccessKey="True"
-                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                        </theme:DataGridHeaderBorder>
-                        <Thumb x:Name="PART_LeftHeaderGripper"
-                               Style="{StaticResource ColumnHeaderGripperStyle}"/>
-                        <Thumb x:Name="PART_RightHeaderGripper"
-                               Style="{StaticResource ColumnHeaderGripperStyle}"/>
-                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

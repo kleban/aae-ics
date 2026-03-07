@@ -77,7 +77,7 @@ public partial class App : Application
         Services.GetRequiredService<ISyncfusionLicenseInitializerService>().Register();
 
         var mainWindow = Services.GetRequiredService<MainWindow>();
-        var homePage = Services.GetRequiredService<SettingsPage>();
+        var homePage = Services.GetRequiredService<HomePage>();
         splashScreen.ProgressBarStatus.Value += 20;
         mainWindow.MainFrame.Navigate(homePage);
         mainWindow.Show();

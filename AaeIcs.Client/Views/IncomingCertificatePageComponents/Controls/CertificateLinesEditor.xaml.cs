@@ -4,9 +4,9 @@ using System.Windows.Controls;
 
 namespace AAEICS.Client.Views.IncomingCertificatePageComponents.Controls;
 
-public partial class ActLinesDataGrid : UserControl
+public partial class CertificateLinesEditor : UserControl
 {
-    public ActLinesDataGrid()
+    public CertificateLinesEditor()
     {
         InitializeComponent();
     }
@@ -16,7 +16,7 @@ public partial class ActLinesDataGrid : UserControl
         DependencyProperty.Register(
             nameof(SourceItems),     // Ім'я властивості
             typeof(IEnumerable),     // Тип даних (IEnumerable підходить для будь-яких списків/колекцій)
-            typeof(ActLinesDataGrid), // Кому належить
+            typeof(CertificateLinesEditor), // Кому належить
             new PropertyMetadata(null));    // Значення за замовчуванням
 
     // Звичайна обгортка для зручного використання в коді

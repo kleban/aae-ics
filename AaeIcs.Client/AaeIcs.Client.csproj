@@ -303,7 +303,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Views\IncomingCertificatePageComponents\Layouts\" />
       <Folder Include="Views\SplashScreenComponents\" />
     </ItemGroup>
 
