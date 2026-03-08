@@ -23,6 +23,7 @@
     <ListBox x:Name="ItemsListBox"
              BorderThickness="0" Background="Transparent"
              HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
+             VirtualizingStackPanel.ScrollUnit="Pixel"
              ScrollViewer.HorizontalScrollBarVisibility="Disabled">
         <ListBox.ItemContainerStyle>
             <Style TargetType="ListBoxItem">

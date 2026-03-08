@@ -20,24 +20,26 @@ public partial class IncomingCertificatePage : Page
     
     private const double PageMinimumWidth = 840;
     
-    // Коли сторінка з'являється - реєструємо її вимоги
-    private async void Page_Loaded(object sender, RoutedEventArgs e)
+    private void Page_Loaded(object sender, RoutedEventArgs e)
     {
         if (Window.GetWindow(this) is IWindowController windowController)
-        {
-            // Кажемо: "Для цієї сторінки контенту треба мінімум 800px"
-            // (Меню сюди не входить, вікно саме додасть 200px зверху)
             windowController.RegisterPageMinWidth(PageMinimumWidth);
-        }
     }
     
     private void BlockBrowseBack_CanExecute(object sender, CanExecuteRoutedEventArgs e)
     {
-        // Кажемо WPF, що ця команда зараз НЕ може бути виконана
         e.CanExecute = false;
-            
-        // Вказуємо, що ми вже обробили цю подію, 
-        // тому WPF не повинен шукати інші способи її виконати
         e.Handled = true; 
+    }
+    
+    private void DatePicker_ValueChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+    {
+        if (dependencyObject is FrameworkElement element && element.Tag != null)
+        {
+            string propertyName = element.Tag.ToString();
+            
+            if (dependencyPropertyChangedEventArgs.NewValue is DateTime newDate && DataContext is IncomingCertificateViewModel vm)
+                vm.DatesChanged(propertyName, newDate);
+        }
     }
 }

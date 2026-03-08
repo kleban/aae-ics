@@ -59,7 +59,9 @@
                                     </components:QuestionBoxControl>
                                     <components:QuestionBoxControl QuestionText="Дата затвердження">
                                         <components:QuestionBoxControl.InputControls>
-                                            <syncfusion:SfDatePicker Margin="5" Value="{Binding IssuanceCertificate.ApproveDate, UpdateSourceTrigger=PropertyChanged}"/>
+                                            <syncfusion:SfDatePicker Margin="5" 
+                                                                     Tag="TransferDateEnd"
+                                                                     ValueChanged="DatePicker_ValueChanged"/>
                                         </components:QuestionBoxControl.InputControls>
                                     </components:QuestionBoxControl>
                                 </StackPanel>
@@ -89,7 +91,9 @@
                                     
                                     <components:QuestionBoxControl Grid.Row="0" Grid.Column="0" QuestionText="Дата складання:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                                         <components:QuestionBoxControl.InputControls>
-                                            <syncfusion:SfDatePicker Margin="5" Value="{Binding IssuanceCertificate.RegistrationDate, UpdateSourceTrigger=PropertyChanged}"/>
+                                            <syncfusion:SfDatePicker Margin="5" 
+                                                                     Tag="TransferDateEnd"
+                                                                     ValueChanged="DatePicker_ValueChanged"/>
                                         </components:QuestionBoxControl.InputControls>
                                     </components:QuestionBoxControl>
                                     <components:QuestionBoxControl Grid.Row="0" Grid.Column="1" QuestionText="Місце складання:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -102,12 +106,16 @@
                                     </components:QuestionBoxControl>
                                     <components:QuestionBoxControl Grid.Row="1" Grid.Column="0" QuestionText="Початок передачі:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                                         <components:QuestionBoxControl.InputControls>
-                                            <syncfusion:SfDatePicker Margin="5" Value="{Binding IssuanceCertificate.TransferDateStart, UpdateSourceTrigger=PropertyChanged}"/>
+                                            <syncfusion:SfDatePicker Margin="5" 
+                                                                     Tag="TransferDateEnd"
+                                                                     ValueChanged="DatePicker_ValueChanged"/>
                                         </components:QuestionBoxControl.InputControls>
                                     </components:QuestionBoxControl>
                                     <components:QuestionBoxControl Grid.Row="1" Grid.Column="1" QuestionText="Кінець передачі:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                                         <components:QuestionBoxControl.InputControls>
-                                            <syncfusion:SfDatePicker Margin="5" Value="{Binding IssuanceCertificate.TransferDateEnd, UpdateSourceTrigger=PropertyChanged}"/>
+                                            <syncfusion:SfDatePicker Margin="5" 
+                                                                     Tag="TransferDateEnd"
+                                                                     ValueChanged="DatePicker_ValueChanged"/>
                                          </components:QuestionBoxControl.InputControls>
                                     </components:QuestionBoxControl>
                                     <components:QuestionBoxControl Grid.Row="2" Grid.Column="0" QuestionText="Відправник:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">

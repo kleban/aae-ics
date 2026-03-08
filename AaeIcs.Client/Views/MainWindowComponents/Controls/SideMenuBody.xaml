@@ -17,11 +17,6 @@
                     Content="{Binding [SettingsMenuOption], Source={x:Static local:App.LanguageService}}"
                     Command="{Binding NavigateToCommand}"
                     CommandParameter="settings"/>
-            <Button Style="{DynamicResource SideMenuOptionStyle}" 
-                    Tag="{DynamicResource Icon.Categories}"
-                    Content="{Binding [NewCertificateMenuOption], Source={x:Static local:App.LanguageService}}"
-                    Command="{Binding NavigateToCommand}"
-                    CommandParameter="newIncomingCertificate"/>
         </StackPanel>
         <TextBlock Text="{Binding [MenuCopyright], Source={x:Static local:App.LanguageService}}"
                    FontFamily="Fonts/#Saira SemiBold" FontSize="10"

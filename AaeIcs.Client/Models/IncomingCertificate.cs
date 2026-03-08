@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using AAEICS.Client.Attributes;
 using CommunityToolkit.Mvvm.ComponentModel;
 
@@ -19,12 +20,12 @@ public partial class IncomingCertificate: ObservableObject
     [ObservableProperty] 
     [property: Display(Name = "CertificateApproveDate", ResourceType = typeof(Resources.Languages.Resources))] 
     [property: GridColumn("90", StringFormat = "MMMM dd yyyy")]
-    private DateTime _approveDate;
+    private DateTime _approveDate = DateTime.Now;
     
     [ObservableProperty] 
     [property: Display(Name = "CertificateRegistrationDate", ResourceType = typeof(Resources.Languages.Resources))] 
     [property: GridColumn("90", StringFormat = "MMMM dd yyyy")]
-    private DateTime _registrationDate;
+    private DateTime _registrationDate = DateTime.Now;
     
     [ObservableProperty] 
     [property: Display(Name = "CertificateRegistrationPlace", ResourceType = typeof(Resources.Languages.Resources))]
@@ -34,12 +35,12 @@ public partial class IncomingCertificate: ObservableObject
     [ObservableProperty] 
     [property: Display(Name = "CertificateTransferDateStart", ResourceType = typeof(Resources.Languages.Resources))]
     [property: GridColumn("90", StringFormat = "MMMM dd yyyy")]
-    private DateTime _transferDateStart;
+    private DateTime _transferDateStart = DateTime.Now;
     
     [ObservableProperty] 
     [property: Display(Name = "CertificateTransferDateEnd", ResourceType = typeof(Resources.Languages.Resources))]
     [property: GridColumn("90", StringFormat = "MMMM dd yyyy")]
-    private DateTime _transferDateEnd;
+    private DateTime _transferDateEnd = DateTime.Now;
     
     [ObservableProperty]
     [property: Display(Name = "CertificateDonor", ResourceType = typeof(Resources.Languages.Resources))]
@@ -55,4 +56,17 @@ public partial class IncomingCertificate: ObservableObject
     [property: Display(Name = "CertificateDeliveryCompany", ResourceType = typeof(Resources.Languages.Resources))]
     [property: GridColumn("1.5*")]
     private string _deliveryCompany;
+    
+    protected override void OnPropertyChanged(PropertyChangedEventArgs e)
+    {
+        base.OnPropertyChanged(e);
+        var dateProperties = new[] { "RegistrationDate", "TransferDateStart", "TransferDateEnd" };
+
+        if (dateProperties.Contains(e.PropertyName))
+        {
+            var prop = GetType().GetProperty(e.PropertyName);
+            var value = (DateTime)prop.GetValue(this);
+            prop.SetValue(this, value.Date);
+        }
+    }
 }

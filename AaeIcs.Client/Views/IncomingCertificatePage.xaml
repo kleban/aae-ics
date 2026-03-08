@@ -6,10 +6,11 @@
       xmlns:helpers="clr-namespace:AAEICS.Client.Helpers"
       xmlns:controls="clr-namespace:AAEICS.Client.Views.IncomingCertificatePageComponents.Controls"
       xmlns:components="clr-namespace:AAEICS.Client.Views.Components"
+      xmlns:viewmodels="clr-namespace:AAEICS.Client.ViewModels"
       xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
       mc:Ignorable="d"
       Title="HomePage"
-      Loaded="Page_Loaded">
+      Loaded="Page_Loaded" d:DataContext="{d:DesignInstance  viewmodels:IncomingCertificateViewModel}">
     <Page.CommandBindings>
         <CommandBinding Command="NavigationCommands.BrowseBack" 
                         CanExecute="BlockBrowseBack_CanExecute"/>
@@ -58,7 +59,10 @@
                                     </components:QuestionBoxControl>
                                     <components:QuestionBoxControl QuestionText="Дата затвердження">
                                         <components:QuestionBoxControl.InputControls>
-                                            <syncfusion:SfDatePicker Margin="5" Value="{Binding IncomingCertificate.ApproveDate, UpdateSourceTrigger=PropertyChanged}"/>
+                                            <syncfusion:SfDatePicker Margin="5" 
+                                                                     SetValueOnLostFocus="True"
+                                                                     Tag="ApproveDate"
+                                                                     ValueChanged="DatePicker_ValueChanged"/>
                                         </components:QuestionBoxControl.InputControls>
                                     </components:QuestionBoxControl>
                                 </StackPanel>
@@ -88,7 +92,10 @@
                                     
                                     <components:QuestionBoxControl Grid.Row="0" Grid.Column="0" QuestionText="Дата складання:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                                         <components:QuestionBoxControl.InputControls>
-                                            <syncfusion:SfDatePicker Margin="5" Value="{Binding IncomingCertificate.RegistrationDate, UpdateSourceTrigger=PropertyChanged}"/>
+                                            <syncfusion:SfDatePicker Margin="5" 
+                                                                     SetValueOnLostFocus="True"
+                                                                     Tag="RegistrationDate"
+                                                                     ValueChanged="DatePicker_ValueChanged"/>
                                         </components:QuestionBoxControl.InputControls>
                                     </components:QuestionBoxControl>
                                     <components:QuestionBoxControl Grid.Row="0" Grid.Column="1" QuestionText="Місце складання:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -101,12 +108,18 @@
                                     </components:QuestionBoxControl>
                                     <components:QuestionBoxControl Grid.Row="1" Grid.Column="0" QuestionText="Початок передачі:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                                         <components:QuestionBoxControl.InputControls>
-                                            <syncfusion:SfDatePicker Margin="5" Value="{Binding IncomingCertificate.TransferDateStart, UpdateSourceTrigger=PropertyChanged}"/>
+                                            <syncfusion:SfDatePicker Margin="5" 
+                                                                     SetValueOnLostFocus="True"
+                                                                     Tag="TransferDateStart"
+                                                                     ValueChanged="DatePicker_ValueChanged"/>
                                         </components:QuestionBoxControl.InputControls>
                                     </components:QuestionBoxControl>
                                     <components:QuestionBoxControl Grid.Row="1" Grid.Column="1" QuestionText="Кінець передачі:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                                         <components:QuestionBoxControl.InputControls>
-                                            <syncfusion:SfDatePicker Margin="5" Value="{Binding IncomingCertificate.TransferDateEnd, UpdateSourceTrigger=PropertyChanged}"/>
+                                            <syncfusion:SfDatePicker Margin="5" 
+                                                                     SetValueOnLostFocus="True"
+                                                                     Tag="TransferDateEnd"
+                                                                     ValueChanged="DatePicker_ValueChanged"/>
                                          </components:QuestionBoxControl.InputControls>
                                     </components:QuestionBoxControl>
                                     <components:QuestionBoxControl Grid.Row="2" Grid.Column="0" QuestionText="Відправник:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">

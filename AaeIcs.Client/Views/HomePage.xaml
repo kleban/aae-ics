@@ -7,8 +7,9 @@
       xmlns:local="clr-namespace:AAEICS.Client"
       xmlns:converters="clr-namespace:AAEICS.Client.Converters"
       xmlns:controls="clr-namespace:AAEICS.Client.Views.HomePageComponents.Controls"
+      xmlns:viewmodels="clr-namespace:AAEICS.Client.ViewModels"
       mc:Ignorable="d"
-      Loaded="Page_Loaded">
+      Loaded="Page_Loaded" d:DataContext="{d:DesignInstance viewmodels:HomePageViewModel}">
     
     <Border 
         Margin="10,0,10,10" 
@@ -18,16 +19,23 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" /> 
-                <RowDefinition Height="*" />    
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             
             <ContentControl Grid.Row="0"
                             ContentTemplate="{StaticResource DashboardCards}"
                             Content="{Binding}"/>
 
-            <Border Grid.Row="1" Style="{StaticResource DashboardCardStyle}">
+            <Border Grid.Row="1" Style="{StaticResource DashboardCardStyle}" Margin="0,0,0,10">
                 <Grid Margin="0" Background="Transparent">
-                    <controls:TableView ItemsSource="{Binding IncomingCertificates}"
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    
+                    <TextBlock Grid.Row="0" Text="Акти прийому-передачі запасів (надходження)" Margin="0,0,0,20"/>
+                    <controls:TableView Grid.Row="1" ItemsSource="{Binding IncomingCertificates}"
                                         ShowOperationsColumn="True">
                         <controls:TableView.Style>
                             <Style TargetType="controls:TableView">
@@ -41,7 +49,45 @@
                         </controls:TableView.Style>
                     </controls:TableView>
                     
-                    <controls:CardView ItemsSource="{Binding IncomingCertificates}" ShowOperationsColumn="True">
+                    
+                    <controls:CardView Grid.Row="1" ItemsSource="{Binding IncomingCertificates}" ShowOperationsColumn="True">
+                        <controls:CardView.Style>
+                            <Style TargetType="controls:CardView">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ElementName=ThisPage, Path=ActualWidth, Converter={x:Static converters:IsLessThanConverter.Instance}, ConverterParameter=900}" Value="True">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </controls:CardView.Style>
+                    </controls:CardView>
+                </Grid>
+            </Border>
+            
+            <Border Grid.Row="2" Style="{StaticResource DashboardCardStyle}">
+                <Grid Margin="0" Background="Transparent">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    
+                    <TextBlock Grid.Row="0" Text="Акти прийому-передачі запасів (видача)" Margin="0,0,0,20"/>
+                    <controls:TableView Grid.Row="1" ItemsSource="{Binding IssuanceCertificates}"
+                                        ShowOperationsColumn="True">
+                        <controls:TableView.Style>
+                            <Style TargetType="controls:TableView">
+                                <Setter Property="Visibility" Value="Visible"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ElementName=ThisPage, Path=ActualWidth, Converter={x:Static converters:IsLessThanConverter.Instance}, ConverterParameter=900}" Value="True">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </controls:TableView.Style>
+                    </controls:TableView>
+                    
+                    <controls:CardView Grid.Row="1" ItemsSource="{Binding IssuanceCertificates}" ShowOperationsColumn="True">
                         <controls:CardView.Style>
                             <Style TargetType="controls:CardView">
                                 <Setter Property="Visibility" Value="Collapsed"/>

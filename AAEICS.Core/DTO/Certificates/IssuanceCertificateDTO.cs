@@ -10,7 +10,7 @@ public class IssuanceCertificateDTO
 
     public int ApprovePersonId { get; set; }
 
-    public DateTime? ApproveDate { get; set; }
+    public DateTime ApproveDate { get; set; }
 
     public DateTime RegistrationDate { get; set; }
 

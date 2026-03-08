@@ -21,7 +21,6 @@ public partial class IssuanceCertificateViewModel : ObservableObject
 {
     private bool _isSyncing;
     
-    // Сервіси
     private readonly IIssuanceCertificateService _issuanceCertificateService;
     private readonly IDictionaryDataService _dataService;
     private readonly IFuzzySearchService<ReasonDTO> _reasonSearch;
@@ -32,10 +31,7 @@ public partial class IssuanceCertificateViewModel : ObservableObject
     private readonly IFuzzySearchService<MeasureUnitDTO> _measureUnitSearch;
     private readonly IFuzzySearchService<CategoryDTO> _categorySentSearch;
     private readonly IFuzzySearchService<CategoryDTO> _categoryReceivedSearch;
-
-    // ==========================================
-    // ВЛАСТИВОСТІ ДЛЯ UI (BINDING)
-    // ==========================================
+    
     [ObservableProperty]
     private IssuanceCertificate _issuanceCertificate = new();
     
@@ -50,10 +46,7 @@ public partial class IssuanceCertificateViewModel : ObservableObject
     public SearchBoxViewModel<TransferInstanceDTO> DonorSearchBox { get; }
     public SearchBoxViewModel<TransferInstanceDTO> RecipientSearchBox { get; }
     public SearchBoxViewModel<TransferInstanceDTO> DeliveryCompanySearchBox { get; }
-
-    // ==========================================
-    // КОНСТРУКТОР
-    // ==========================================
+    
     public IssuanceCertificateViewModel(
         IIssuanceCertificateService issuanceCertificateService,
         IDictionaryDataService dataService,
@@ -76,18 +69,15 @@ public partial class IssuanceCertificateViewModel : ObservableObject
         _measureUnitSearch = measureUnitSearch;
         _categorySentSearch = categorySentSearch;
         _categoryReceivedSearch = categoryReceivedSearch;
-
-        // Ініціалізуємо UI компоненти пошуку
+        
         ReasonSearchBox = new SearchBoxViewModel<ReasonDTO>(_reasonSearch, r => r.Name);
         ApprovePersonSearchBox = new SearchBoxViewModel<PersonnelDTO>(_personnelSearch, p => p.LastName, "LastName");
         DonorSearchBox = new SearchBoxViewModel<TransferInstanceDTO>(_donorSearch, d => d.Name);
         RecipientSearchBox = new SearchBoxViewModel<TransferInstanceDTO>(_recipientSearch, r => r.Name);
         DeliveryCompanySearchBox = new SearchBoxViewModel<TransferInstanceDTO>(_deliveryCompanySearch, d => d.Name);
-
-        // Підписуємося на події зміни колекції рядків
+        
         IssueCertificateLines.CollectionChanged += OnIssueCertificateLinesCollectionChanged;
-
-        // Реєструємо месенджери для створення нових довідників через DynamicDialog
+        
         WeakReferenceMessenger.Default.Register<CreateNewItemMessage<ReasonDTO>>(this, async (r, m) => 
             await HandleCreateNewItemAsync<Reason, ReasonDTO>(m, _reasonSearch));
             
@@ -99,24 +89,16 @@ public partial class IssuanceCertificateViewModel : ObservableObject
         
         WeakReferenceMessenger.Default.Register<CreateNewItemMessage<CategoryDTO>>(this, async (r, m) => 
             await HandleCreateNewItemAsync<Category, CategoryDTO>(m, _categorySentSearch));
-        
-        // WeakReferenceMessenger.Default.Register<CreateNewItemMessage<CategoryDTO>>(this, async (r, m) => 
-        //     await HandleCreateNewItemAsync<Category, CategoryDTO>(m, _categoryReceivedSearch));
     }
-
-    // ==========================================
-    // ІНІЦІАЛІЗАЦІЯ (Викликати з View.Loaded)
-    // ==========================================
+    
     public async Task InitializeAsync()
     {
-        // Завантажуємо дані для пошуковиків
         var reasons = await _dataService.GetAllDataAsync<Reason, ReasonDTO>();
         _reasonSearch.LoadData(reasons);
 
         var personnel = await _dataService.GetAllDataAsync<Personnel, PersonnelDTO>();
         _personnelSearch.LoadData(personnel);
-
-        // Завантажуємо одиниці виміру для ComboBox у DataGrid
+        
         var units = await _dataService.GetAllDataAsync<MeasureUnit, MeasureUnitDTO>();
         _measureUnitSearch.LoadData(units);
         
@@ -131,10 +113,7 @@ public partial class IssuanceCertificateViewModel : ObservableObject
         
         _deliveryCompanySearch.LoadData(instances);
     }
-
-    // ==========================================
-    // ЛОГІКА СТВОРЕННЯ НОВИХ ДОВІДНИКІВ
-    // ==========================================
+    
     private async Task HandleCreateNewItemAsync<TEntity, TDto>(
         CreateNewItemMessage<TDto> message, 
         IFuzzySearchService<TDto> searchService) 
@@ -142,24 +121,18 @@ public partial class IssuanceCertificateViewModel : ObservableObject
         where TDto : class, new()
     {
         var newDto = new TDto(); 
-
-        // Відкриваємо динамічний діалог
+        
         var dialog = new DynamicDialog(newDto, _dataService);
         
         if (dialog.ShowDialog() == true) 
         {
-            // Зберігаємо через DataService (без UnitOfWork напряму!)
             await _dataService.AddDataAsync<TEntity, TDto>(newDto);
-
-            // Оновлюємо кеш пошуку і вибираємо створений елемент у UI
+            
             searchService.AddItemToCache(newDto);
             message.OnItemCreated?.Invoke(newDto);
         }
     }
-
-    // ==========================================
-    // ЛОГІКА СИНХРОНІЗАЦІЇ ЧЕКБОКСІВ
-    // ==========================================
+    
     partial void OnIsAllConfirmedChanged(bool value)
     {
         if (_isSyncing) return;
@@ -203,14 +176,10 @@ public partial class IssuanceCertificateViewModel : ObservableObject
 
         CheckHeaderState();
     }
-
-    // ==========================================
-    // КОМАНДИ РЕДАГУВАННЯ ТАБЛИЦІ
-    // ==========================================
+    
     [RelayCommand]
     private void AddRow()
     {
-// Створюємо новий рядок і передаємо йому сервіси для створення його власних SearchBoxViewModel
         var newLine = new IssueCertificateLine(
             _measureUnitSearch, 
             _categorySentSearch, 
@@ -226,10 +195,7 @@ public partial class IssuanceCertificateViewModel : ObservableObject
         if (actLine != null)
             IssueCertificateLines.Remove(actLine); 
     }
-
-    // ==========================================
-    // ГОЛОВНА КОМАНДА ЗБЕРЕЖЕННЯ
-    // ==========================================
+    
     [RelayCommand]
     private async Task AddCertificateAsync() 
     {
@@ -238,14 +204,12 @@ public partial class IssuanceCertificateViewModel : ObservableObject
         //     System.Windows.MessageBox.Show("Заповніть усі обов'язкові поля (Підстава, Особа)!");
         //     return;
         // }
-    
-        // 1. Формуємо DTO рядків
+        
         var linesDto = IssueCertificateLines.Select((line, index) => new IssueCertificateLineDTO
         {
             Name = line.Name,
             BatchNumber = line.BatchNumber,
             OrdinalNumber = index + 1,
-            // Створюємо MeasureUnitDTO тільки з ID, AutoMapper на бекенді зрозуміє, що робити
             MeasureUnit = line.MeasureUnitSearchBox.SelectedItem, 
             PricePerUnit = line.PricePerUnit,
             QuantitySent = line.QuantitySent,
@@ -255,8 +219,7 @@ public partial class IssuanceCertificateViewModel : ObservableObject
             Notes = line.Notes,
             MadeIn = line.MadeIn
         }).ToList();
-    
-        // 2. Формуємо головне DTO акту
+        
         var IssuanceCertificateDTO = new IssuanceCertificateDTO
         {
             Edrpou = IssuanceCertificate.Edrpou,
@@ -277,13 +240,10 @@ public partial class IssuanceCertificateViewModel : ObservableObject
     
         try
         {
-            // 3. Відправляємо на бекенд (Сервіс сам викличе репозиторій і UnitOfWork.CompleteAsync)
             var result = await _issuanceCertificateService.AddIssuanceCertificateAsync(IssuanceCertificateDTO);
             
-            // Повідомляємо іншим частинам програми про успіх
             WeakReferenceMessenger.Default.Send(new NewCertificateMessage(result));
             
-            // Очищення форми
             IssuanceCertificate = new IssuanceCertificate();
             IssueCertificateLines.Clear();
             

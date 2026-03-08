@@ -23,12 +23,8 @@ public partial class MainViewModel : ObservableObject
 {
     private readonly INavigationService _navigationService;
     private readonly ILanguageService _languageService;
-      // Прапорець, щоб уникнути зациклення подій
-      
-      // Це наша "змінна для коду". Action означає, що метод не приймає параметрів і нічого не повертає (void)
-    public Action RequestExit { get; set; }
-      
     
+    public Action RequestExit { get; set; }
     private string _currentPageKey = "HomeAppTitle";
     private double _currentPageMinWidth;
 
@@ -66,8 +62,6 @@ public partial class MainViewModel : ObservableObject
     [RelayCommand]
     private void CloseApp()
     {
-        // Знак питання перевіряє, чи хтось "поклав" туди код. 
-        // Invoke() - це команда "виконай той код, який лежить у цій змінній"
         RequestExit?.Invoke();
     }
 
@@ -129,8 +123,7 @@ public partial class MainViewModel : ObservableObject
 
     private void UpdateWindowConstraints()
     {
-        double menuPart = IsSideMenuVisible ? UIConfig.SideMenuWidth : 0;
-        WindowMinWidth = _currentPageMinWidth + menuPart;
+        WindowMinWidth = _currentPageMinWidth + UIConfig.SideMenuWidth;
     }
     
     [RelayCommand]
