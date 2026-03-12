@@ -25,6 +25,10 @@ public partial class MainViewModel : ObservableObject
     private readonly ILanguageService _languageService;
     
     public Action RequestExit { get; set; }
+    public Action RequestMinimize { get; set; }
+    public Action RequestRestore { get; set; }
+    
+    
     private string _currentPageKey = "HomeAppTitle";
     private double _currentPageMinWidth;
 
@@ -66,15 +70,15 @@ public partial class MainViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private void MaximizeApp(ChromelessWindow window)
+    private void MaximizeApp(Window window)
     {
-        window.WindowState = window.WindowState == WindowState.Normal ? WindowState.Maximized : WindowState.Normal;
+        RequestRestore?.Invoke();
     }
 
     [RelayCommand]
-    private void MinimizeApp(ChromelessWindow window)
+    private void MinimizeApp(Window window)
     {
-        window.WindowState = WindowState.Minimized;
+        RequestMinimize?.Invoke();
     }
 
     [RelayCommand]

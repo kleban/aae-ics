@@ -5,7 +5,8 @@
     
     <ControlTemplate x:Key="TitleBarTemplate" TargetType="ContentControl">
         <Grid Background="Transparent"
-              behaviors:WindowBehaviors.EnableDrag="True">
+              behaviors:WindowBehaviors.EnableDrag="True"
+              WindowChrome.IsHitTestVisibleInChrome="True">
             
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -22,16 +23,14 @@
                         Orientation="Horizontal" 
                         VerticalAlignment="Stretch">
                 <Button Style="{DynamicResource WindowControlButtonStyle}" 
-                        Command="{Binding MinimizeAppCommand}"
-                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=syncfusion:ChromelessWindow}}">
+                        Command="{Binding MinimizeAppCommand}">
                     <Path Data="{DynamicResource MinimizeIcon}"
                           Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}" 
                           Width="14" Height="14" Stretch="Uniform"/>
                 </Button>
                 
                 <Button Style="{DynamicResource WindowControlButtonStyle}" 
-                        Command="{Binding MaximizeAppCommand}"
-                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=syncfusion:ChromelessWindow}}">
+                        Command="{Binding MaximizeAppCommand}">
                     <Path Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}" 
                           Width="14" Height="14" Stretch="Uniform">
                         <Path.Style>
@@ -50,7 +49,9 @@
                 
                 <Button Style="{DynamicResource WindowCloseButtonStyle}"
                         Command="{Binding CloseAppCommand}">
-                    <Path Data="{DynamicResource CloseIcon}" Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}" StrokeThickness="1.5" Width="14" Height="14" Stretch="Uniform"/>
+                    <Path Data="{DynamicResource CloseIcon}" 
+                          Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}" StrokeThickness="1.5" 
+                          Width="14" Height="14" Stretch="Uniform"/>
                 </Button>
             </StackPanel>
         </Grid>

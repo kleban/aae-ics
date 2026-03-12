@@ -4,6 +4,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
+using System.Windows.Media;
 using AAEICS.Client.Attributes;
 
 namespace AAEICS.Client.Views.HomePageComponents.Controls;
@@ -30,9 +31,56 @@ public partial class TableView : UserControl
         set => SetValue(ShowOperationsColumnProperty, value);
     }
     
+    private ScrollViewer? _listboxScrollViewer;
+    
     public TableView()
     {
         InitializeComponent();
+        
+        ItemsListBox.LayoutUpdated += ItemsListBox_LayoutUpdated;
+    }
+    
+    private void ItemsListBox_LayoutUpdated(object? sender, EventArgs e)
+    {
+        // 1. Шукаємо фізичний ScrollViewer всередині ListBox (лише один раз)
+        if (_listboxScrollViewer == null)
+        {
+            _listboxScrollViewer = FindVisualChild<ScrollViewer>(ItemsListBox);
+        }
+
+        if (_listboxScrollViewer != null)
+        {
+            // 2. Надійна математика: чи фізично контент більший за видиме вікно?
+            bool needsScrollbar = _listboxScrollViewer.ExtentHeight > _listboxScrollViewer.ViewportHeight;
+
+            // 3. Беремо точну ширину скролбару системи (замість жорстких 17px)
+            double paddingRight = needsScrollbar ? SystemParameters.VerticalScrollBarWidth : 0;
+
+            // 4. Застосовуємо відступ лише якщо він змінився (щоб уникнути нескінченного циклу оновлень макета)
+            if (HeaderBorder.Padding.Right != paddingRight)
+            {
+                HeaderBorder.Padding = new Thickness(5, 5, paddingRight, 5);
+            }
+        }
+    }
+
+    // Допоміжний метод для пошуку реального елемента глибоко у візуальному дереві
+    private static T? FindVisualChild<T>(DependencyObject parent) where T : DependencyObject
+    {
+        if (parent == null) return null;
+            
+        for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+        {
+            var child = VisualTreeHelper.GetChild(parent, i);
+                
+            if (child is T typedChild)
+                return typedChild;
+                    
+            var result = FindVisualChild<T>(child);
+            if (result != null)
+                return result;
+        }
+        return null;
     }
     
     private static void OnItemsSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -67,9 +115,9 @@ public partial class TableView : UserControl
         var glc = new GridLengthConverter();
         StringBuilder xamlBuilder = new StringBuilder();
         
-        xamlBuilder.Append("<DataTemplate xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\">");
+        xamlBuilder.Append("<DataTemplate xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\" xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\">");
         xamlBuilder.Append("<Border Style=\"{StaticResource TableItemStyle}\" >");
-        xamlBuilder.Append("<Grid>");
+        xamlBuilder.Append("<Grid Width=\"{Binding ViewportWidth, RelativeSource={RelativeSource AncestorType={x:Type ScrollViewer}}}\">");
         xamlBuilder.Append("<Grid.ColumnDefinitions>");
 
         int columnIndex = 0;

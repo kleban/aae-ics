@@ -1,38 +1,46 @@
-﻿<syncfusion:ChromelessWindow x:Class="AAEICS.Client.Views.MainWindow"
+﻿<Window x:Class="AAEICS.Client.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:services="clr-namespace:AAEICS.Client.Services"
-        xmlns:local="clr-namespace:AAEICS.Client"
-        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
         mc:Ignorable="d"
+        
         Title="{Binding AppTitle}"
         
         Height="800" Width="1200"
         MinHeight="619" MinWidth="{Binding WindowMinWidth}"
-        Style="{DynamicResource CustomChromelessWindowStyle}"
         
         WindowStartupLocation="CenterScreen"
-        AllowsTransparency="True"
-        WindowStyle="None"
-        
-        TitleBarHeight="50"
-        ShowIcon="False"
+        WindowStyle="SingleBorderWindow"
         SizeChanged="MainWindow_SizeChanged">
-    <syncfusion:ChromelessWindow.TitleBarTemplate>
-        <StaticResource ResourceKey="TitleBarTemplate"/>
-    </syncfusion:ChromelessWindow.TitleBarTemplate>
-    <syncfusion:ChromelessWindow.Resources>
+    
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="50" 
+                      CornerRadius="0" 
+                      GlassFrameThickness="1" 
+                      ResizeBorderThickness="5" 
+                      UseAeroCaptionButtons="False"/>
+    </WindowChrome.WindowChrome>
+    
+    <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
-    </syncfusion:ChromelessWindow.Resources>
-    <Grid Margin="0">
+    </Window.Resources>
+    
+    <Grid x:Name="Root" Style="{StaticResource RootGridStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <ContentControl Grid.Column="0"
+        
+        <ContentControl Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Template="{DynamicResource TitleBarTemplate}" />
+        
+        <ContentControl Grid.Row="1" Grid.Column="0"
                         Template="{DynamicResource SideMenuTemplate}"
                         Content="{Binding}">
             <ContentControl.Style>
@@ -44,7 +52,7 @@
             </ContentControl.Style>
         </ContentControl>
 
-        <Button Grid.Column="0" 
+        <Button Grid.Row="1" Grid.Column="0" 
                 Command="{Binding ShowFlyoutMenuCommand}"
                 VerticalAlignment="Top">
             <Button.Style>
@@ -65,7 +73,7 @@
             </Button.Style>
         </Button>
         
-        <Grid Grid.Column="0" Grid.ColumnSpan="2" 
+        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" 
               Panel.ZIndex="100"
               HorizontalAlignment="Left">
             <Grid.Style>
@@ -92,7 +100,7 @@
             </ContentControl>
         </Grid>
         
-        <Border Grid.Column="1"
+        <Border Grid.Row="1" Grid.Column="1"
                 Background="{DynamicResource WindowMainFrameBackgroundBrush}"
                 CornerRadius="8,8,10,8">
             <Grid Margin="0">
@@ -113,4 +121,4 @@
             </Grid>
         </Border>
     </Grid>
-</syncfusion:ChromelessWindow>
+</Window>

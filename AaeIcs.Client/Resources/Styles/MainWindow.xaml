@@ -2,27 +2,12 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:syncfusion="http://schemas.syncfusion.com/wpf">
     
-    <Style x:Key="CustomChromelessWindowStyle"
-           TargetType="{x:Type syncfusion:ChromelessWindow}"
-           BasedOn="{StaticResource SyncfusionChromelessWindowStyle}">
-        <Setter Property="CornerRadius" Value="10"/>
-        <Setter Property="ResizeBorderThickness" Value="10"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Background" Value="{DynamicResource WindowBackgroundBrush}"/> 
-        <Setter Property="Margin" Value="0"/>
-        <Setter Property="Padding" Value="0"/>
+    <Style x:Key="RootGridStyle" TargetType="Grid">
+        <Setter Property="Margin" Value="0" />
         <Style.Triggers>
-            <Trigger Property="WindowState" Value="Maximized">
-                <Setter Property="CornerRadius" Value="0"/>
-                <Setter Property="ResizeBorderThickness" Value="0"/>
-                <Setter Property="BorderThickness" Value="0"/>
-            </Trigger>
-            <Trigger Property="WindowState" Value="Normal">
-                <Setter Property="CornerRadius" Value="10"/>
-                <Setter Property="ResizeBorderThickness" Value="10"/>
-                <Setter Property="BorderThickness" Value="0"/>
-                <Setter Property="BorderBrush" Value="Transparent"/>
-            </Trigger>
+            <DataTrigger Binding="{Binding WindowState, RelativeSource={RelativeSource AncestorType=Window}}" Value="Maximized">
+                <Setter Property="Margin" Value="8" />
+            </DataTrigger>
         </Style.Triggers>
     </Style>
     
