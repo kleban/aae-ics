@@ -117,7 +117,7 @@
                                         </Grid.ColumnDefinitions>
                 
                                         <TextBox x:Name="FirstInput" Grid.Column="0" 
-                                                 Text="{Binding QuantitySent, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                                                 Text="{Binding QuantitySent, UpdateSourceTrigger=PropertyChanged}"
                                                  Style="{StaticResource WrapTextEditingStyle}"
                                                  VerticalContentAlignment="Center"
                                                  VerticalAlignment="Center" />
@@ -186,7 +186,7 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
                                         <TextBox x:Name="FirstInput" Grid.Column="0" 
-                                                 Text="{Binding QuantityReceived, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                                                 Text="{Binding QuantityReceived, UpdateSourceTrigger=PropertyChanged}"
                                                  Style="{StaticResource WrapTextEditingStyle}"
                                                  VerticalContentAlignment="Center"
                                                  VerticalAlignment="Center" />

@@ -6,7 +6,7 @@ public class IssuanceCertificateDTO
 {
     public int? IssueCertificateId { get; set; }
 
-    public int Edrpou { get; set; }
+    public string Edrpou { get; set; }
 
     public int ApprovePersonId { get; set; }
 

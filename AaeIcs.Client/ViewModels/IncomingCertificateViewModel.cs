@@ -2,6 +2,7 @@
 using System.Collections.Specialized;
 using System.ComponentModel;
 using AAEICS.Client.Messages;
+using AAEICS.Client.Services.Validation;
 using AAEICS.Client.ViewModels.Components;
 using AAEICS.Client.Views;
 using AAEICS.Core.Contracts.Services;
@@ -116,21 +117,10 @@ public partial class IncomingCertificateViewModel : ObservableObject
     public void DatesChanged(string propertyName, DateTime newDate)
     {
         if (IncomingCertificate == null) return;
-
-        // Шукаємо властивість в об'єкті IncomingCertificate
+        
         var prop = IncomingCertificate.GetType().GetProperty(propertyName);
 
-        if (prop != null && prop.CanWrite)
-        {
-            // Записуємо нове значення через рефлексію
-            prop.SetValue(IncomingCertificate, newDate);
-        
-            // Оскільки IncomingCertificate : ObservableObject, 
-            // викликаємо OnPropertyChanged, щоб сповістити UI про зміни
-            // (Це важливо, якщо інші елементи UI залежать від цієї дати)
-            // Якщо OnPropertyChanged приватний, можна використати рефлексію і для нього, 
-            // але зазвичай у CommunityToolkit він доступний як OnPropertyChanged(propertyName)
-        }
+        if (prop != null && prop.CanWrite) prop.SetValue(IncomingCertificate, newDate);
     }
     
     private async Task HandleCreateNewItemAsync<TEntity, TDto>(
@@ -218,11 +208,35 @@ public partial class IncomingCertificateViewModel : ObservableObject
     [RelayCommand]
     private async Task AddCertificateAsync() 
     {
-        // if (IncomingCertificate == null || ReasonSearchBox.SelectedItem == null || ApprovePersonSearchBox.SelectedItem == null)
-        // {
-        //     System.Windows.MessageBox.Show("Заповніть усі обов'язкові поля (Підстава, Особа)!");
-        //     return;
-        // }
+
+    // 1. Створюємо список, куди будемо записувати всі помилки
+        var errors = new List<string>();
+
+        // 2. Перевіряємо обов'язкові поля за допомогою твого ValidationService
+        if (!ValidationService.IsNotNull(ReasonSearchBox.SelectedItem))
+        {
+            errors.Add("Поле 'Підстава' є обов'язковим.");
+        }
+
+        if (!ValidationService.IsNotNull(ApprovePersonSearchBox.SelectedItem))
+        {
+            errors.Add("Поле 'Особа' є обов'язковим.");
+        }
+
+        // (Тут ми пізніше можемо додати перевірку рядків IncomingCertificateLines)
+
+        // 3. Якщо є хоча б одна помилка, показуємо їх усі і зупиняємо збереження
+        if (errors.Any())
+        {
+            // Об'єднуємо всі помилки в один текст, кожна з нового рядка
+            string errorMessage = string.Join("\n", errors);
+            System.Windows.MessageBox.Show(
+                $"Будь ласка, виправте наступні помилки:\n\n{errorMessage}", 
+                "Помилка валідації", 
+                System.Windows.MessageBoxButton.OK, 
+                System.Windows.MessageBoxImage.Warning);
+            return; // Зупиняємо виконання методу
+        }
         
         var linesDto = IncomingCertificateLines.Select((line, index) => new IncomingCertificateLineDTO
         {

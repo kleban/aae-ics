@@ -124,6 +124,7 @@ public static class DataGridBehavior
             e.PropertyName == "QuantitySent" || 
             e.PropertyName == "CategorySent" || 
             e.PropertyName == "QuantityReceived" || 
+            e.PropertyName == "HasErrors" ||
             e.PropertyName == "CategoryReceived")
         {
             // Кажемо WPF: "Не роби для них окремих колонок, ми самі з ними розібралися!"
@@ -169,6 +170,11 @@ public static class DataGridBehavior
                 if (textColumn.Binding is Binding binding)
                 {
                     binding.StringFormat = "MMMM dd, yyyy";
+                    binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+        
+                    // Вмикаємо валідацію, щоб WrapTextEditingStyle побачив помилку
+                    binding.ValidatesOnDataErrors = true;
+                    binding.ValidatesOnNotifyDataErrors = true;
             
                     // Важливо: StringFormat у коді не потребує екранування \{0:\}, 
                     // яке ми використовуємо в XAML. Просто пишемо маску.

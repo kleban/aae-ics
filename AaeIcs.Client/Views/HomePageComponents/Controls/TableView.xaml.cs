@@ -164,7 +164,7 @@ public partial class TableView : UserControl
                 : "";
 
             xamlBuilder.Append($"<TextBlock Grid.Column=\"{columnIndex}\" ");
-            xamlBuilder.Append($"Text=\"{{Binding {item.Property.Name}{bindingFormat}}}\" ");
+            xamlBuilder.Append($"Text=\"{{Binding {item.Property.Name}{bindingFormat}, ValidatesOnNotifyDataErrors=False}}\" ");
             xamlBuilder.Append("Style=\"{DynamicResource TableCellTextStyle}\" />");
         
             columnIndex++;
@@ -173,7 +173,7 @@ public partial class TableView : UserControl
         if (ShowOperationsColumn)
         {
             xamlBuilder.Append($"<ContentControl Grid.Column=\"{columnIndex}\" ");
-            xamlBuilder.Append("Content=\"{Binding}\" ");
+            xamlBuilder.Append("Content=\"{Binding ValidatesOnNotifyDataErrors=False}\" ");
             xamlBuilder.Append("ContentTemplate=\"{DynamicResource OperationsCellTemplate}\" ");
             xamlBuilder.Append("HorizontalAlignment=\"Center\" VerticalAlignment=\"Center\" Margin=\"5,0\" />");
         }

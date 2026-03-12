@@ -9,7 +9,7 @@ public partial class IssuanceCertificate: ObservableObject
     [ObservableProperty] 
     [property: Display(Name = "CertificateEDRPOU", ResourceType = typeof(Resources.Languages.Resources))]
     [property: GridColumn("70")]
-    private int _edrpou;
+    private string _edrpou;
     
     [ObservableProperty] 
     [property: Display(Name = "CertificateApprovePerson", ResourceType = typeof(Resources.Languages.Resources))]

@@ -6,7 +6,7 @@ public class IncomingCertificateDTO
 {
     public int? IncCertificateId { get; set; }
     
-    public int Edrpou { get; set; }
+    public string Edrpou { get; set; }
     
     public PersonnelDTO ApprovePerson { get; set; }
     

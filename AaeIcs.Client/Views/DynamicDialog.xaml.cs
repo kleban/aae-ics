@@ -16,13 +16,14 @@ public partial class DynamicDialog : Window
         InitializeComponent();
 
         // Створюємо екземпляр ViewModel
-        var viewModel = new DynamicDialogViewModel(targetObject, dataService);
-
-        // "Вчимо" ViewModel закривати це вікно
-        viewModel.RequestClose = (dialogResult) =>
+        var viewModel = new DynamicDialogViewModel(targetObject, dataService)
         {
-            DialogResult = dialogResult;
-            Close();
+            // "Вчимо" ViewModel закривати це вікно
+            RequestClose = (dialogResult) =>
+            {
+                DialogResult = dialogResult;
+                Close();
+            }
         };
 
         // Прив'язуємо ViewModel до інтерфейсу
@@ -32,7 +33,14 @@ public partial class DynamicDialog : Window
     // У коді вікна (Code-Behind), наприклад DynamicDialogWindow.xaml.cs
     private async void DynamicDialog_Loaded(object sender, RoutedEventArgs e)
     {
-        if (DataContext is DynamicDialogViewModel viewModel)
-            await viewModel.InitializeAsync();
+        try
+        {
+            if (DataContext is DynamicDialogViewModel viewModel)
+                await viewModel.InitializeAsync();
+        }
+        catch (Exception ex)
+        {
+            throw; // TODO handle exception
+        }
     }
 }

@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Reflection;
 using AAEICS.Client.Models;
 using AAEICS.Client.Services.Validation;
 using AAEICS.Core.Contracts.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using AAEICS.Services; // Заміни на свій namespace для DictionaryDataService
+using AAEICS.Services;
 
 namespace AAEICS.Client.ViewModels;
 
@@ -16,7 +15,7 @@ public partial class DynamicDialogViewModel : ObservableObject
     private readonly IDictionaryDataService _dataService;
 
     // Делегат, який дозволить ViewModel "попросити" View закритися
-    public Action<bool> RequestClose { get; set; }
+    public Action<bool>? RequestClose { get; set; }
 
     // Колекція для прив'язки до ItemsControl у XAML
     [ObservableProperty]
@@ -98,7 +97,14 @@ public partial class DynamicDialogViewModel : ObservableObject
     
     [RelayCommand]
     private void Save()
-    {
+    {   
+        // 1. Спочатку перевіряємо, чи всі поля валідні (чи можна зберігати)
+        if (!CanSave())
+        {
+            // Якщо є помилки, ми нічого не робимо. 
+            // Користувач побачить повідомлення про помилки біля полів (якщо UI це підтримує).
+            return; 
+        }
         RequestClose?.Invoke(true);
     }
 }
